@@ -1,0 +1,7 @@
+.alert.success {
+  @extend .green, .darken-4;
+}
+
+.alert.alert {
+  @extend .red, .darken-4;
+}
