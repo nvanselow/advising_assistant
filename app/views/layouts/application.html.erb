@@ -8,17 +8,7 @@
 </head>
 <body>
 
-  <% flash.each do |type, message| %>
-    <% type = 'success' if type == 'notice' %>
-    <%= content_tag :div, class: 'flash_data', data: { type: type, message: message} do %>
-    <% end %>
-    <script>
-      var info = $('.flash_data');
-      var type = info.data('type');
-      var message = info.data('message');
-      Materialize.toast(message, 3000, 'alert ' + type);
-    </script>
-  <% end %>
+  <%= render 'layouts/flash' %>
 
   <div class="container">
     <%= yield %>
