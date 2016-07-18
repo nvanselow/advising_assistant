@@ -56,6 +56,7 @@ GEM
       tins (~> 1.6.0)
     diff-lcs (1.2.5)
     docile (1.1.5)
+    dotenv (2.1.1)
     erubis (2.7.0)
     execjs (2.7.0)
     factory_girl (4.7.0)
@@ -190,6 +191,7 @@ PLATFORMS
 DEPENDENCIES
   capybara
   coveralls
+  dotenv
   factory_girl_rails
   jquery-rails
   launchy
