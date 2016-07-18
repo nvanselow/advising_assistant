@@ -1,3 +1,7 @@
+.flash {
+  display: none;
+}
+
 .alert.success {
   @extend .green, .darken-4;
 }

@@ -1,0 +1,8 @@
+<% flash.each do |type, message| %>
+  <% type = 'success' if type == 'notice' %>
+  <div class="flash flash-<%= type %>"
+       data-type="<%= type %>"
+       data-message="<%= message %>">
+    <%= message %>
+  </div>
+<% end %>
