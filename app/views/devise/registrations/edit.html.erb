@@ -3,8 +3,8 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
+  <div class="input-field">
+    <%= f.label :email, class: 'active' %>
     <%= f.email_field :email, autofocus: true %>
   </div>
 
@@ -12,32 +12,33 @@
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+  <div class="input-field">
+    <%= f.label :password, class: 'active' %>
     <%= f.password_field :password, autocomplete: "off" %>
+    <i>(leave blank if you don't want to change it)</i><br />
     <% if @minimum_password_length %>
       <br />
       <em><%= @minimum_password_length %> characters minimum</em>
     <% end %>
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
+  <div class="input-field">
+    <%= f.label :password_confirmation, class: 'active' %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+  <div class="input-field">
+    <%= f.label :current_password, class: 'active' %>
     <%= f.password_field :current_password, autocomplete: "off" %>
+    <i>(we need your current password to confirm your changes)</i><br />
   </div>
 
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "Update", class: 'btn' %>
   </div>
 <% end %>
 
 <h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn red darken-4' %></p>
 
 <%= link_to "Back", :back %>
