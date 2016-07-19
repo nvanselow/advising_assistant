@@ -48,7 +48,8 @@ feature 'Create a new advisee', %{
         fill_in('First Name', with: advisee[:first_name])
         fill_in('Last Name', with: advisee[:last_name])
         fill_in('Email', with: advisee[:email])
-        select(advisee[:graduation_semester], from: 'Graduation Semester')
+        select(advisee[:graduation_semester],
+               from: 'advisee_graduation_semester')
         fill_in('Graduation Year', with: advisee[:graduation_year])
 
         click_button('Save Advisee')
@@ -68,7 +69,6 @@ feature 'Create a new advisee', %{
         expect(page).to have_content("First name can't be blank")
         expect(page).to have_content("Last name can't be blank")
         expect(page).to have_content("Email can't be blank")
-        expect(page).to have_content("Graduation semester can't be blank")
         expect(page).to have_content("Graduation year is not a number")
       end
     end

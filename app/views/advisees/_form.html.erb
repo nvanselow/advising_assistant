@@ -17,8 +17,8 @@
   </div>
 
   <div class="input-field">
+    <%= f.select :graduation_semester, @semesters %>
     <%= f.label :graduation_semester, 'Graduation Semester' %>
-    <%= f.select :graduation_semester, @semesters, include_blank: true %>
   </div>
 
   <div class="input-field">
@@ -26,5 +26,7 @@
     <%= f.number_field :graduation_year, min: 1990, max: 10000 %>
   </div>
 
-  <%= f.submit 'Save Advisee', class: 'btn' %>
+  <div class="input-field">
+    <%= f.submit 'Save Advisee', class: 'btn' %>
+  </div>
 <% end %>
