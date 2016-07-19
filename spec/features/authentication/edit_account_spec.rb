@@ -41,10 +41,10 @@ feature 'user can edit their account information', %{
     visit edit_user_registration_path
 
     expect(find_field('Email').value).to have_content(updated_user[:email])
-    expect(find_field('First Name').value).
-             to have_content(updated_user[:first_name])
-    expect(find_field('Last Name').value).
-             to have_content(updated_user[:last_name])
+    expect(find_field('First Name').value)
+      .to have_content(updated_user[:first_name])
+    expect(find_field('Last Name').value)
+      .to have_content(updated_user[:last_name])
   end
 
   scenario 'user edits account incorrectly' do
