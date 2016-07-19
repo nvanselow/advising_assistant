@@ -1,5 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe User, type: :model do
+  it { should have_valid(:first_name).when('Bob', 'Susie') }
+  it { should_not have_valid(:first_name).when('', nil) }
+
+  it { should have_valid(:first_name).when('Smith', 'Weeks') }
+  it { should_not have_valid(:first_name).when('', nil) }
 end
