@@ -21,6 +21,7 @@ end
 group :test do
   gem 'launchy', require: false
   gem 'coveralls', require: false
+  gem "capybara-webkit"
 end
 
 group :production do
