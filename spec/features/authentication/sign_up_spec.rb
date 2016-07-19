@@ -9,8 +9,8 @@ feature 'Sign up for an account', %{
   # [X] There is an option to create an account if I am not signed in
   # [X] I must specify a valid email address
   # [X] I must specify a valid password and password confirmation
-  # [ ] I must specify a first name
-  # [ ] I must specify a last name
+  # [X] I must specify a first name
+  # [X] I must specify a last name
   # [X] If I complete the form successfully, I am logged in to the system
   # [X] If I complete the form successfuly, I see a success message
   # [X] If I complete the form incorrectly, I see an error message indicating
@@ -46,8 +46,9 @@ feature 'Sign up for an account', %{
       visit root_path
 
       within('nav') { click_link('Sign Up') }
-
       fill_in('Email', with: user[:email])
+      fill_in('First Name', with: user[:first_name])
+      fill_in('Last Name', with: user[:last_name])
       fill_in('Password', with: user[:password])
       fill_in('Password Confirmation', with: user[:password])
       click_button('Sign Up')
@@ -63,6 +64,8 @@ feature 'Sign up for an account', %{
       end
 
       scenario 'user forgets to add an email' do
+        fill_in('First Name', with: user[:first_name])
+        fill_in('Last Name', with: user[:last_name])
         fill_in('Password', with: user[:password])
         fill_in('Password Confirmation', with: user[:password])
         click_button('Sign Up')
@@ -75,6 +78,8 @@ feature 'Sign up for an account', %{
 
       scenario 'user does not provide a password' do
         fill_in('Email', with: user[:email])
+        fill_in('First Name', with: user[:first_name])
+        fill_in('Last Name', with: user[:last_name])
         fill_in('Password Confirmation', with: user[:password])
         click_button('Sign Up')
 
@@ -86,6 +91,8 @@ feature 'Sign up for an account', %{
 
       scenario 'password confirmation does not match' do
         fill_in('Email', with: user[:email])
+        fill_in('First Name', with: user[:first_name])
+        fill_in('Last Name', with: user[:last_name])
         fill_in('Password', with: user[:password])
         fill_in('Password Confirmation', with: 'something not matching')
         click_button('Sign Up')
@@ -96,8 +103,22 @@ feature 'Sign up for an account', %{
         expect_not_signed_in
       end
 
+      scenario 'user does not enter their name' do
+        fill_in('Email', with: user[:email])
+        fill_in('Password', with: user[:password])
+        fill_in('Password Confirmation', with: user[:password])
+        click_button('Sign Up')
+
+        expect(page).to have_content('There were 2 errors creating your '\
+                                     'account')
+        expect(page).to have_content("First name can't be blank")
+        expect(page).to have_content("Last name can't be blank")
+      end
+
       scenario 'user sees success message', js: true do
         fill_in('Email', with: user[:email])
+        fill_in('First Name', with: user[:first_name])
+        fill_in('Last Name', with: user[:last_name])
         fill_in('Password', with: user[:password])
         fill_in('Password Confirmation', with: user[:password])
         click_button('Sign Up')
