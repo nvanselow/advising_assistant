@@ -10,11 +10,11 @@ describe Semesters do
   describe '.all_for_select' do
     it 'returns an array formatted for use in a select on a form' do
       expect(Semesters.all_for_select).to eq([
-        %w(Fall Fall),
-        %w(Spring Spring),
-        %w(Summer Summer),
-        %w(Winter Winter),
-      ])
+                                               %w(Fall Fall),
+                                               %w(Spring Spring),
+                                               %w(Summer Summer),
+                                               %w(Winter Winter),
+                                             ])
     end
   end
 end

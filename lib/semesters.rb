@@ -1,5 +1,5 @@
 class Semesters
-  SEMESTERS = %w(Fall Spring Summer Winter)
+  SEMESTERS = %w(Fall Spring Summer Winter).freeze
 
   def self.all
     SEMESTERS
