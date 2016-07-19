@@ -2,8 +2,6 @@
 
 <div class="advisees">
   <% @advisees.each do |advisee| %>
-    <%= link_to advisee_path(advisee) do %>
-      <%= render partial: 'advisees/advisee', object: advisee %>
-    <% end %>
+    <%= render partial: 'advisees/advisee', object: advisee %>
   <% end %>
 </div>
