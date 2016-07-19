@@ -1,0 +1,7 @@
+.btn {
+  @extend .amber, .darken-4;
+}
+
+.danger {
+  @extend .red, .darken-4;
+}
