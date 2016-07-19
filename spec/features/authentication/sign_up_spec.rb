@@ -12,8 +12,8 @@ feature 'Sign up for an account', %{
   # [ ] I must specify a first name
   # [ ] I must specify a last name
   # [X] If I complete the form successfully, I am logged in to the system
-  # [ ] If I complete the form successfuly, I see a success message
-  # [ ] If I complete the form incorrectly, I see an error message indicating
+  # [X] If I complete the form successfuly, I see a success message
+  # [X] If I complete the form incorrectly, I see an error message indicating
   #     what I need to fix
 
   context 'user is authenticated' do
@@ -94,6 +94,15 @@ feature 'Sign up for an account', %{
                                      'account')
         expect(page).to have_content("Password confirmation doesn't match")
         expect_not_signed_in
+      end
+
+      scenario 'user sees success message', js: true do
+        fill_in('Email', with: user[:email])
+        fill_in('Password', with: user[:password])
+        fill_in('Password Confirmation', with: user[:password])
+        click_button('Sign Up')
+
+        expect(page).to have_content('You have signed up successfully')
       end
     end
   end
