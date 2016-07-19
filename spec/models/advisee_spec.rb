@@ -18,7 +18,7 @@ describe Advisee, type: :model do
                                                     nil,
                                                     'ab',
                                                     1970,
-                                                    10000)}
+                                                    10_000) }
 
   it { should belong_to(:user) }
 
@@ -37,9 +37,7 @@ describe Advisee, type: :model do
     it "does not return another user's advisees" do
       user = FactoryGirl.create(:user)
       another_user = FactoryGirl.create(:user)
-      another_user_advisees = FactoryGirl.create_list(:advisee,
-                                                      3,
-                                                      user: another_user)
+      FactoryGirl.create_list(:advisee, 3, user: another_user)
 
       advisees = Advisee.all_for(user)
 
