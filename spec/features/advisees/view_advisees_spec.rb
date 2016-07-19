@@ -57,6 +57,8 @@ feature 'Advisor can view all of their advisees', %{
                                                           3,
                                                           user: another_advisor)
 
+      visit advisees_path
+
       advisees.each do |advisee|
         expect(page).to have_content(advisee.first_name)
         expect(page).to have_content(advisee.last_name)
