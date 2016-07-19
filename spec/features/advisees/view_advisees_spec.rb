@@ -18,12 +18,13 @@ feature 'Advisor can view all of their advisees', %{
 
     visit advisees_path
 
-    expect(page).to have_content('You do not have permission')
+    expect(page).to have_content('You need to sign in or sign up before '\
+                                 'continuing')
   end
 
   context 'Advisor is authenticated' do
     let(:advisor) { FactoryGirl.create(:user) }
-    let(:advisees) { FactoryGirl.create_list(:advisee, 3) }
+    let!(:advisees) { FactoryGirl.create_list(:advisee, 3) }
 
     before do
       sign_in advisor
