@@ -1,7 +1,9 @@
-<div class="advisee valign-wrapper">
-  <h2 class="valign"><%= advisee.full_name %></h2>
-  <h3 class="valign">
-    <%= advisee.graduation_semester %>
-    <%= advisee.graduation_year %>
-  </h3>
-</div>
+<%= link_to advisee_path(advisee) do %>
+  <div class="advisee valign-wrapper">
+    <h2 class="valign"><%= advisee.full_name %></h2>
+    <h3 class="valign">
+      <%= advisee.graduation_semester %>
+      <%= advisee.graduation_year %>
+    </h3>
+  </div>
+<% end %>
