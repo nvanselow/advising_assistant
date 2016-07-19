@@ -22,6 +22,31 @@ describe Advisee, type: :model do
 
   it { should belong_to(:user) }
 
+  describe '.all_for' do
+    it 'returns all advisee for a user' do
+      user = FactoryGirl.create(:user)
+      expected_advisees = FactoryGirl.create_list(:advisee, 3, user: user)
+
+      advisees = Advisee.all_for(user)
+
+      expected_advisees.each do |advisee|
+        expect(advisees).to include(advisee)
+      end
+    end
+
+    it "does not return another user's advisees" do
+      user = FactoryGirl.create(:user)
+      another_user = FactoryGirl.create(:user)
+      another_user_advisees = FactoryGirl.create_list(:advisee,
+                                                      3,
+                                                      user: another_user)
+
+      advisees = Advisee.all_for(user)
+
+      expect(advisees.count).to eq(0)
+    end
+  end
+
   describe '#full_name' do
     it 'concatenates the first and last name' do
       advisee = FactoryGirl.create(:advisee)
