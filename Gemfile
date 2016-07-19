@@ -21,7 +21,8 @@ end
 group :test do
   gem 'launchy', require: false
   gem 'coveralls', require: false
-  gem "capybara-webkit"
+  gem 'capybara-webkit'
+  gem 'database_cleaner'
 end
 
 group :production do
