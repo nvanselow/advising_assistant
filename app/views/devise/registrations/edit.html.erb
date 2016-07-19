@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Edit <%= resource_name.to_s.humanize %></h2>
+  <h2>Edit Account Information</h2>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= devise_error_messages! %>
@@ -33,12 +33,14 @@
     </div>
 
     <div class="input-field">
-      <%= f.label :password_confirmation, class: 'active' %>
+      <%= f.label :password_confirmation,
+                  'Password Confirmation',
+                  class: 'active' %>
       <%= f.password_field :password_confirmation, autocomplete: "off" %>
     </div>
 
     <div class="input-field">
-      <%= f.label :current_password, class: 'active' %>
+      <%= f.label :current_password, 'Current Password', class: 'active' %>
       <%= f.password_field :current_password, autocomplete: "off" %>
       <i>(we need your current password to confirm your changes)</i><br />
     </div>
