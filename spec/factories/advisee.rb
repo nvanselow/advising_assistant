@@ -3,7 +3,7 @@ FactoryGirl.define do
     sequence(:first_name) { |num| "Gavin #{num}" }
     sequence(:last_name) { |num| "Guile #{num}" }
     sequence(:email) { |num| "advisee_#{num}@mailinator.com" }
-    grauduation_semester 'Spring'
+    graduation_semester 'Spring'
     graduation_year '2017'
     user
   end
