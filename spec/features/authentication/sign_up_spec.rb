@@ -115,7 +115,7 @@ feature 'Sign up for an account', %{
         expect(page).to have_content("Last name can't be blank")
       end
 
-      scenario 'user sees success message', js: true do
+      scenario 'user sees success message' do
         fill_in('Email', with: user[:email])
         fill_in('First Name', with: user[:first_name])
         fill_in('Last Name', with: user[:last_name])
