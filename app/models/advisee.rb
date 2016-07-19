@@ -13,6 +13,10 @@ class Advisee < ActiveRecord::Base
                                               greater_than: 1990,
                                               less_than: 9999 }
 
+  def self.all_for(user)
+    Advisee.where(user: user)
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end
