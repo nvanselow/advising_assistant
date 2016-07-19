@@ -24,7 +24,7 @@ feature 'Advisor can view all of their advisees', %{
 
   context 'Advisor is authenticated' do
     let(:advisor) { FactoryGirl.create(:user) }
-    let!(:advisees) { FactoryGirl.create_list(:advisee, 3) }
+    let!(:advisees) { FactoryGirl.create_list(:advisee, 3, user: advisor) }
 
     before do
       sign_in advisor
