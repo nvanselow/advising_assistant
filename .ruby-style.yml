@@ -4,6 +4,7 @@ AllCops:
     - "config/initializers/devise.rb"
     - "db/schema.rb"
     - "db/migrate/*.rb"
+    - "db/seed.rb"
   UseCache: false
 Documentation:
   Enabled: false
@@ -17,7 +18,7 @@ Style/CollectionMethods:
     find: detect
     find_all: select
     reduce: inject
-Style/DotPosition:
+DotPosition:
   Description: Checks the position of the dot in multi-line method calls.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#consistent-multi-line-chains
   Enabled: true

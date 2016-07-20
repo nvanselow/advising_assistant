@@ -1,5 +1,5 @@
 .advisee-enter {
-  opacity: 0.01;
+  opacity: .01;
 }
 
 .advisee-enter.advisee-enter-active {
@@ -12,6 +12,6 @@
 }
 
 .advisee-leave.advisee-leave-active {
-  opacity: 0.01;
+  opacity: .01;
   transition: opacity 300ms ease-in;
 }
