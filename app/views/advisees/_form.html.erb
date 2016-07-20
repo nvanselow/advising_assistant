@@ -26,6 +26,16 @@
     <%= f.number_field :graduation_year, min: 1990, max: 10000 %>
   </div>
 
+  <div class="file-field input-field">
+    <div class="btn">
+      <span>Photo</span>
+      <%= f.file_field :photo, accept: 'image/png,image/gif,image/jpeg' %>
+    </div>
+    <div class="file-path-wrapper">
+      <input class="file-path validate" type="text">
+    </div>
+  </div>
+
   <div class="input-field">
     <%= f.submit 'Save Advisee', class: 'btn' %>
   </div>

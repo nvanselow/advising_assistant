@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'digest/md5'
 
 describe Advisee, type: :model do
   it { should have_valid(:first_name).when('Bob', 'Susie') }
@@ -50,6 +51,22 @@ describe Advisee, type: :model do
       advisee = FactoryGirl.create(:advisee)
 
       expect(advisee.full_name).to eq("#{advisee.first_name} #{advisee.last_name}")
+    end
+  end
+
+  describe '#photo_url' do
+    it 'returns the url of the uploaded photo if a photo exists' do
+      advisee = FactoryGirl.create(:advisee)
+
+      expect(advisee.photo_url).to eq("/uploads/advisee/photo/#{advisee.id}"\
+                                      "/sample_avatar.jpg")
+    end
+
+    it 'returns a gravatar url if no photo has been uploaded' do
+      advisee = FactoryGirl.create(:advisee, photo: nil)
+
+      expect(advisee.photo_url).to eq('https://www.gravatar.com/avatar/'\
+                                      "#{Digest::MD5.hexdigest(advisee.email)}")
     end
   end
 end

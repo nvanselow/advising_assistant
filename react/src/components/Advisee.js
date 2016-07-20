@@ -4,16 +4,19 @@ class Advisee extends Component {
   render() {
     let advisee = this.props.advisee;
     let url = `/advisees/${advisee.id}`;
+    let altText = `Photo of ${advisee.first_name} ${advisee.last_name}`;
+    let adviseeNameId = `advisee-name-${advisee.id}`;
+
     return (
       <div className="advisee col s12 m4">
         <a href={url}>
           <div className="advisee-info">
-            <h2>
+            <img src={advisee.photo_url} alt={altText} className="circle responsive-img" />
+            <div id={adviseeNameId} className='advisee-name'>
               {advisee.first_name} {advisee.last_name}
-            </h2>
+            </div>
             <h3>
-              {advisee.graduation_semester}
-              {advisee.graduation_year}
+              {advisee.graduation_semester} {advisee.graduation_year}
             </h3>
           </div>
         </a>

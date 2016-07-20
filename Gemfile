@@ -8,6 +8,7 @@ gem 'jquery-rails'
 gem 'materialize-sass'
 gem 'devise'
 gem 'pg_search'
+gem 'carrierwave'
 
 group :development, :test do
   gem 'capybara'
