@@ -15,3 +15,21 @@
   opacity: .01;
   transition: opacity 300ms ease-in;
 }
+
+.generic-enter {
+  opacity: .01;
+}
+
+.generic-enter.generic-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.generic-leave {
+  opacity: 1;
+}
+
+.generic-leave.generic-leave-active {
+  opacity: .01;
+  transition: opacity 300ms ease-in;
+}
