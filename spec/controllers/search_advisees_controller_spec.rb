@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Api::V1::AdviseeSearchController, type: :controller do
+describe Api::V1::SearchAdviseesController, type: :controller do
   describe 'GET /api/v1/advisee_search' do
     let(:user) { FactoryGirl.create(:user) }
     let!(:advisees) { FactoryGirl.create_list(:advisee, 3, user: user) }

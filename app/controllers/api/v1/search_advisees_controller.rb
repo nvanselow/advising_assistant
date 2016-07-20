@@ -1,4 +1,4 @@
-class Api::V1::AdviseeSearchController < ApiController
+class Api::V1::SearchAdviseesController < ApiController
   def index
     advisees = Advisee.search(params[:search])
 
