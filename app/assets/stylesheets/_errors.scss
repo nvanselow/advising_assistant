@@ -1,0 +1,7 @@
+.errors {
+  h5 {
+    @extend .red-text, .darken-4;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+}
