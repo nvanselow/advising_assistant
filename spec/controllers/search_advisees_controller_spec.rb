@@ -34,6 +34,18 @@ describe Api::V1::SearchAdviseesController, type: :controller do
       expect(ids).to include(searched_advisee.id)
     end
 
+    it 'returns partial name matches' do
+      searched_advisee = FactoryGirl.create(:advisee, last_name: 'Bogan')
+
+      get :index, search: 'bog'
+
+      json_response = parse_json(response)
+      ids = get_ids(json_response)
+
+      expect(ids.count).to eq(1)
+      expect(ids).to include(searched_advisee.id)
+    end
+
     it 'returns advisees matching a search by last name' do
       searched_advisee_name = 'Whiteoak'
       searched_advisee = FactoryGirl.create(:advisee,
