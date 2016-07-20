@@ -1,6 +1,7 @@
 <h2><%= @advisee.full_name %> <small>(<%= @advisee.email %>)</small></h2>
 <h3><%= @advisee.graduation_semester %> <%= @advisee.graduation_year %></h3>
 
+<%= link_to 'Edit Advisee', edit_advisee_path(@advisee), class: 'btn' %>
 <button data-target="delete-advisee-modal" class="btn danger modal-trigger">
   Delete Advisee
 </button>

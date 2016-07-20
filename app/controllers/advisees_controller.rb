@@ -29,6 +29,26 @@ class AdviseesController < ApplicationController
     end
   end
 
+  def edit
+    @advisee = Advisee.find(params[:id])
+    @semesters = Semesters.all_for_select
+  end
+
+  def update
+    @advisee = Advisee.find(params[:id])
+
+    if @advisee.update(advisee_params)
+      flash[:success] = 'Advisee info updated!'
+      redirect_to advisee_path(@advisee)
+    else
+      flash[:alert] = 'There were problems updating the advisee'
+      @errors = @advisee.errors.full_messages
+      @semesters = Semesters.all_for_select
+
+      render 'advisees/edit'
+    end
+  end
+
   def destroy
     Advisee.destroy(params[:id])
     flash[:success] = 'Advisee deleted successfully!'
