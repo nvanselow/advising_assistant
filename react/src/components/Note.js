@@ -6,8 +6,8 @@ class Note extends Component {
 
     return (
       <div className="note">
+      <h4>{note.updated_at}</h4>
         <p>{note.body}</p>
-        <h4>{note.updated_at}</h4>
       </div>
     );
   }
