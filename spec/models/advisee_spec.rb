@@ -22,6 +22,7 @@ describe Advisee, type: :model do
                                                     10_000) }
 
   it { should belong_to(:user) }
+  it { should have_many(:notes).dependent(:destroy) }
 
   describe '.all_for' do
     it 'returns all advisee for a user' do

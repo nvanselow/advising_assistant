@@ -5,6 +5,7 @@ class Advisee < ActiveRecord::Base
   mount_uploader :photo, AdviseePhotoUploader
 
   belongs_to :user
+  has_many :notes, as: :noteable, dependent: :destroy
 
   validates :first_name, presence: true
   validates :last_name, presence: true
