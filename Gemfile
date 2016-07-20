@@ -17,6 +17,7 @@ group :development, :test do
   gem 'shoulda'
   gem 'valid_attribute'
   gem 'dotenv'
+  gem 'faker'
 end
 
 group :test do
