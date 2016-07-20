@@ -23,7 +23,8 @@ describe Api::V1::SearchAdviseesController, type: :controller do
     it 'returns advisees matching a search by first name' do
       searched_advisee_name = 'Karris'
       searched_advisee = FactoryGirl.create(:advisee,
-                                            first_name: searched_advisee_name)
+                                            first_name: searched_advisee_name,
+                                            user: user)
 
       get :index, search: searched_advisee_name.downcase
 
@@ -35,7 +36,9 @@ describe Api::V1::SearchAdviseesController, type: :controller do
     end
 
     it 'returns partial name matches' do
-      searched_advisee = FactoryGirl.create(:advisee, last_name: 'Bogan')
+      searched_advisee = FactoryGirl.create(:advisee,
+                                            last_name: 'Bogan',
+                                            user: user)
 
       get :index, search: 'bog'
 
@@ -49,7 +52,8 @@ describe Api::V1::SearchAdviseesController, type: :controller do
     it 'returns advisees matching a search by last name' do
       searched_advisee_name = 'Whiteoak'
       searched_advisee = FactoryGirl.create(:advisee,
-                                            last_name: searched_advisee_name)
+                                            last_name: searched_advisee_name,
+                                            user: user)
 
       get :index, search: searched_advisee_name.downcase
 
@@ -63,7 +67,8 @@ describe Api::V1::SearchAdviseesController, type: :controller do
     it 'returns advisees matching a search by email' do
       searched_advisee_email = 'KWhiteoak@chromeria.gov'
       searched_advisee = FactoryGirl.create(:advisee,
-                                            email: searched_advisee_email)
+                                            email: searched_advisee_email,
+                                            user: user)
 
       get :index, search: searched_advisee_email.downcase
 
