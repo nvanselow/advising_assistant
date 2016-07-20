@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-describe AdviseeSearchController, type: :controller do
+describe Api::V1::AdviseeSearchController, type: :controller do
   describe 'GET /api/v1/advisee_search' do
     let(:user) { FactoryGirl.create(:user) }
-    let!(:advisees) { FactoryGirl.create(:advisee, 3, user: user) }
+    let!(:advisees) { FactoryGirl.create_list(:advisee, 3, user: user) }
 
     before do
       sign_in user
@@ -12,12 +12,11 @@ describe AdviseeSearchController, type: :controller do
     it 'returns all advisees for the current user if no search params' do
       get :index
 
-      json_response = parse_json
-
-      expect_json_response(response)
+      json_response = parse_json(response)
+      ids = get_ids(json_response)
 
       advisees.each do |advisee|
-        expect(json).to include(advisee)
+        expect(ids).to include(advisee.id)
       end
     end
 
@@ -29,9 +28,10 @@ describe AdviseeSearchController, type: :controller do
       get :index, search: searched_advisee_name.downcase
 
       json_response = parse_json(response)
+      ids = get_ids(json_response)
 
-      expect(json_response.count).to eq(1)
-      expect(json_response).to include(searched_advisee)
+      expect(ids.count).to eq(1)
+      expect(ids).to include(searched_advisee.id)
     end
 
     it 'returns advisees matching a search by last name' do
@@ -42,9 +42,10 @@ describe AdviseeSearchController, type: :controller do
       get :index, search: searched_advisee_name.downcase
 
       json_response = parse_json(response)
+      ids = get_ids(json_response)
 
-      expect(json_response.count).to eq(1)
-      expect(json_response).to include(searched_advisee)
+      expect(ids.count).to eq(1)
+      expect(ids).to include(searched_advisee.id)
     end
 
     it 'returns advisees matching a search by email' do
@@ -55,9 +56,14 @@ describe AdviseeSearchController, type: :controller do
       get :index, search: searched_advisee_email.downcase
 
       json_response = parse_json(response)
+      ids = get_ids(json_response)
 
-      expect(json_response.count).to eq(1)
-      expect(json_response).to include(searched_advisee)
+      expect(ids.count).to eq(1)
+      expect(ids).to include(searched_advisee.id)
     end
   end
+end
+
+def get_ids(json)
+  json['advisees'].map { |c| c['id'] }
 end

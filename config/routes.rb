@@ -3,4 +3,10 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :advisees
+
+  namespace :api do
+    namespace :v1 do
+      resources :advisee_search, only: [:index]
+    end
+  end
 end
