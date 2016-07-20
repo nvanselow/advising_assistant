@@ -39,25 +39,41 @@ feature 'User can search for an advisee', %{
                                             user: user)
     visit advisees_path
 
-    find('#search').send_keys(searchable_name)
+    find('#search').send_keys(searchable_name[0..2])
 
-    expect(page).to have_content(searchable_advisee.full_name[0..2])
+    expect(page).to have_content(searchable_advisee.full_name)
 
     advisees.each do |advisee|
       expect(page).not_to have_content(advisee.full_name)
     end
   end
 
-  scenario 'User searches by last name' do
+  scenario 'User searches by advisee last name' do
     searchable_name = 'Whiteoak'
     searchable_advisee = FactoryGirl.create(:advisee,
                                             last_name: searchable_name,
                                             user: user)
     visit advisees_path
 
-    find('#search').send_keys(searchable_name)
+    find('#search').send_keys(searchable_name[0..2])
 
-    expect(page).to have_content(searchable_advisee.last_name[0..2])
+    expect(page).to have_content(searchable_advisee.full_name)
+
+    advisees.each do |advisee|
+      expect(page).not_to have_content(advisee.full_name)
+    end
+  end
+
+  scenario 'User searched by advisee email' do
+    searchable_email = 'kwhiteoak@chromeria.gov'
+    searchable_advisee = FactoryGirl.create(:advisee,
+                                            email: searchable_email,
+                                            user: user)
+    visit advisees_path
+
+    find('#search').send_keys(searchable_email[0..2])
+
+    expect(page).to have_content(searchable_advisee.full_name)
 
     advisees.each do |advisee|
       expect(page).not_to have_content(advisee.full_name)
