@@ -14,12 +14,10 @@
 
 
   <div id="advisee-search">
-    React isn't working
-  </div>
-
-  <div class="advisees">
-    <% @advisees.each do |advisee| %>
-      <%= render partial: 'advisees/advisee', object: advisee %>
-    <% end %>
+    <div class="advisees">
+      <% @advisees.each do |advisee| %>
+        <%= render partial: 'advisees/advisee', object: advisee %>
+      <% end %>
+    </div>
   </div>
 </div>

@@ -1,0 +1,23 @@
+.advisee {
+  cursor: pointer;
+  text-align: center;
+
+  .advisee-info {
+    background: $primary-color-light;
+    margin-bottom: 5px;
+    min-height: 100px;
+    padding: 10px;
+  }
+
+  h2 {
+    color: $primary-text-color;
+    font-size: 22px;
+    margin-bottom: 0;
+  }
+
+  h3 {
+    color: $secondary-text-color;
+    font-size: 16px;
+    margin-top: 5px;
+  }
+}

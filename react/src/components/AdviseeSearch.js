@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import Advisee from './Advisee';
 
 class AdviseeSearch extends Component {
   constructor(props) {
@@ -39,14 +41,14 @@ class AdviseeSearch extends Component {
   renderAdvisees() {
     return this.state.advisees.map((advisee) => {
       return (
-        <li key={advisee.id}>
-          {advisee.first_name} {advisee.last_name}
-        </li>
+        <Advisee key={advisee.id} advisee={advisee} />
       );
     });
   }
 
   render() {
+    let advisees = this.renderAdvisees();
+
     return (
       <div id="advisee-search" className="search">
         <div className="input-field">
@@ -55,13 +57,14 @@ class AdviseeSearch extends Component {
                  id="search"
                  name="search"
                  value={this.state.searchQuery}
-                 onChange={this.updateSearchQuery} />
+                 onChange={this.updateSearchQuery}
+                 autoComplete="off" />
         </div>
 
-        <div className="advisees">
-          <ul>
-            {this.renderAdvisees()}
-          </ul>
+        <div className="advisees row">
+          <ReactCSSTransitionGroup transitionName="advisee" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={true} transitionAppearTimeout={500}>
+            {advisees}
+          </ReactCSSTransitionGroup>
         </div>
       </div>
     );
