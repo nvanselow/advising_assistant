@@ -1,2 +1,8 @@
 <h2><%= @advisee.full_name %> <small>(<%= @advisee.email %>)</small></h2>
 <h3><%= @advisee.graduation_semester %> <%= @advisee.graduation_year %></h3>
+
+<button data-target="delete-advisee-modal" class="btn danger modal-trigger">
+  Delete Advisee
+</button>
+<!-- <a class="btn modal-trigger" href="#delete-advisee-modal">Delete Advisee</a> -->
+<%= render partial: 'advisees/delete_modal', locals: { advisee: @advisee} %>
