@@ -1,4 +1,6 @@
 class Advisee < ActiveRecord::Base
+  include PgSearch
+
   belongs_to :user
 
   validates :first_name, presence: true
@@ -11,6 +13,13 @@ class Advisee < ActiveRecord::Base
   validates :graduation_year, numericality: { only_integer: true,
                                               greater_than: 1990,
                                               less_than: 9999 }
+
+  pg_search_scope :search_advisees,
+                  against: [:first_name, :last_name, :email],
+                  using: {
+                    tsearch: { prefix: true }
+                  }
+  scope :search, -> (query) { search_advisees(query) if query.present? }
 
   def self.all_for(user)
     Advisee.where(user: user)

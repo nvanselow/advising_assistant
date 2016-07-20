@@ -7,6 +7,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'materialize-sass'
 gem 'devise'
+gem 'pg_search'
 
 group :development, :test do
   gem 'capybara'
@@ -16,6 +17,7 @@ group :development, :test do
   gem 'shoulda'
   gem 'valid_attribute'
   gem 'dotenv'
+  gem 'faker'
 end
 
 group :test do

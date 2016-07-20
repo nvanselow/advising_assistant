@@ -75,6 +75,8 @@ GEM
     factory_girl_rails (4.7.0)
       factory_girl (~> 4.7.0)
       railties (>= 3.0.0)
+    faker (1.6.3)
+      i18n (~> 0.5)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
@@ -102,6 +104,10 @@ GEM
       pkg-config (~> 1.1.7)
     orm_adapter (0.5.0)
     pg (0.18.4)
+    pg_search (1.0.6)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
+      arel
     pkg-config (1.1.7)
     pry (0.10.4)
       coderay (~> 1.1.0)
@@ -214,10 +220,12 @@ DEPENDENCIES
   devise
   dotenv
   factory_girl_rails
+  faker
   jquery-rails
   launchy
   materialize-sass
   pg (~> 0.15)
+  pg_search
   pry-rails
   rails (= 4.2.6)
   rails_12factor
