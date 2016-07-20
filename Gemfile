@@ -26,6 +26,7 @@ group :test do
   gem 'coveralls', require: false
   gem 'capybara-webkit'
   gem 'database_cleaner'
+  gem 'orderly'
 end
 
 group :production do
