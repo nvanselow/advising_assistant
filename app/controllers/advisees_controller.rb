@@ -24,9 +24,16 @@ class AdviseesController < ApplicationController
       flash[:alert] = 'There was a problem creating that advisee'
       @errors = @advisee.errors.full_messages
       @semesters = Semesters.all_for_select
-      
+
       render 'advisees/new'
     end
+  end
+
+  def destroy
+    Advisee.destroy(params[:id])
+    flash[:success] = 'Advisee deleted successfully!'
+
+    redirect_to advisees_path
   end
 
   private
