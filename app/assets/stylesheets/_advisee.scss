@@ -9,15 +9,25 @@
     padding: 10px;
   }
 
-  h2 {
+  img {
+    height: 80px;
+  }
+
+  .advisee-name {
     color: $primary-text-color;
-    font-size: 22px;
-    margin-bottom: 0;
+    font-size: 1.15em;
+    white-space: nowrap;
   }
 
   h3 {
     color: $secondary-text-color;
     font-size: 16px;
     margin-top: 5px;
+  }
+}
+
+.advisee-details {
+  .photo {
+    padding: 15px;
   }
 }

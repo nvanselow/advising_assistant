@@ -1,5 +1,8 @@
+require 'digest/md5'
+
 class Advisee < ActiveRecord::Base
   include PgSearch
+  mount_uploader :photo, AdviseePhotoUploader
 
   belongs_to :user
 
@@ -27,5 +30,25 @@ class Advisee < ActiveRecord::Base
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def photo_url
+    if photo.to_s == ""
+      "https://www.gravatar.com/avatar/#{email_hash}"
+    else
+      photo.to_s
+    end
+  end
+
+  def as_json(options = {})
+    h = super(options)
+    h[:photo_url] = photo_url
+    h
+  end
+
+  private
+
+  def email_hash
+    Digest::MD5.hexdigest(email)
   end
 end

@@ -5,6 +5,7 @@ FactoryGirl.define do
     sequence(:email) { |num| "advisee_#{num}@mailinator.com" }
     graduation_semester 'Spring'
     graduation_year '2017'
+    photo File.open("#{Rails.root}/spec/support/images/sample_avatar.jpg")
     user
   end
 end

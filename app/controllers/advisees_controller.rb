@@ -16,6 +16,7 @@ class AdviseesController < ApplicationController
 
   def create
     @advisee = Advisee.new(advisee_params)
+    @advisee.user = current_user
 
     if @advisee.save
       flash[:success] = 'Advisee added successfully'
@@ -63,6 +64,7 @@ class AdviseesController < ApplicationController
                                     :last_name,
                                     :email,
                                     :graduation_semester,
-                                    :graduation_year)
+                                    :graduation_year,
+                                    :photo)
   end
 end
