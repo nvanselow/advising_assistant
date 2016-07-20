@@ -12,9 +12,9 @@ feature 'Add a photo to an advisee', %{
 
   let(:user) { FactoryGirl.create(:user) }
   let(:sample_photo) { "#{Rails.root}/spec/support/images/sample_avatar.jpg" }
-  let(:advisee_without_photo) { FactoryGirl.create(:advisee,
-                                             user: user,
-                                             photo: nil) }
+  let(:advisee_without_photo) do
+    FactoryGirl.create(:advisee, user: user, photo: nil)
+  end
 
   before do
     sign_in user
