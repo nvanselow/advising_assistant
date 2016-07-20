@@ -17,3 +17,4 @@
 .DS_Store
 /node_modules
 /react/coverage
+/app/assets/javascripts/bundle.js
