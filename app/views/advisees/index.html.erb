@@ -1,10 +1,21 @@
 <div class="container">
-  <h1>Advisees</h1>
 
-  <%= link_to new_advisee_path, class: 'btn' do %>
-     <i class="material-icons left">add</i>
-    Add Advisee
-  <% end %>
+  <div class="row">
+    <div class="col s12 m9">
+      <h1>Advisees</h1>
+    </div>
+    <div class="col s12 m3">
+      <%= link_to new_advisee_path, class: 'btn add-advisee' do %>
+         <i class="material-icons left">add</i>
+        Add Advisee
+      <% end %>
+    </div>
+  </div>
+
+
+  <div id="advisee-search">
+    React isn't working
+  </div>
 
   <div class="advisees">
     <% @advisees.each do |advisee| %>

@@ -1,6 +1,7 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import AdviseeSearch from './components/AdviseeSearch';
 
 // $(function() {
 //   ReactDOM.render(
@@ -8,3 +9,14 @@ import ReactDOM from 'react-dom';
 //     document.getElementById('app')
 //   );
 // });
+
+$(function() {
+  let adviseeSearch = document.getElementById('advisee-search')
+
+  if(adviseeSearch){
+    ReactDOM.render(
+      <AdviseeSearch />,
+      adviseeSearch
+    );
+  }
+});
