@@ -1,0 +1,21 @@
+<div id="delete-advisee-modal" class="modal">
+  <div class="modal-content">
+    <h4>Delete Advisee?</h4>
+    <p>
+      Are you sure you want to delete <%= advisee.full_name %> and all of their
+      information?
+    </p>
+    <p>
+      <b>Warning:</b> This cannot be undone.
+    </p>
+  </div>
+  <div class="modal-footer">
+    <%= button_to 'Yes, Delete Advisee',
+                  advisee_path(advisee),
+                  method: 'delete',
+                  class: 'btn danger modal-action modal-close' %>
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">
+      Cancel
+    </a>
+  </div>
+</div>
