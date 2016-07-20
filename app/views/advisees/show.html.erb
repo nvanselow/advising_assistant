@@ -17,4 +17,24 @@
     Delete Advisee
   </button>
   <%= render partial: 'advisees/delete_modal', locals: { advisee: @advisee} %>
+
+  <div class="notes">
+    <% if @notes.count == 0 %>
+      <p>
+        There are no notes for this advisee.
+      </p>
+      <button class="btn">
+        <i class="material-icons left">add</i> Add Note
+      </button>
+    <% end %>
+
+    <% @notes.each do |note| %>
+      <div class="note">
+        <p>
+          <%= note.body %>
+        </p>
+        <h4><%= note.updated_at %></h4>
+      </div>
+    <% end %>
+  </div>
 </div>

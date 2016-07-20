@@ -7,6 +7,7 @@ class AdviseesController < ApplicationController
 
   def show
     @advisee = Advisee.find(params[:id])
+    @notes = @advisee.notes.order(updated_at: :desc)
   end
 
   def new

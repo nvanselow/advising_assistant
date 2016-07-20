@@ -19,7 +19,7 @@ feature 'User can view notes for an advisee', %{
   end
 
   scenario 'User visits advisee details page and sees all notes' do
-    notes = FactoryGirl.create_list(:note, 3, advisee: advisee)
+    notes = FactoryGirl.create_list(:note, 3, noteable: advisee)
 
     visit advisee_path(advisee)
 
@@ -30,20 +30,20 @@ feature 'User can view notes for an advisee', %{
 
   scenario 'Most recent notes are at the top of the list' do
     old_note = FactoryGirl.create(:note,
-                                  advisee: advisee,
+                                  noteable: advisee,
                                   updated_at: DateTime.new(2010, 2, 3, 4, 5))
     new_note = FactoryGirl.create(:note,
-                                  advisee: advisee,
+                                  noteable: advisee,
                                   updated_at: DateTime.new(2016, 7, 19, 8, 0))
     note = FactoryGirl.create(:note,
-                              advisee: advisee,
+                              noteable: advisee,
                               updated_at: DateTime.new(2016, 7, 4, 8, 0))
 
     visit advisee_path(advisee)
 
-    expect(new_note).to appear_before(note)
-    expect(new_note).to appear_before(old_note)
-    expect(note).to appear_before(old_note)
+    expect(new_note.body).to appear_before(note.body)
+    expect(new_note.body).to appear_before(old_note.body)
+    expect(note.body).to appear_before(old_note.body)
   end
 
   scenario 'There is a message if there are no notes for the advisee' do
