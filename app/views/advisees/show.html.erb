@@ -1,4 +1,6 @@
 <div class="container advisee-details">
+  <div id="advisee-data" data-id="<%= @advisee.id %>" />
+
   <div class="row">
     <div class="col s12 m3 photo">
       <img src="<%= @advisee.photo_url %>"
@@ -18,7 +20,7 @@
   </button>
   <%= render partial: 'advisees/delete_modal', locals: { advisee: @advisee} %>
 
-  <div class="notes">
+  <div class="notes" id="advisee-notes">
     <% if @notes.count == 0 %>
       <p>
         There are no notes for this advisee.
