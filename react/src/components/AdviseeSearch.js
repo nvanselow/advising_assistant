@@ -62,7 +62,11 @@ class AdviseeSearch extends Component {
         </div>
 
         <div className="advisees row">
-          <ReactCSSTransitionGroup transitionName="advisee" transitionEnterTimeout={500} transitionLeaveTimeout={300} transitionAppear={true} transitionAppearTimeout={500}>
+          <ReactCSSTransitionGroup transitionName="advisee"
+                                   transitionEnterTimeout={500}
+                                   transitionLeaveTimeout={300}
+                                   transitionAppear={true}
+                                   transitionAppearTimeout={500}>
             {advisees}
           </ReactCSSTransitionGroup>
         </div>
