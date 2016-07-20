@@ -1,0 +1,32 @@
+<%= render partial: 'layouts/errors' %>
+
+<%= form_for @advisee do |f| %>
+  <div class="input-field">
+    <%= f.label :first_name, 'First Name' %>
+    <%= f.text_field :first_name %>
+  </div>
+
+  <div class="input-field">
+    <%= f.label :last_name, 'Last Name' %>
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div class="input-field">
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>
+
+  <div class="input-field">
+    <%= f.select :graduation_semester, @semesters %>
+    <%= f.label :graduation_semester, 'Graduation Semester' %>
+  </div>
+
+  <div class="input-field">
+    <%= f.label :graduation_year, 'Graduation Year' %>
+    <%= f.number_field :graduation_year, min: 1990, max: 10000 %>
+  </div>
+
+  <div class="input-field">
+    <%= f.submit 'Save Advisee', class: 'btn' %>
+  </div>
+<% end %>

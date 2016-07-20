@@ -1,5 +1,10 @@
 <h1>Advisees</h1>
 
+<%= link_to new_advisee_path, class: 'btn' do %>
+   <i class="material-icons left">add</i>
+  Add Advisee
+<% end %>
+
 <div class="advisees">
   <% @advisees.each do |advisee| %>
     <%= render partial: 'advisees/advisee', object: advisee %>
