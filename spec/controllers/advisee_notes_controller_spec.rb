@@ -49,7 +49,7 @@ describe Api::V1::AdviseeNotesController, type: :controller do
     it 'creates a new note if a valid note is provided' do
       post :create,
            advisee_id: advisee.id,
-           note: { body: note_body}
+           note: { body: note_body }
 
       json_response = parse_json(response)
 
@@ -91,11 +91,15 @@ describe Api::V1::AdviseeNotesController, type: :controller do
     end
 
     it 'returns errors if the note is invalid' do
+      note = FactoryGirl.create(:note)
 
-    end
+      put :update, advisee_id: advisee.id,
+                   id: note.id,
+                   note: { body: '' }
 
-    it 'returns an error if the note does not exist' do
+      json_response = parse_json(response, :bad_request)
 
+      expect(json_response['errors']).to include("Body can't be blank")
     end
   end
 end
