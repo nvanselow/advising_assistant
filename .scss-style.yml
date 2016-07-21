@@ -5,3 +5,5 @@ exclude:
 linters:
   Comment:
     enabled: false
+  PlaceholderInExtend:
+    enabled: false
