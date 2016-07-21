@@ -20,7 +20,7 @@
   </button>
   <%= render partial: 'advisees/delete_modal', locals: { advisee: @advisee} %>
 
-  <div class="notes" id="advisee-notes">
+  <div id="advisee-notes">
     <% if @notes.count == 0 %>
       <p>
         There are no notes for this advisee.

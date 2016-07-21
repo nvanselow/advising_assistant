@@ -8,9 +8,12 @@ class Errors extends Component {
   }
 
   renderErrors() {
+    let i = 0;
+
     return this.props.errors.map((error) => {
+      i++;
       return (
-        <li>
+        <li key={i}>
           {error}
         </li>
       );
