@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Confirmation from '../lib/Confirmation';
 import Errors from './Errors';
+import Time from './Time';
 
 class Note extends Component {
   constructor(props) {
@@ -33,7 +34,9 @@ class Note extends Component {
       <div className="note card blue-grey darken-1">
         <div className="card-content white-text">
           <span className="card-title">
-            Note: <small>({note.updated_at})</small>
+            Note: <small>
+            (updated <Time dateTime={note.updated_at} displayType="timeago"/>)
+          </small>
           </span>
           <p>{note.body}</p>
         </div>
