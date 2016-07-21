@@ -35,7 +35,6 @@ describe Api::V1::AdviseeNotesController, type: :controller do
 
       get :index, advisee_id: advisee.id
 
-
       json_response = parse_json(response)
       ids = get_note_ids(json_response)
 
