@@ -34,8 +34,8 @@ class Api::V1::AdviseeNotesController < ApplicationController
       errors = note.errors.full_messages
 
       render json: {
-                     message: 'There were problems updating the note.',
-                     errors: errors
+                      message: 'There were problems updating the note.',
+                      errors: errors
                    }, status: :bad_request
     end
   end
