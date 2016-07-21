@@ -30,17 +30,23 @@ class Note extends Component {
   render() {
     let note = this.props.note;
     return (
-      <div className="note">
-        <h4>{note.updated_at}</h4>
-        <p>{note.body}</p>
-        <button className="delete-note btn-floating danger"
-                onClick={this.handleDelete}>
-          <i className="material-icons">delete</i>
-        </button>
-        <button className="edit-note btn-floating"
-                onClick={this.handleEdit} >
-          <i className="material-icons">mode_edit</i>
-        </button>
+      <div className="note card blue-grey darken-1">
+        <div className="card-content white-text">
+          <span className="card-title">
+            Note: <small>({note.updated_at})</small>
+          </span>
+          <p>{note.body}</p>
+        </div>
+        <div className="card-action">
+          <button className="delete-note btn-floating danger"
+                  onClick={this.handleDelete}>
+            <i className="material-icons">delete</i>
+          </button>
+          <button className="edit-note btn-floating"
+                  onClick={this.handleEdit} >
+            <i className="material-icons">mode_edit</i>
+          </button>
+        </div>
       </div>
     );
   }
