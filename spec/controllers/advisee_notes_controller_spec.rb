@@ -15,7 +15,7 @@ describe Api::V1::AdviseeNotesController, type: :controller do
       get :index, advisee_id: advisee.id
 
       json_response = parse_json(response)
-      ids = get_ids(json_response)
+      ids = get_note_ids(json_response)
 
       notes.each do |note|
         expect(ids).to include(note.id)
@@ -37,7 +37,7 @@ describe Api::V1::AdviseeNotesController, type: :controller do
 
 
       json_response = parse_json(response)
-      ids = get_ids(json_response)
+      ids = get_note_ids(json_response)
 
       expect(ids).to eq([new_note.id, note.id, old_note.id])
     end
@@ -100,6 +100,6 @@ describe Api::V1::AdviseeNotesController, type: :controller do
   end
 end
 
-def get_ids(json)
+def get_note_ids(json)
   json['notes'].map { |c| c['id'] }
 end

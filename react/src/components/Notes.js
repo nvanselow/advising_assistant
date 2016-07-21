@@ -95,7 +95,7 @@ class Notes extends Component {
             </textarea>
             <label htmlFor="note_body">Note</label>
             <div className="input-field">
-              <button onClick={this.saveNote} className="btn">
+              <button id="add-note" onClick={this.saveNote} className="btn">
                 <i className="material-icons left">add</i>
                 Add Note
               </button>
