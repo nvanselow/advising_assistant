@@ -20,23 +20,34 @@
   </button>
   <%= render partial: 'advisees/delete_modal', locals: { advisee: @advisee} %>
 
-  <div id="advisee-notes">
-    <% if @notes.count == 0 %>
-      <p>
-        There are no notes for this advisee.
-      </p>
-      <button class="btn">
-        <i class="material-icons left">add</i> Add Note
-      </button>
-    <% end %>
+  <div class="row notes-and-meetings">
+    <div class="col s12 m6">
+      <h5>Notes</h5>
+      <div id="advisee-notes">
+        <% if @notes.count == 0 %>
+          <p>
+            There are no notes for this advisee.
+          </p>
+          <button class="btn">
+            <i class="material-icons left">add</i> Add Note
+          </button>
+        <% end %>
 
-    <% @notes.each do |note| %>
-      <div class="note">
-        <p>
-          <%= note.body %>
-        </p>
-        <h4><%= note.updated_at %></h4>
+        <% @notes.each do |note| %>
+          <div class="note">
+            <p>
+              <%= note.body %>
+            </p>
+            <h4><%= note.updated_at %></h4>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
+    <div class="col s12 m6">
+      <div id="advisee-meetings">
+        <h5>Meetings</h5>
+      </div>
+    </div>
   </div>
+
 </div>
