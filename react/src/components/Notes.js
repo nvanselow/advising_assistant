@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Flash from '../lib/Flash';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Note from './Note';
+import EditNote from './EditNote';
 import Errors from './Errors';
 
 class Notes extends Component {
@@ -18,6 +19,7 @@ class Notes extends Component {
       newNoteBody: '',
       newNoteErrors: [],
       notes: [],
+      editingNoteId: null
     }
 
     this.getNotes = this.getNotes.bind(this);
@@ -27,6 +29,9 @@ class Notes extends Component {
     this.noteCreated = this.noteCreated.bind(this);
     this.noteCreatedErrors = this.noteCreatedErrors.bind(this);
     this.deleteNote = this.deleteNote.bind(this);
+    this.editNote = this.editNote.bind(this);
+    this.updateNote = this.updateNote.bind(this);
+    this.cancelUpdate = this.cancelUpdate.bind(this);
   }
 
   componentDidMount() {
@@ -44,9 +49,22 @@ class Notes extends Component {
 
   renderNotes() {
     return this.state.notes.map((note) => {
-      return (
-        <Note key={note.id} note={note} onDelete={this.deleteNote} />
-      );
+      if(this.state.editingNoteId === note.id) {
+        return (
+          <EditNote key={note.id}
+                    note={note}
+                    onSave={this.updateNote}
+                    onCancel={this.cancelUpdate}
+                    {...this.props} />
+        );
+      } else {
+        return (
+          <Note key={note.id}
+                note={note}
+                onDelete={this.deleteNote}
+                handleEdit={this.editNote} />
+        );
+      }
     });
   }
 
@@ -103,8 +121,25 @@ class Notes extends Component {
     });
   }
 
-  noteDelete() {
-    Flash.success('Note deleted!')
+  editNote(note) {
+    this.setState({ editingNoteId: note.id });
+  }
+
+  updateNote(note) {
+    let notes = this.state.notes;
+
+    notes = notes.map((currentNote) => {
+      if(currentNote.id == note.id){
+        currentNote.body = note.body;
+      }
+      return currentNote;
+    });
+
+    this.setState({ notes: notes, editingNoteId: null });
+  }
+
+  cancelUpdate() {
+    this.setState({ editingNoteId: null });
   }
 
   render() {
