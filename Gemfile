@@ -27,6 +27,7 @@ group :test do
   gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'orderly'
+  gem 'poltergeist'
 end
 
 group :production do
