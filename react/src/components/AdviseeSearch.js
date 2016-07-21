@@ -7,12 +7,14 @@ class AdviseeSearch extends Component {
     super(props)
 
     this.state = {
+      originalAdvisees: [],
       advisees: [],
       searchQuery: ''
     }
 
     this.searchAdvisees = this.searchAdvisees.bind(this);
     this.updateSearchQuery = this.updateSearchQuery.bind(this);
+    this.noAdviseesMessage = this.noAdviseesMessage.bind(this);
   }
 
   componentDidMount() {
@@ -26,14 +28,20 @@ class AdviseeSearch extends Component {
 
   searchAdvisees(searchQuery) {
     let url = '/api/v1/search_advisees';
+    let noSearch = true;
+
     if(searchQuery && searchQuery.length > 0){
       url = url + '?search=' + searchQuery;
+      noSearch = false;
     }
 
     $.ajax({
       url: url,
       method: 'GET'
     }).done((data) => {
+      if(noSearch){
+        this.setState({ originalAdvisees: data.advisees});
+      }
       this.setState({ advisees: data.advisees });
     });
   }
@@ -44,6 +52,29 @@ class AdviseeSearch extends Component {
         <Advisee key={advisee.id} advisee={advisee} />
       );
     });
+  }
+
+  noAdviseesMessage() {
+    if(this.state.originalAdvisees.length == 0){
+      return (
+        <div className="no-advisees card blue-grey darken-1">
+          <div className="card-content white-text center-align">
+            <h5>
+              You have not created any advisees. Add one to get started.
+            </h5>
+
+          </div>
+          <div className="card-action">
+            <a href="/advisees/new">
+              <i className="material-icons left">add</i>
+              Add Advisee
+            </a>
+          </div>
+        </div>
+      );
+    } else {
+      return null;
+    }
   }
 
   render() {
@@ -60,6 +91,8 @@ class AdviseeSearch extends Component {
                  onChange={this.updateSearchQuery}
                  autoComplete="off" />
         </div>
+
+        {this.noAdviseesMessage()}
 
         <div className="advisees row">
           <ReactCSSTransitionGroup transitionName="advisee"
