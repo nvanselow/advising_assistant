@@ -12,6 +12,7 @@ class Notes extends Component {
     let noteableId = this.props.noteableId;
     let controller = this.props.controller;
     this.baseUrl = `/api/v1/${noteableType}/${noteableId}/${controller}`;
+    this.controller = controller;
 
     this.state = {
       newNoteBody: '',
@@ -25,6 +26,7 @@ class Notes extends Component {
     this.updateNoteBody = this.updateNoteBody.bind(this);
     this.noteCreated = this.noteCreated.bind(this);
     this.noteCreatedErrors = this.noteCreatedErrors.bind(this);
+    this.deleteNote = this.deleteNote.bind(this);
   }
 
   componentDidMount() {
@@ -43,7 +45,7 @@ class Notes extends Component {
   renderNotes() {
     return this.state.notes.map((note) => {
       return (
-        <Note key={note.id} note={note} />
+        <Note key={note.id} note={note} onDelete={this.deleteNote} />
       );
     });
   }
@@ -79,6 +81,30 @@ class Notes extends Component {
     let data = response.responseJSON;
     Flash.error(data.message);
     this.setState({ newNoteErrors: data.errors });
+  }
+
+  deleteNote(note) {
+    $.ajax({
+      url: `/api/v1/${this.controller}/${note.id}`,
+      method: 'DELETE'
+    })
+    .done((data) => {
+      let notes = this.state.notes;
+
+      notes = notes.filter((currentNote) => {
+        return (note.id !== currentNote.id);
+      });
+
+      Flash.success('Note deleted!');
+      this.setState({ notes: notes });
+    })
+    .fail((response) => {
+      Flash.error('There was a problem deleting that note.');
+    });
+  }
+
+  noteDelete() {
+    Flash.success('Note deleted!')
   }
 
   render() {
