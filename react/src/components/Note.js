@@ -12,7 +12,7 @@ class Note extends Component {
   handleDelete() {
     Confirmation.show({
                         header: 'Delete this note?',
-                        okText: 'Yes, Delete Note',
+                        okText: 'Yes, delete note',
                         okCallback: this.deleteNoteConfirmed
                       });
   }
@@ -28,7 +28,8 @@ class Note extends Component {
       <div className="note">
         <h4>{note.updated_at}</h4>
         <p>{note.body}</p>
-        <button className="btn-floating danger" onClick={this.handleDelete}>
+        <button className="delete-note btn-floating danger"
+                onClick={this.handleDelete}>
           <i className="material-icons">delete</i>
         </button>
       </div>

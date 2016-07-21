@@ -4,12 +4,13 @@ feature 'Delete an advisee note', %{
   As an advisor
   I want to delete a note
   So that I no longer see that note in the list of notes
-} do
+}, js: true do
   # ACCEPTANCE CRITERIA
-  # [ ] On the advisee details page, there is an option to delete a note next to each note
-  # [ ] Clicking that option deletes the note and I can no longer see it in the notes list for that advisee
-  # [ ] If deleted, I see a success message indicated the note was removed
-  # [ ] If deleted, I am brought back to the details page for that advisee
+  # [X] On the advisee details page, there is an option to delete a note next
+  #     to each note
+  # [X] Clicking that option deletes the note and I can no longer see it in
+  #     the notes list for that advisee
+  # [X] If deleted, I see a success message indicated the note was removed
 
   let(:user) { FactoryGirl.create(:user) }
   let(:advisee) { FactoryGirl.create(:advisee, user: user) }
@@ -23,7 +24,7 @@ feature 'Delete an advisee note', %{
   scenario 'User deletes a note' do
     find('.delete-note').click
 
-    click('Yes, delete note')
+    find('.ok-btn').click
 
     expect(page).to have_content('Note deleted')
     expect(page).not_to have_content(note.body)
@@ -32,9 +33,9 @@ feature 'Delete an advisee note', %{
   scenario 'User cancels note deletion' do
     find('.delete-note').click
 
-    click('Cancel')
+    find('.cancel-btn').click
 
-    expect(page).not_to have_content('Note deleted')
     expect(page).to have_content(note.body)
+    expect(page).not_to have_content('Note deleted')
   end
 end

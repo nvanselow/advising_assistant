@@ -95,6 +95,7 @@ class Notes extends Component {
         return (note.id !== currentNote.id);
       });
 
+      Flash.success('Note deleted!');
       this.setState({ notes: notes });
     })
     .fail((response) => {

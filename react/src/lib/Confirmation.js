@@ -46,11 +46,11 @@ class ConfirmationDialogBox extends Component {
           <p>{this.bodyText}</p>
         </div>
         <div className="modal-footer">
-          <button className="modal-action modal-close waves-effect btn-flat"
+          <button className="cancel-btn modal-action modal-close waves-effect btn-flat"
                   onClick={this.handleCancelClick}>
             {this.cancelText}
           </button>
-          <button className="modal-action modal-close waves-effect btn"
+          <button className="ok-btn modal-action modal-close waves-effect btn"
                   onClick={this.handleOkClick}>
             {this.okText}
           </button>
