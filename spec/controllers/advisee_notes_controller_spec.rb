@@ -101,6 +101,18 @@ describe Api::V1::AdviseeNotesController, type: :controller do
       expect(json_response['errors']).to include("Body can't be blank")
     end
   end
+
+  describe 'DELETE /api/v1/advisee_notes/:id' do
+    it 'deletes a note' do
+      note = FactoryGirl.create(:note, noteable: advisee)
+
+      delete :destroy, id: note.id
+
+      json_response = parse_json(response)
+
+      expect(json_response['message']).to include('Note deleted')
+    end
+  end
 end
 
 def get_note_ids(json)

@@ -43,7 +43,7 @@ class Api::V1::AdviseeNotesController < ApplicationController
   def destroy
     Note.destroy(params[:id])
 
-    render json: { message: 'Note was deleted' }, status: :ok
+    render json: { message: 'Note deleted!' }, status: :ok
   end
 
   private
