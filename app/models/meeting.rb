@@ -26,7 +26,7 @@ class Meeting < ActiveRecord::Base
     end
   end
 
-  def as_json(options = { })
+  def as_json(options = {})
     m = super(options)
     m[:duration] = duration
     m
