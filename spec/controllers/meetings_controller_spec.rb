@@ -9,7 +9,6 @@ describe Api::V1::MeetingsController, type: :controller do
   end
 
   describe 'GET /api/v1/advisees/:advisee_id/meetings' do
-
     it 'returns all meetings for an advisee' do
       meetings = FactoryGirl.create_list(:meeting, 4, advisee: advisee)
 

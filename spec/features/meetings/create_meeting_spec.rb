@@ -9,8 +9,10 @@ feature 'Create a meeting', %{
   # [X] There is an option to add a meeting for an advisee
   # [X] I can set the start time and end time for the meeting
   # [X] I can optionally give the meeting a brief name/description
-  # [X] If the meeting is added successfully, I see a success message and the meeting is added to the meetings list
-  # [ ] If there is a problem with the meeting, I see an error message with information about what to fix
+  # [X] If the meeting is added successfully, I see a success message and
+  #     the meeting is added to the meetings list
+  # [X] If there is a problem with the meeting, I see an error message with
+  #     information about what to fix
   let(:user) { FactoryGirl.create(:user) }
   let(:advisee) { FactoryGirl.create(:advisee, user: user) }
   let(:meeting) { FactoryGirl.attributes_for(:meeting_with_duration) }

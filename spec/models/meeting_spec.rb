@@ -8,10 +8,12 @@ describe Meeting, type: :model do
       FactoryGirl.build(:meeting, start_time: start_time, end_time: end_time)
     end
 
-    it { should have_valid(:description).when('Meeting',
-                                              'Some Meeting',
-                                              '',
-                                              nil) }
+    it do
+      should have_valid(:description).when('Meeting',
+                                           'Some Meeting',
+                                           '',
+                                           nil) 
+    end
 
     it { should validate_presence_of(:start_time) }
     it { should have_valid(:start_time).when(*valid_start_dates) }

@@ -11,7 +11,7 @@ class Meeting < ActiveRecord::Base
   def self.new_from_duration(params)
     meeting = Meeting.new(params)
 
-    if(params[:duration] && params[:duration] != '' && meeting.start_time)
+    if params[:duration] && params[:duration] != '' && meeting.start_time
       meeting.end_time = meeting.start_time + params[:duration].to_i.minutes
     end
 
@@ -19,7 +19,7 @@ class Meeting < ActiveRecord::Base
   end
 
   def duration
-    if(!start_time || !end_time)
+    if !start_time || !end_time
       0
     else
       (end_time - start_time) / 60.to_f
