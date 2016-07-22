@@ -9,7 +9,8 @@ feature 'Delete a meeting with advisee', %{
   # [ ] There is an option to delete a meeting
   # [ ] Deleting a meeting removes it from the list
   # [ ] If deleted, I see a message indicating the meeting was removed
-  # [ ] If deleted, I am brought back to the main meetings index for that advisee
+  # [ ] If deleted, I am brought back to the main meetings index for that
+  #     advisee
 
   let(:user) { FactoryGirl.create(:user) }
   let(:advisee) { FactoryGirl.create(:advisee, user: user) }
