@@ -145,7 +145,7 @@ class Notes extends Component {
   render() {
     return (
       <div className="notes-container">
-        <div className="row">
+        <div className="row add-note-form">
           <Errors errors={this.state.newNoteErrors} />
           <div className="input-field add-note col s12">
             <textarea id="note_body"
