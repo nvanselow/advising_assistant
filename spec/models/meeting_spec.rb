@@ -60,4 +60,18 @@ describe Meeting, type: :model do
       expect(meeting.duration).to eq(0)
     end
   end
+
+  describe '.new_from_duration' do
+    it 'sets an end time if a duration is provided' do
+      duration = 90
+      meeting = FactoryGirl.attributes_for(:meeting_with_duration,
+                                           end_time: nil,
+                                           duration: duration)
+      new_meeting = Meeting.new_from_duration(meeting)
+
+      old_start_time = DateTime.parse(meeting[:start_time])
+      expect(new_meeting.end_time).to eq(old_start_time + duration.minutes)
+    end
+
+  end
 end

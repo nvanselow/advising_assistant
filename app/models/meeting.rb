@@ -3,10 +3,17 @@ class Meeting < ActiveRecord::Base
 
   belongs_to :advisee
 
-  validates :start_time, presence: true, timeliness: { before: :end_time }
-  validates :end_time, presence: true, timeliness: { after: :start_time }
+  validates :start_time, presence: true, timeliness: true
+  validates :end_time, presence: true, timeliness: true
   validates :timezone, presence: true
   validates :advisee, presence: true
+
+  def self.new_from_duration(params)
+    meeting = Meeting.new(params)
+    meeting.end_time = meeting.start_time + params[:duration].minutes
+
+    meeting
+  end
 
   def duration
     if(!start_time || !end_time)
