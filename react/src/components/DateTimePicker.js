@@ -30,6 +30,7 @@ class DateTimePicker extends Component {
 
     this.onDateChange = this.onDateChange.bind(this);
     this.onTimeChange = this.onTimeChange.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {

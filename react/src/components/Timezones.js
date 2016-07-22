@@ -8,8 +8,18 @@ class Timezones extends Component {
     this.timezones = moment.tz.names();
     this.timezones.unshift(moment.tz.guess());
 
+    this.jQueryId = `#${props.id}`;
+
     this.timezoneOptions = this.timezoneOptions.bind(this);
     this.onChange = this.onChange.bind(this);
+  }
+
+  componentDidMount() {
+    $(this.jQueryId).change(this.onChange);
+  }
+
+  componentWillUnmount() {
+    $(this.jQueryId).unbind();
   }
 
   timezoneOptions() {
@@ -31,7 +41,7 @@ class Timezones extends Component {
   render() {
     return (
       <div className="timezone-select">
-        <select id={this.props.id} onChange={this.onChange} placeholder="Timezone">
+        <select id={this.props.id} placeholder="Timezone">
           {this.timezoneOptions()}
         </select>
       </div>
