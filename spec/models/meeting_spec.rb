@@ -12,7 +12,7 @@ describe Meeting, type: :model do
       should have_valid(:description).when('Meeting',
                                            'Some Meeting',
                                            '',
-                                           nil) 
+                                           nil)
     end
 
     it { should validate_presence_of(:start_time) }

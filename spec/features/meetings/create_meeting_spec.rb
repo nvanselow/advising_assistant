@@ -24,7 +24,9 @@ feature 'Create a meeting', %{
 
   scenario 'User can create a new meeting' do
     fill_in('meeting_description', with: meeting[:description])
-    fill_in('meeting_start_time_date', with: meeting[:start_time])
+    # Use js to fill in a read only input
+    page.execute_script("$('#meeting_start_time_date')."\
+                        "val('#{meeting[:start_time]}')")
     fill_in('meeting_start_time_time', with: meeting[:start_time])
     fill_in('meeting_duration', with: meeting[:duration])
     find('#add_meeting').click
