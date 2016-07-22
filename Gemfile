@@ -9,6 +9,7 @@ gem 'materialize-sass'
 gem 'devise'
 gem 'pg_search'
 gem 'carrierwave'
+gem 'validates_timeliness', '~> 4.0'
 
 group :development, :test do
   gem 'capybara'
