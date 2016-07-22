@@ -12,6 +12,8 @@ gem 'carrierwave'
 gem 'validates_timeliness', '~> 4.0'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
+gem 'signet'
+gem 'google-api-client', '0.9'
 
 group :development, :test do
   gem 'capybara'

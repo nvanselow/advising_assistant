@@ -31,11 +31,13 @@ ActiveRecord::Schema.define(version: 20160722194642) do
   add_index "advisees", ["user_id"], name: "index_advisees_on_user_id", using: :btree
 
   create_table "identities", force: :cascade do |t|
-    t.string   "uid",        null: false
-    t.string   "provider",   null: false
+    t.string   "uid",            null: false
+    t.string   "provider",       null: false
+    t.string   "referesh_token"
+    t.string   "access_token"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   add_index "identities", ["uid"], name: "index_identities_on_uid", using: :btree

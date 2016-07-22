@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   devise_for :users
   root 'home#index'
 
+  get "/auth/:provider/callback" => 'identities#create'
+
   resources :advisees
 
   namespace :api do
