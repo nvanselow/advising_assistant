@@ -1,9 +1,16 @@
 import React, { Component, PropTypes } from 'react';
+import DateTimePicker from './DateTimePicker';
+import Timezones from './Timezones';
 
 class Meetings extends Component {
   constructor(props) {
     super(props);
 
+    this.changeTimezone = this.changeTimezone.bind(this);
+  }
+
+  changeTimezone(timezone) {
+    console.log(timezone);
   }
 
   render() {
@@ -17,14 +24,30 @@ class Meetings extends Component {
                 <label htmlFor="meeting_description">Description</label>
               </div>
             </div>
+
             <div className="input-field">
+              <DateTimePicker id="meeting_start_time" />
+            </div>
+
+            <div className="row">
+              <div className="input-field col s12">
+                <input type="number" id="meeting_duration" />
+                <label htmlFor="meeting_duration">Duration (min):</label>
+              </div>
+            </div>
+
+
+            <div className="input-field">
+              <Timezones id="meeting_timezone"
+                         label="Timezone"
+                         onChange={this.changeTimezone} />
+            </div>
+
+            <div className="input-field col s12">
               <button className="btn">
                 <i className="material-icons left">add</i>
                 Add Meeting
               </button>
-            </div>
-            <div className="input-field">
-              <label htmlFor="meeting_start_time">Start Time</label>
             </div>
           </div>
         </div>
