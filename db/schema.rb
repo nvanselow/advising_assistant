@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20160722194642) do
     t.string   "provider",       null: false
     t.string   "referesh_token"
     t.string   "access_token"
+    t.datetime "expires_at"
     t.integer  "user_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false

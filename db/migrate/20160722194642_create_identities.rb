@@ -5,6 +5,7 @@ class CreateIdentities < ActiveRecord::Migration
       t.string :provider, null: false
       t.string :referesh_token
       t.string :access_token
+      t.datetime :expires_at
       t.belongs_to :user
 
       t.timestamps null: false
