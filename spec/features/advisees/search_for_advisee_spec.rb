@@ -1,5 +1,4 @@
 require 'rails_helper'
-Capybara.javascript_driver = :webkit
 
 feature 'User can search for an advisee', %{
   As an advisor
@@ -96,7 +95,7 @@ feature 'User can search for an advisee', %{
 
       visit advisees_path
 
-      find_link(advisee.full_name).trigger('click')
+      find_link(advisee.full_name).click
 
       expect(page).to have_content(advisee.full_name)
       expect(page).to have_content(advisee.email)

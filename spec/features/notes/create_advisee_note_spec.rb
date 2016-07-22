@@ -22,7 +22,7 @@ feature 'User creates a note for an advisee', %{
   end
 
   scenario 'User adds a note correctly' do
-    find('#note_body').trigger('click')
+    find('#note_body').click
     fill_in('note_body', with: note_body)
     click_button('add-note')
 
@@ -34,8 +34,6 @@ feature 'User creates a note for an advisee', %{
 
     expect(page).to have_content("Body can't be blank")
 
-    within('.notes') do
-      expect(page).not_to have_content(note_body)
-    end
+    expect(page).not_to have_content(note_body)
   end
 end

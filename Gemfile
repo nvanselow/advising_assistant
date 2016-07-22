@@ -29,6 +29,7 @@ group :test do
   gem 'database_cleaner'
   gem 'orderly'
   gem 'poltergeist'
+  gem 'selenium-webdriver'
 end
 
 group :production do
