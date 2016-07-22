@@ -73,5 +73,12 @@ describe Meeting, type: :model do
       expect(new_meeting.end_time).to eq(old_start_time + duration.minutes)
     end
 
+    it 'does not set the end time if no duration is provided' do
+      meeting = FactoryGirl.attributes_for(:meeting, end_time: nil)
+
+      new_meeting = Meeting.new_from_duration(meeting)
+
+      expect(new_meeting.end_time).to eq(nil)
+    end
   end
 end
