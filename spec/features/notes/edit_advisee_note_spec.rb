@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-Capybara.javascript_driver = :webkit
-
 feature 'User can edit an advisee note', %{
   As an advisor
   I want to edit a note for an advisee
@@ -56,7 +54,7 @@ feature 'User can edit an advisee note', %{
         find('#edit_note_body').send_keys(:backspace)
       end
 
-      find('#save-note').trigger('click')
+      find('#save-note').click
     end
 
     expect(page).not_to have_content('Note updated')

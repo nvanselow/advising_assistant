@@ -145,9 +145,9 @@ class Notes extends Component {
   render() {
     return (
       <div className="notes-container">
-        <div className="row">
+        <div className="row add-note-form">
           <Errors errors={this.state.newNoteErrors} />
-          <div className="input-field add-note col s12 m4">
+          <div className="input-field add-note col s12">
             <textarea id="note_body"
                       name="note[body]"
                       className="materialize-textarea"
@@ -162,8 +162,9 @@ class Notes extends Component {
               </button>
             </div>
           </div>
-
-          <div className="col s12 offset-m1 m7 notes">
+        </div>
+        <div className="row">
+          <div className="col s12 notes">
             <ReactCSSTransitionGroup transitionName="generic"
                                      transitionEnterTimeout={500}
                                      transitionLeaveTimeout={300}

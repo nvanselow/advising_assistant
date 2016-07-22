@@ -9,6 +9,7 @@ gem 'materialize-sass'
 gem 'devise'
 gem 'pg_search'
 gem 'carrierwave'
+gem 'validates_timeliness', '~> 4.0'
 
 group :development, :test do
   gem 'capybara'
@@ -28,6 +29,7 @@ group :test do
   gem 'database_cleaner'
   gem 'orderly'
   gem 'poltergeist'
+  gem 'selenium-webdriver'
 end
 
 group :production do
