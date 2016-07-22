@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import Flash from '../lib/Flash';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import Flash from '../lib/Flash';
 import Note from './Note';
 import EditNote from './EditNote';
 import Errors from './Errors';
