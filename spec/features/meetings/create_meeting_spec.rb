@@ -21,7 +21,7 @@ feature 'Create a meeting', %{
   end
 
   scenario 'User can create a new meeting' do
-    fill_in('meeting_title', with: meeting[:title])
+    fill_in('meeting_title', with: meeting[:description])
     fill_in('meeting_start_time', with: meeting[:start_time])
     fill_in('meeting_end_time', with: meeting[:end_time])
     select(meeting[:timezone], from: 'meeting_timezone')
@@ -30,7 +30,7 @@ feature 'Create a meeting', %{
     expect(page).to have_content('Meeting created')
 
     within('.meetings') do
-      expect(page).to have_content(meeting[:title])
+      expect(page).to have_content(meeting[:description])
     end
   end
 
