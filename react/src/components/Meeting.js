@@ -14,14 +14,14 @@ class Meeting extends Component {
         <div className="card-content white-text">
           <span className="card-title">
             <Time dateTime={meeting.start_time} />
-            <small>({meeting.duration}) minutes</small>
+            <small> ({meeting.duration} minutes)</small>
           </span>
           <p>
-            {meeting.description}
-          </p>
-          <p>
-            Starts in: <Time dateTime={meeting.start_time}
+            Starts <Time dateTime={meeting.start_time}
                              displayType="timeto" />
+          </p>
+          <p className="meeting-description">
+            {meeting.description}
           </p>
         </div>
       </div>

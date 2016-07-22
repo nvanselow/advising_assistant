@@ -25,4 +25,10 @@ class Meeting < ActiveRecord::Base
       (end_time - start_time) / 60.to_f
     end
   end
+
+  def as_json(options = {})
+    m = super(options)
+    m[:duration] = duration
+    m
+  end
 end

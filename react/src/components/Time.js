@@ -18,7 +18,7 @@ class Time extends Component {
     let dateTime = moment(this.props.dateTime);
     if (this.displayType == 'timeago') {
       return dateTime.tz(moment.tz.guess()).fromNow();
-    } else if (this.displayType = 'timeto') {
+    } else if (this.displayType =='timeto') {
       return dateTime.tz(moment.tz.guess()).toNow();
     } else {
       return dateTime.tz(moment.tz.guess()).format('MMM Qo, YYYY h:mm a');
