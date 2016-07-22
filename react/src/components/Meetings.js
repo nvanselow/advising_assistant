@@ -16,12 +16,27 @@ class Meetings extends Component {
       meetings: []
     }
 
+    this.getMeetings = this.getMeetings.bind(this);
     this.changeDescription = this.changeDescription.bind(this);
     this.changeDateTime = this.changeDateTime.bind(this);
     this.changeDuration = this.changeDuration.bind(this);
     this.changeTimezone = this.changeTimezone.bind(this);
     this.saveMeeting = this.saveMeeting.bind(this);
     this.renderMeetings = this.renderMeetings.bind(this);
+  }
+
+  componentDidMount() {
+    this.getMeetings();
+  }
+
+  getMeetings() {
+    $.ajax({
+      url: `/api/v1/advisees/${this.props.adviseeId}/meetings`,
+      method: 'GET'
+    })
+    .done((data) => {
+      this.setState({ meetings: data.meetings });
+    });
   }
 
   resetMeeting() {
