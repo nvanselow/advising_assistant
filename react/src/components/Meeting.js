@@ -1,7 +1,25 @@
 import React, { Component, PropTypes } from 'react';
 import Time from './Time';
+import Flash from '../lib/Flash';
 
 class Meeting extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  handleDelete() {
+    $.ajax({
+      url: `/api/v1/meetings/${this.props.meeting.id}`,
+      method: 'DELETE'
+    })
+    .done((data) => {
+      Flash.success('Meeting deleted!')
+      this.props.onDelete(this.props.meeting);
+    });
+  }
+
   render() {
     let meeting = this.props.meeting;
     let meetingDescription = 'Meeting';
@@ -23,6 +41,12 @@ class Meeting extends Component {
           <p className="meeting-description">
             {meeting.description}
           </p>
+        </div>
+        <div className="card-action">
+          <button className="delete-meeting btn-floating danger"
+                  onClick={this.handleDelete}>
+            <i className="material-icons">delete</i>
+          </button>
         </div>
       </div>
     );

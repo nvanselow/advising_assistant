@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Flash from '../lib/Flash';
 import Errors from './Errors';
 import moment from 'moment-timezone/builds/moment-timezone-with-data';
@@ -23,6 +24,7 @@ class Meetings extends Component {
     this.changeTimezone = this.changeTimezone.bind(this);
     this.saveMeeting = this.saveMeeting.bind(this);
     this.renderMeetings = this.renderMeetings.bind(this);
+    this.onMeetingDelete = this.onMeetingDelete.bind(this);
   }
 
   componentDidMount() {
@@ -74,12 +76,13 @@ class Meetings extends Component {
 
   renderMeetings() {
     return this.state.meetings.map((meeting) => {
-      return <Meeting key={meeting.id} meeting={meeting} />;
+      return <Meeting key={meeting.id}
+                      meeting={meeting}
+                      onDelete={this.onMeetingDelete} />;
     });
   }
 
   saveMeeting(event) {
-    debugger;
     $.ajax({
       url: `/api/v1/advisees/${this.props.adviseeId}/meetings`,
       method: 'POST',
@@ -97,10 +100,19 @@ class Meetings extends Component {
     })
     .fail((response) => {
       let data = response.responseJSON;
-      debugger;
       Flash.error(data.message);
       this.setState({ newMeetingErrors: data.errors });
     });
+  }
+
+  onMeetingDelete(meeting) {
+    let meetings = this.state.meetings;
+
+    meetings = meetings.filter((currentMeeting) => {
+      return meeting.id !== currentMeeting.id;
+    });
+
+    this.setState({ meetings: meetings });
   }
 
   render() {
@@ -156,7 +168,13 @@ class Meetings extends Component {
           </div>
         </div>
         <div className="meetings">
-          {this.renderMeetings()}
+          <ReactCSSTransitionGroup transitionName="generic"
+                                   transitionEnterTimeout={500}
+                                   transitionLeaveTimeout={300}
+                                   transitionAppear={true}
+                                   transitionAppearTimeout={500}>
+            {this.renderMeetings()}
+          </ReactCSSTransitionGroup>
         </div>
       </div>
     );
