@@ -40,8 +40,8 @@ class Timezones extends Component {
 
   render() {
     return (
-      <div className="timezone-select">
-        <select id={this.props.id} placeholder="Timezone">
+      <div className="timezone-select" id={this.props.id}>
+        <select>
           {this.timezoneOptions()}
         </select>
       </div>

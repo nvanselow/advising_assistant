@@ -11,7 +11,7 @@ class Meeting < ActiveRecord::Base
   def self.new_from_duration(params)
     meeting = Meeting.new(params)
 
-    if(params[:duration] && params[:duration] != '')
+    if(params[:duration] && params[:duration] != '' && meeting.start_time)
       meeting.end_time = meeting.start_time + params[:duration].to_i.minutes
     end
 

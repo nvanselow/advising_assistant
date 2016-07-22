@@ -13,32 +13,30 @@ feature 'Create a meeting', %{
   # [ ] If there is a problem with the meeting, I see an error message with information about what to fix
   let(:user) { FactoryGirl.create(:user) }
   let(:advisee) { FactoryGirl.create(:advisee, user: user) }
-  let(:meeting) { FactoryGirl.attributes_for(:meeting) }
+  let(:meeting) { FactoryGirl.attributes_for(:meeting_with_duration) }
 
-  # before do
-  #   sign_in user
-  #   visit advisee_path(advisee)
-  # end
-  #
-  # scenario 'User can create a new meeting' do
-  #   fill_in('meeting_title', with: meeting[:description])
-  #   fill_in('meeting_start_time', with: meeting[:start_time])
-  #   fill_in('meeting_end_time', with: meeting[:end_time])
-  #   select(meeting[:timezone], from: 'meeting_timezone')
-  #   find('#save-meeting').click
-  #
-  #   expect(page).to have_content('Meeting created')
-  #
-  #   within('.meetings') do
-  #     expect(page).to have_content(meeting[:description])
-  #   end
-  # end
-  #
-  # scenario 'User attempts to create an invalid meeting' do
-  #   find('#save-meeting').click
-  #
-  #   expect(page).to have_content('There were problems creating the meeting')
-  #   expect(page).to have_content("Start time can't be blank")
-  #   expect(page).to have_content("End time can't be blank")
-  # end
+  before do
+    sign_in user
+    visit advisee_path(advisee)
+  end
+
+  scenario 'User can create a new meeting' do
+    fill_in('meeting_description', with: meeting[:description])
+    fill_in('meeting_start_time_date', with: meeting[:start_time])
+    fill_in('meeting_start_time_time', with: meeting[:start_time])
+    fill_in('meeting_duration', with: meeting[:duration])
+    find('#add_meeting').click
+
+    expect(page).to have_content('Meeting created')
+
+    expect(page).to have_content(meeting[:description])
+  end
+
+  scenario 'User attempts to create an invalid meeting' do
+    find('#add_meeting').click
+
+    expect(page).to have_content('There were problems creating that meeting')
+    expect(page).to have_content("Start time can't be blank")
+    expect(page).to have_content("End time can't be blank")
+  end
 end
