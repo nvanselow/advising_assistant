@@ -26,13 +26,16 @@ describe Api::V1::MeetingsController, type: :controller do
     it 'returns meetings sorted with the most recent first' do
       old_meeting = FactoryGirl.create(:meeting,
                                        advisee: advisee,
-                                       start_time: DateTime.new(2010, 5, 1, 8, 0))
+                                       start_time: DateTime.new(2010, 5, 1, 8, 0),
+                                       end_time: DateTime.new(2010, 5, 1, 9, 0))
       new_meeting = FactoryGirl.create(:meeting,
                                        advisee: advisee,
-                                       start_time: DateTime.new(2016, 7, 20, 8, 0))
+                                       start_time: DateTime.new(2016, 7, 20, 8, 0),
+                                       end_time: DateTime.new(2016, 7, 20, 9, 0))
       meeting = FactoryGirl.create(:meeting,
                                    advisee: advisee,
-                                   start_time: DateTime.new(2016, 7, 19, 8, 0))
+                                   start_time: DateTime.new(2016, 7, 19, 8, 0),
+                                   end_time: DateTime.new(2016, 7, 19, 9, 0))
 
       get :index, advisee_id: advisee.id
 
@@ -62,7 +65,12 @@ describe Api::V1::MeetingsController, type: :controller do
     end
 
     it 'returns errors if the meeting is invalid' do
-      post :create, advisee_id: advisee.id, meeting: {}
+      post :create, advisee_id: advisee.id, meeting: {
+        description: '',
+        start_time: '',
+        duration: '',
+        timezone: ''
+      }
 
       json_response = parse_json(response, :bad_request)
 
@@ -92,13 +100,19 @@ describe Api::V1::MeetingsController, type: :controller do
     it 'returns error is the meeting is invalid' do
       meeting = FactoryGirl.create(:meeting)
 
-      put :update, id: meeting.id, meeting: {}
+      put :update, id: meeting.id, meeting: {
+        description: '',
+        start_time: '',
+        duration: '',
+        timezone: ''
+      }
+
+      json_response = parse_json(response, :bad_request)
 
       expect(json_response['message']).to include('There were problems '\
                                                   'updating that meeting')
       errors = json_response['errors']
       expect(errors).to include("Start time can't be blank")
-      expect(errors).to include("End time can't be blank")
       expect(errors).to include("Timezone can't be blank")
     end
   end
@@ -109,11 +123,13 @@ describe Api::V1::MeetingsController, type: :controller do
 
       delete :destroy, id: meeting.id
 
+      json_response = parse_json(response)
+
       expect(json_response['message']).to include('Meeting deleted')
     end
   end
 end
 
-def get_note_ids(json)
+def get_meeting_ids(json)
   json['meetings'].map { |c| c['id'] }
 end

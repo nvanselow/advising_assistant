@@ -10,9 +10,11 @@ Rails.application.routes.draw do
 
       resources :advisees, only: [] do
         resources :advisee_notes, only: [:index, :create]
+        resources :meetings, only: [:index, :create]
       end
 
       resources :advisee_notes, only: [:update, :destroy]
+      resources :meetings, only: [:update, :destroy]
     end
   end
 end
