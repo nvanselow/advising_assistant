@@ -3,6 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import AdviseeSearch from './components/AdviseeSearch';
 import Notes from './components/Notes';
+import Meetings from './components/Meetings';
+import DateTimePicker from './components/DateTimePicker';
 
 $(function() {
   let adviseeSearch = document.getElementById('advisee-search');
@@ -24,6 +26,17 @@ $(function() {
              noteableId={adviseeId}
              controller="advisee_notes" />,
       adviseeNotes
+    );
+  }
+
+  let adviseeMeetings = document.getElementById('advisee-meetings');
+
+  if(adviseeMeetings){
+    let adviseeId = $('#advisee-data').data('id');
+
+    ReactDOM.render(
+      <Meetings adviseeId={adviseeId} />,
+      adviseeMeetings
     );
   }
 });
