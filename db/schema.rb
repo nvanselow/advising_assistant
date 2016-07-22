@@ -33,8 +33,6 @@ ActiveRecord::Schema.define(version: 20160722194642) do
   create_table "identities", force: :cascade do |t|
     t.string   "uid",        null: false
     t.string   "provider",   null: false
-    t.string   "email"
-    t.string   "avatar_url"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
