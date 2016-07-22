@@ -20,7 +20,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'shoulda'
   gem 'valid_attribute'
-  gem 'dotenv'
+  gem 'dotenv-rails', '~> 2.1', '>= 2.1.1'
   gem 'faker'
 end
 
