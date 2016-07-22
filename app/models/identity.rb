@@ -3,4 +3,5 @@ class Identity < ActiveRecord::Base
 
   validates :uid, presence: true
   validates :provider, presence: true
+  validates :user, presence: true
 end
