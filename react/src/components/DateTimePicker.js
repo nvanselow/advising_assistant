@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import 'materialize-clockpicker/dist/js/materialize.clockpicker.js';
-import moment from 'moment';
+import moment from 'moment-timezone/builds/moment-timezone-with-data';
+import Timezones from './Timezones';
 
 class DateTimePicker extends Component {
   constructor(props) {
@@ -8,7 +9,8 @@ class DateTimePicker extends Component {
 
     this.state = {
       date: null,
-      time: null
+      time: null,
+      timezone: moment.tz.guess()
     }
 
     if (!('dateLabel' in props)){
@@ -25,11 +27,13 @@ class DateTimePicker extends Component {
 
     this.dateId = `${this.props.id}_date`;
     this.timeId = `${this.props.id}_time`;
+    this.timezoneId = `${this.props.id}_timezone`;
     this.jQueryDateId = `#${this.dateId}`;
     this.jQueryTimeId = `#${this.timeId}`;
 
     this.onDateChange = this.onDateChange.bind(this);
     this.onTimeChange = this.onTimeChange.bind(this);
+    this.onTimezoneChange = this.onTimezoneChange.bind(this);
     this.onChange = this.onChange.bind(this);
   }
 
@@ -53,31 +57,43 @@ class DateTimePicker extends Component {
   }
 
   onDateChange(event) {
+    let timezone = this.state.timezone;
     let updatedDate = moment(event.target.value, 'DD MMMM, YYYY')
     let currentTime = this.state.time;
 
     this.setState({ date: updatedDate });
 
-    this.onChange(this.combineDateAndTime(updatedDate, currentTime));
+    this.onChange(this.combineDateAndTime(updatedDate,
+                                          currentTime,
+                                          timezone));
   }
 
   onTimeChange(event) {
-    let updatedTime = moment(event.target.value, 'hh:mmA')
+    let timezone = this.state.timezone;
+    let updatedTime = moment.tz(event.target.value,
+                                'hh:mmA',
+                                timezone)
     let currentDate = this.state.date;
 
     this.setState({ time: updatedTime });
 
-    this.onChange(this.combineDateAndTime(currentDate, updatedTime));
+    this.onChange(this.combineDateAndTime(currentDate,
+                                          updatedTime,
+                                          timezone));
   }
 
-  combineDateAndTime(date, time) {
-    if(!date && !time){
+  onTimezoneChange(timezone) {
+    let date = this.state.date;
+    let time = this.state.time;
+    this.setState({ timezone: timezone });
+    this.onChange(this.combineDateAndTime(date, time, timezone));
+  }
+
+  combineDateAndTime(date, time, timezone) {
+    if(!date || !time){
       return null;
-    } else if (!time) {
-      return date.format();
-    } else if (!date) {
-      return time.format();
     } else {
+      time = moment.tz(time.format('YYYY-MM-DD HH:mm'), timezone);
       return date.format('YYYY-MM-DD') + time.format('THH:mm:SSZ');
     }
   }
@@ -106,6 +122,12 @@ class DateTimePicker extends Component {
           <input type="time"
                  className="timepicker"
                  id={this.timeId} />
+        </div>
+
+        <div className="input-field">
+          <Timezones id="meeting_timezone"
+                     label="Timezone"
+                     onChange={this.onTimezoneChange} />
         </div>
       </div>
     );

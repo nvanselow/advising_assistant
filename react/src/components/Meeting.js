@@ -35,8 +35,7 @@ class Meeting extends Component {
             <small> ({meeting.duration} minutes)</small>
           </span>
           <p>
-            Starts <Time dateTime={meeting.start_time}
-                             displayType="timeto" />
+            <Time dateTime={meeting.start_time} displayType="timeago" />
           </p>
           <p className="meeting-description">
             {meeting.description}

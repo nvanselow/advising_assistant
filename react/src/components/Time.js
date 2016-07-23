@@ -16,12 +16,15 @@ class Time extends Component {
 
   transformTime() {
     let dateTime = moment(this.props.dateTime);
+
+    if(this.props.timezone && this.props.timezone.length > 0){
+      dateTime = moment.tz(this.props.dateTime, this.props.timezone);
+    }
+
     if (this.displayType == 'timeago') {
-      return dateTime.tz(moment.tz.guess()).fromNow();
-    } else if (this.displayType =='timeto') {
-      return dateTime.tz(moment.tz.guess()).toNow();
+      return dateTime.fromNow();
     } else {
-      return dateTime.tz(moment.tz.guess()).format('MMM Qo, YYYY h:mm a');
+      return dateTime.format('MMM D, YYYY h:mm a');
     }
   }
 
