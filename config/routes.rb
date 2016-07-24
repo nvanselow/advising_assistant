@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
       resources :advisee_notes, only: [:update, :destroy]
       resources :meetings, only: [:update, :destroy]
+      resources :google_calendars, only: [:index]
     end
   end
 end

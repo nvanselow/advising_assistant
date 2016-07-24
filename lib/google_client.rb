@@ -8,21 +8,22 @@ module GoogleClient
   def initialize(user = nil)
     return nil if !user
     @client = Signet::OAuth2::Client.new(
-      :authorization_uri => 'https://accounts.google.com/o/oauth2/auth',
-      :token_credential_uri =>  'https://accounts.google.com/o/oauth2/token',
-      :client_id => ENV['GOOGLE_CLIENT_ID'],
-      :client_secret => ENV['GOOGLE_CLIENT_SECRET'],
-      :scope => [
+      authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
+      token_credential_uri:  'https://accounts.google.com/o/oauth2/token',
+      client_id: ENV['GOOGLE_CLIENT_ID'],
+      client_secret: ENV['GOOGLE_CLIENT_SECRET'],
+      scope: [
             'profile',
             'email',
             'https://www.googleapis.com/auth/calendar',
           ],
-      :redirect_uri => ENV['GOOGLE_REDIRECT_URI']
+      redirect_uri: ENV['GOOGLE_REDIRECT_URI']
     )
   end
 
   def add_token(token)
-    @client.access_token = token.fresh_token
+    binding.pry
+    @client.access_token = token.access_token
     @client.expires_at = token.expires_at
     @client.issued_at = token.updated_at
   end
