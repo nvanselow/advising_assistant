@@ -51,7 +51,6 @@ class Api::V1::MeetingsController < ApplicationController
     params.require(:meeting).permit(:description,
                                     :start_time,
                                     :end_time,
-                                    :duration,
-                                    :timezone)
+                                    :duration)
   end
 end

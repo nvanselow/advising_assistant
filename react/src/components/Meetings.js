@@ -4,7 +4,6 @@ import Flash from '../lib/Flash';
 import Errors from './Errors';
 import moment from 'moment-timezone/builds/moment-timezone-with-data';
 import DateTimePicker from './DateTimePicker';
-import Timezones from './Timezones';
 import Meeting from './Meeting';
 
 class Meetings extends Component {
@@ -21,7 +20,6 @@ class Meetings extends Component {
     this.changeDescription = this.changeDescription.bind(this);
     this.changeDateTime = this.changeDateTime.bind(this);
     this.changeDuration = this.changeDuration.bind(this);
-    this.changeTimezone = this.changeTimezone.bind(this);
     this.saveMeeting = this.saveMeeting.bind(this);
     this.renderMeetings = this.renderMeetings.bind(this);
     this.onMeetingDelete = this.onMeetingDelete.bind(this);
@@ -68,12 +66,6 @@ class Meetings extends Component {
     this.setState({ newMeeting: meeting });
   }
 
-  changeTimezone(timezone) {
-    let meeting = this.state.newMeeting;
-    meeting.timezone = timezone;
-    this.setState({ newMeeting: meeting });
-  }
-
   renderMeetings() {
     return this.state.meetings.map((meeting) => {
       return <Meeting key={meeting.id}
@@ -93,8 +85,10 @@ class Meetings extends Component {
     .done((data) => {
       let meetings = this.state.meetings;
       meetings.unshift(data.meeting);
+      let meeting = this.state.newMeeting;
+      meeting.description = '';
       this.setState({ meetings: meetings,
-                      newMeeting: this.resetMeeting(),
+                      newMeeting: meeting,
                       newMeetingErrors: [] });
       Flash.success('Meeting created!');
     })
@@ -148,13 +142,6 @@ class Meetings extends Component {
                        onChange={this.changeDuration} />
                 <label htmlFor="meeting_duration">Duration (min):</label>
               </div>
-            </div>
-
-
-            <div className="input-field">
-              <Timezones id="meeting_timezone"
-                         label="Timezone"
-                         onChange={this.changeTimezone} />
             </div>
 
             <div className="input-field col s12">

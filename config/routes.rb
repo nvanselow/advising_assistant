@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   devise_for :users
   root 'home#index'
 
+  get "/auth/:provider/callback" => 'identities#create'
+
   resources :advisees
 
   namespace :api do
@@ -14,7 +16,12 @@ Rails.application.routes.draw do
       end
 
       resources :advisee_notes, only: [:update, :destroy]
-      resources :meetings, only: [:update, :destroy]
+      resources :meetings, only: [:update, :destroy] do
+        resources :google_calendars, only: [:create]
+        resources :microsoft_calendars, only: [:create]
+      end
+      resources :google_calendars, only: [:index]
+      resources :microsoft_calendars, only: [:index]
     end
   end
 end

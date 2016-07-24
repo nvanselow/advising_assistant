@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Time from './Time';
 import Flash from '../lib/Flash';
+import ExportOptions from './ExportOptions';
 
 class Meeting extends Component {
   constructor(props) {
@@ -35,8 +36,7 @@ class Meeting extends Component {
             <small> ({meeting.duration} minutes)</small>
           </span>
           <p>
-            Starts <Time dateTime={meeting.start_time}
-                             displayType="timeto" />
+            <Time dateTime={meeting.start_time} displayType="timeago" />
           </p>
           <p className="meeting-description">
             {meeting.description}
@@ -47,6 +47,7 @@ class Meeting extends Component {
                   onClick={this.handleDelete}>
             <i className="material-icons">delete</i>
           </button>
+          <ExportOptions meeting={this.props.meeting} />
         </div>
       </div>
     );

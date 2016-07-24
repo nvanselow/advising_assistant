@@ -5,7 +5,6 @@ class Meeting < ActiveRecord::Base
 
   validates :start_time, presence: true, timeliness: true
   validates :end_time, presence: true, timeliness: true
-  validates :timezone, presence: true
   validates :advisee, presence: true
 
   def self.new_from_duration(params)

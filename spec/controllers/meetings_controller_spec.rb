@@ -60,7 +60,6 @@ describe Api::V1::MeetingsController, type: :controller do
       expect(db_meeting.description).to eq(meeting[:description])
       expect(db_meeting.start_time).to eq(meeting[:start_time])
       expect(db_meeting.end_time).to eq(meeting[:end_time])
-      expect(db_meeting.timezone).to eq(meeting[:timezone])
     end
 
     it 'returns errors if the meeting is invalid' do
@@ -68,7 +67,6 @@ describe Api::V1::MeetingsController, type: :controller do
         description: '',
         start_time: '',
         duration: '',
-        timezone: ''
       }
 
       json_response = parse_json(response, :bad_request)
@@ -78,7 +76,6 @@ describe Api::V1::MeetingsController, type: :controller do
       errors = json_response['errors']
       expect(errors).to include("Start time can't be blank")
       expect(errors).to include("End time can't be blank")
-      expect(errors).to include("Timezone can't be blank")
     end
   end
 
@@ -103,7 +100,6 @@ describe Api::V1::MeetingsController, type: :controller do
         description: '',
         start_time: '',
         duration: '',
-        timezone: ''
       }
 
       json_response = parse_json(response, :bad_request)
@@ -112,7 +108,6 @@ describe Api::V1::MeetingsController, type: :controller do
                                                   'updating that meeting')
       errors = json_response['errors']
       expect(errors).to include("Start time can't be blank")
-      expect(errors).to include("Timezone can't be blank")
     end
   end
 

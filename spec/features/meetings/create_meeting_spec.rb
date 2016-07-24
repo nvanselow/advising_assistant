@@ -27,8 +27,11 @@ feature 'Create a meeting', %{
     # Use js to fill in a read only input
     page.execute_script("$('#meeting_start_time_date')."\
                         "val('#{meeting[:start_time]}')")
+    page.execute_script("$('#meeting_start_time_date')."\
+                        "trigger('change')")
     fill_in('meeting_start_time_time', with: meeting[:start_time])
-    fill_in('meeting_duration', with: meeting[:duration])
+    click_button('Done')
+    find('#meeting_duration').send_keys(meeting[:duration])
     find('#add_meeting').click
 
     expect(page).to have_content('Meeting created')

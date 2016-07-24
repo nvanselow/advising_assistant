@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160722040131) do
+ActiveRecord::Schema.define(version: 20160724010128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,11 +30,24 @@ ActiveRecord::Schema.define(version: 20160722040131) do
 
   add_index "advisees", ["user_id"], name: "index_advisees_on_user_id", using: :btree
 
+  create_table "identities", force: :cascade do |t|
+    t.string   "uid",           null: false
+    t.string   "provider",      null: false
+    t.string   "refresh_token"
+    t.string   "access_token"
+    t.datetime "expires_at"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "identities", ["uid"], name: "index_identities_on_uid", using: :btree
+  add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
+
   create_table "meetings", force: :cascade do |t|
     t.string   "description"
     t.datetime "start_time",  null: false
     t.datetime "end_time",    null: false
-    t.string   "timezone",    null: false
     t.integer  "advisee_id",  null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
