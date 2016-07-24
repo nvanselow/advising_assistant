@@ -1,4 +1,6 @@
 class Api::V1::GoogleCalendarsController < ApplicationController
+  before_filter :authenticate_user!
+  
   rescue_from Errors::TokenExpired, with: :token_error
 
   def index
