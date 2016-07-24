@@ -61,7 +61,8 @@ class ExportMeeting extends Component {
     })
     .done((data) => {
       ReactDOM.render(
-        <ExportMeetingDialogBox calendars={data.calendars}
+        <ExportMeetingDialogBox meeting={this.props.meeting}
+                                calendars={data.calendars}
                                 addText={this.addText}
                                 accountType={this.props.accountType}
                                 addClick={this.addClick}
@@ -71,7 +72,6 @@ class ExportMeeting extends Component {
       $('#export-meeting-modal').openModal();
     })
     .fail((response) => {
-      debugger;
       if(response.status == 401) {
         let data = response.responseJSON;
         Flash.error(data.message);
@@ -90,9 +90,9 @@ class ExportMeeting extends Component {
   render() {
     return (
       <div className="export-meeting">
-        <button className="waves-effect waves-light btn"
+        <button className="waves-effect waves-light btn-flat"
                 onClick={this.onClick}>
-           Add to Calendar
+           {this.addText}
         </button>
       </div>
     );

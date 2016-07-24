@@ -14,6 +14,7 @@ class ExportMeetingDialogBox extends Component {
     this.onNotifyChange = this.onNotifyChange.bind(this);
     this.addClick = this.addClick.bind(this);
     this.cancelClick = this.cancelClick.bind(this);
+    this.meetingDescription = this.meetingDescription.bind(this);
   }
 
   calendarOptions() {
@@ -42,11 +43,24 @@ class ExportMeetingDialogBox extends Component {
     this.props.cancelClick();
   }
 
+  meetingDescription() {
+    let meeting = this.props.meeting;
+
+    if(meeting.description && meeting.description.length > 0){
+      return meeting.description;
+    } else {
+      return `Meeting ${meeting.id}`;
+    }
+  }
+
   render() {
     return (
       <div id="export-meeting-modal" className="modal">
         <div className="modal-content">
           <h4>{this.props.addText}</h4>
+          <p>
+            Meeting: {this.meetingDescription()}
+          </p>
           <p>Please select a calendar.</p>
           <div className="input-field col s12">
             <label className="active">Calendars</label>
