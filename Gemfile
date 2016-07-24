@@ -41,3 +41,7 @@ end
 group :production do
   gem 'rails_12factor'
 end
+
+group :development, :production do
+  gem 'fog'
+end
