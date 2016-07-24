@@ -34,4 +34,18 @@ describe Api::V1::GoogleCalendarsController, type: :controller do
       expect(json['calendars'].count).to eq(2)
     end
   end
+
+  describe 'POST /api/v1/meetings/:meeting_id/google_calendars' do
+    let!(:identity) { FactoryGirl.create(:identity, user: user) }
+    let(:advisee) { FactoryGirl.create(:advisee, user: user) }
+    let(:meeting) { FactoryGirl.create(:meeting, advisee: advisee) }
+
+    it "adds a meeting to the user's google calendar" do
+      post :create, meeting_id: meeting.id
+
+      json = parse_json(response)
+
+      expect(json['message']).to include('Meeting added')
+    end
+  end
 end
