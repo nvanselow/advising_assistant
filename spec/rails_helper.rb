@@ -80,3 +80,14 @@ end
 MicrosoftCalendar.outlook_client = FakeMicrosoftService.new
 GoogleCalendar.calendar_service = FakeGoogleCalendarService
 GoogleClient.signet = FakeSignet
+
+def fake_omniauth
+  {
+    'provider' => 'google_oauth2',
+    'uid' => '1234',
+    'credentials' => {
+      'token' => 'abcdef',
+      'expires_at' => Time.now.to_i
+    }
+  }
+end

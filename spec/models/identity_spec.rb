@@ -12,16 +12,7 @@ describe Identity, type: :model do
 
   describe '.find_or_create_from_omniauth' do
     let(:user) { FactoryGirl.create(:user) }
-    let(:auth) do
-      {
-        'provider' => 'google_oauth2',
-        'uid' => '1234',
-        'credentials' => {
-          'token' => 'abcdef',
-          'expires_at' => Time.now.to_i
-        }
-      }
-    end
+    let(:auth) { fake_omniauth }
 
     it 'creates a new identify if one does not exist for provider' do
       identity = Identity.find_or_create_from_omniauth(auth, user)
