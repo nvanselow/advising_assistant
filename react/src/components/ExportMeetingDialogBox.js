@@ -5,7 +5,7 @@ class ExportMeetingDialogBox extends Component {
     super(props);
 
     this.state = {
-      selectedCalendar: this.props.calendars[0],
+      selectedCalendar: this.props.calendars[0].id,
       notify: true
     }
 

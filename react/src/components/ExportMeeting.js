@@ -75,7 +75,7 @@ class ExportMeeting extends Component {
       if(response.status == 401) {
         let data = response.responseJSON;
         Flash.error(data.message);
-        return window.location.href = '/auth/google_oauth2';
+        return window.location.href = `/auth/${data.provider}`;
       }
 
       Flash.error('There was a problem getting your calendars. ' +

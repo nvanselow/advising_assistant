@@ -3,13 +3,14 @@ class Api::V1::MicrosoftCalendarsController < ApiController
 
   def index
     calendar_service = MicrosoftCalendar.new(current_user)
-
-    calendars = calendar_service.get_calendars
-
-    render json: { calendars: calendars }, status: :ok
+    render json: { calendars: calendar_service.get_calendars }, status: :ok
   end
 
   def create
+    meeting = Meeting.find(params[:meeting_id])
     calendar_service = MicrosoftCalendar.new(current_user)
+    calendar_service.create_meeting(meeting, params[:calendar], params[:notify])
+
+    render json: { message: 'Meeting added to calendar!' }, status: :ok
   end
 end

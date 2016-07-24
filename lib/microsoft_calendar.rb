@@ -1,7 +1,7 @@
-require 'ruby_outlook'
+require_relative 'client'
 
 class MicrosoftCalendar
-  @@outlook_client = RubyOutlook::Client.new
+  @@outlook_client = MicrosoftClient.new
   cattr_accessor :outlook_client
 
   def initialize(user = nil)
@@ -33,13 +33,10 @@ class MicrosoftCalendar
   end
 
   def create_meeting(meeting, calendar_id = nil, notify = true)
-    response = outlook_client.create_event(@access_token,
-                                           microsoft_meeting(meeting),
-                                           calendar_id)
-                                           binding.pry
-    calendar_event = JSON.parse(response)
-    binding.pry
-    calendar_event
+    outlook_client.create_event(@access_token,
+                                microsoft_meeting(meeting),
+                                calendar_id)
+
   end
 
   private
@@ -52,11 +49,11 @@ class MicrosoftCalendar
       'Subject': meeting.description,
       'Start': {
         'DateTime': start_time,
-        'TimeZone': 'UTC'
+        'TimeZone': 'Etc/UTC'
       },
       'End': {
         'DateTime': end_time,
-        'TimeZone': 'UTC'
+        'TimeZone': 'Etc/UTC'
       },
       'Attendees': [
         {

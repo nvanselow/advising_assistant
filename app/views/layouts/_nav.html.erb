@@ -1,5 +1,11 @@
 <ul id="user_dropdown" class="dropdown-content">
   <li><%= link_to 'Edit Account Info', edit_user_registration_path %></li>
+  <li>
+    <%= link_to 'Link Microsoft Account', '/auth/microsoft_office365' %>
+  </li>
+  <li>
+    <%= link_to 'Microsoft Calendars', api_v1_microsoft_calendars_path %>
+  </li>
 
   <% if !current_user.identities.where(provider: 'google_oauth2').first %>
     <li>
