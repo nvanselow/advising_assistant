@@ -25,6 +25,7 @@ class GoogleCalendar
         # summary
         # time_zone
     calendars = @calendar.list_calendar_lists(min_access_role: "writer")
+
     simple_calendars = []
     calendars.items.each do |calendar|
       simple_calendars << SimpleCalendar.new(calendar.id,
@@ -74,6 +75,8 @@ class GoogleCalendar
 
   def set_authorization
     token = @user.identities.where(provider: 'google_oauth2').first
+    raise Errors::MissingToken if !token
+
     @calendar.authorization = client_with_token(token)
   end
 end
