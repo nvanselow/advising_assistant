@@ -146,20 +146,33 @@ class Notes extends Component {
     return (
       <div className="notes-container">
         <div className="row add-note-form">
-          <Errors errors={this.state.newNoteErrors} />
-          <div className="input-field add-note col s12">
-            <textarea id="note_body"
-                      name="note[body]"
-                      className="materialize-textarea"
-                      value={this.state.newNoteBody}
-                      onChange={this.updateNoteBody} >
-            </textarea>
-            <label htmlFor="note_body">Note</label>
-            <div className="input-field">
-              <button id="add-note" onClick={this.saveNote} className="btn">
-                <i className="material-icons left">add</i>
-                Add Note
-              </button>
+          <div className="col s12">
+            <div className="card blue-grey lighten-3">
+              <div className="card-content">
+                <span className="card-title">Add Note</span>
+                  <div className="row">
+                    <div className="cols s12">
+                      <Errors errors={this.state.newNoteErrors} />
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="input-field add-note col s12">
+                      <textarea id="note_body"
+                                name="note[body]"
+                                className="materialize-textarea"
+                                value={this.state.newNoteBody}
+                                onChange={this.updateNoteBody} >
+                      </textarea>
+                      <label htmlFor="note_body">Note</label>
+                      <div className="input-field">
+                        <button id="add-note" onClick={this.saveNote} className="btn">
+                          <i className="material-icons left">add</i>
+                          Add Note
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+              </div>
             </div>
           </div>
         </div>
