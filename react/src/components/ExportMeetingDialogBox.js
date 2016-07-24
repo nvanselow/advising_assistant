@@ -5,11 +5,13 @@ class ExportMeetingDialogBox extends Component {
     super(props);
 
     this.state = {
-      selectedCalendar: this.props.calendars[0]
+      selectedCalendar: this.props.calendars[0],
+      notify: true
     }
 
     this.calendarOptions = this.calendarOptions.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.onNotifyChange = this.onNotifyChange.bind(this);
     this.addClick = this.addClick.bind(this);
     this.cancelClick = this.cancelClick.bind(this);
   }
@@ -28,8 +30,12 @@ class ExportMeetingDialogBox extends Component {
     this.setState({ selectedCalendar: event.target.value });
   }
 
+  onNotifyChange(event) {
+    this.setState({ notify: event.target.checked });
+  }
+
   addClick(event) {
-    this.props.addClick(this.state.selectedCalendar);
+    this.props.addClick(this.state.selectedCalendar, this.state.notify);
   }
 
   cancelClick(event) {
@@ -50,6 +56,14 @@ class ExportMeetingDialogBox extends Component {
               {this.calendarOptions()}
             </select>
           </div>
+          <p>
+            <input type="checkbox"
+                   className="filled-in"
+                   id="notify-checkbox"
+                   checked={this.state.notify}
+                   onChange={this.onNotifyChange} />
+            <label htmlFor="notify-checkbox">Invite advisee</label>
+          </p>
           <p>
             This meeting will be added to the calendar you selected above.
           </p>

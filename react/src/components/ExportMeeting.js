@@ -22,7 +22,7 @@ class ExportMeeting extends Component {
     this.getCalendars();
   }
 
-  addClick(calendar) {
+  addClick(calendar, notify) {
     this.cleanup();
   }
 
