@@ -6,17 +6,19 @@ class Identity < ActiveRecord::Base
   validates :user, presence: true
 
   def self.find_or_create_from_omniauth(auth, current_user)
-    provider = auth.provider
-    uid = auth.uid
+    provider = auth['provider']
+    uid = auth['uid']
     access_token = auth['credentials']['token']
     expires_at = Time.at(auth['credentials']['expires_at']).to_datetime
 
-    identity = where(user: current_user, provider: provider, uid: uid).first
+    identity = where(user: current_user, provider: provider).first
 
     if(identity)
       identity.access_token = access_token
       identity.expires_at = expires_at
       identity.save
+
+      identity
     else
       create({
         provider: provider,
