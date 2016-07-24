@@ -45,23 +45,22 @@ class GoogleCalendar
 
   private
 
-  def google_event
-    a_google_event = Google::Apis::CalendarV3::Event.new
-    a_google_event.summary = @meeting.description
-    a_google_event.location = @meeting.location if @meeting.location
+  def google_meeting
+    google_event = Google::Apis::CalendarV3::Event.new
+    google_event.summary = @meeting.description
 
-    start_time = @meeting.start_time
-    end_time = @meeting.end_time
+    start_time = @meeting.start_time.to_datetime.to_s
+    end_time = @meeting.end_time.to_datetime.to_s
 
-    a_google_event.start =
+    google_event.start =
       Google::Apis::CalendarV3::EventDateTime.new(date_time: start_time,
                                                   time_zone: 'Etc/UTC')
-    a_google_event.end =
+    google_event.end =
       Google::Apis::CalendarV3::EventDateTime.new(date_time: end_time,
                                                   time_zone: 'Etc/UTC')
-    a_google_event.attendees = build_attendee(@meeting.advisee)
+    google_event.attendees = [build_attendee(@meeting.advisee)]
 
-    a_google_event
+    google_event
   end
 
   def build_attendee(person)
