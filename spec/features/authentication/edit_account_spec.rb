@@ -6,9 +6,9 @@ feature 'user can edit their account information', %{
   So that I can update my information if it changes
 } do
   # ACCEPTANCE CRITERIA
-  # [ ] I can edit my account my clicking my name in the navbar
-  # [ ] I can see a success message if I edit my account correctly
-  # [ ] I see an error message indicating what to fix if I make an
+  # [X] I can edit my account my clicking my name in the navbar
+  # [X] I can see a success message if I edit my account correctly
+  # [X] I see an error message indicating what to fix if I make an
   #     invalid change
 
   let(:user) { FactoryGirl.create(:user) }
@@ -22,6 +22,7 @@ feature 'user can edit their account information', %{
     visit root_path
 
     click_link user.email
+    click_link 'Edit Account Info'
 
     expect(page).to have_content('Edit Account Information')
     expect(page).to have_css('form')
