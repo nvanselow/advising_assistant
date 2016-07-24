@@ -14,6 +14,8 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'signet'
 gem 'google-api-client', '0.9'
+gem 'omniauth-microsoft-office365'
+gem 'ruby_outlook'
 
 group :development, :test do
   gem 'capybara'
