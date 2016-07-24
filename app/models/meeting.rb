@@ -30,6 +30,4 @@ class Meeting < ActiveRecord::Base
     m[:duration] = duration
     m
   end
-
-  private
 end

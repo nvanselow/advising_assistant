@@ -5,7 +5,7 @@ module GoogleClient
   cattr_accessor :signet
   attr_reader :client
 
-  def initialize(user)
+  def initialize(_user)
     @client = signet.new(
       authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
       token_credential_uri:  'https://accounts.google.com/o/oauth2/token',

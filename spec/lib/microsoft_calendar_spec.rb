@@ -36,26 +36,27 @@ describe MicrosoftCalendar do
 
     it 'returns list of Microsoft calendars that belong to the user as hash' do
       expect(service.get_calendars).to eq(
-      [
-        {
-          id: "calendar_1",
-          name: "Calendar",
-          color: "Auto",
-          change_key: "change_key_1"
-        },
-        {
-          id: "calendar_2",
-          name: "United Statesholidays",
-          color: "Auto",
-          change_key: "change_key_2"
-        },
-        {
-          id: "calendar_3",
-          name: "Birthdays",
-          color: "Auto",
-          change_key: "change_key_3"
-        }
-      ])
+        [
+          {
+            id: "calendar_1",
+            name: "Calendar",
+            color: "Auto",
+            change_key: "change_key_1"
+          },
+          {
+            id: "calendar_2",
+            name: "United Statesholidays",
+            color: "Auto",
+            change_key: "change_key_2"
+          },
+          {
+            id: "calendar_3",
+            name: "Birthdays",
+            color: "Auto",
+            change_key: "change_key_3"
+          }
+        ]
+      )
     end
   end
 

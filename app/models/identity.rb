@@ -13,20 +13,20 @@ class Identity < ActiveRecord::Base
 
     identity = where(user: current_user, provider: provider).first
 
-    if(identity)
+    if identity
       identity.access_token = access_token
       identity.expires_at = expires_at
       identity.save
 
       identity
     else
-      create({
+      create(
         provider: provider,
         uid: uid,
         user: current_user,
         access_token: access_token,
         expires_at: expires_at
-      })
+      )
     end
   end
 end
