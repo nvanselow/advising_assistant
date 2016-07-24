@@ -1,7 +1,7 @@
-require_relative 'client'
+require 'ruby_outlook'
 
 class MicrosoftCalendar
-  @@outlook_client = MicrosoftClient.new
+  @@outlook_client = RubyOutlook::Client.new
   cattr_accessor :outlook_client
 
   def initialize(user = nil)
@@ -36,7 +36,6 @@ class MicrosoftCalendar
     outlook_client.create_event(@access_token,
                                 microsoft_meeting(meeting),
                                 calendar_id)
-
   end
 
   private
