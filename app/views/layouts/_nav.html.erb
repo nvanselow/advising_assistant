@@ -6,16 +6,12 @@
   <li>
     <%= link_to 'Microsoft Calendars', api_v1_microsoft_calendars_path %>
   </li>
-
-  <% if !current_user.identities.where(provider: 'google_oauth2').first %>
-    <li>
-      <%= link_to 'Link Google Account', '/auth/google_oauth2' %>
-    </li>
-  <% else %>
-    <li>
-      <%= link_to 'View Calendars', api_v1_google_calendars_path %>
-    </li>
-  <% end %>
+  <li>
+    <%= link_to 'Link Google Account', '/auth/google_oauth2' %>
+  </li>
+  <li>
+    <%= link_to 'View Calendars', api_v1_google_calendars_path %>
+  </li>
 </ul>
 
 <nav>
