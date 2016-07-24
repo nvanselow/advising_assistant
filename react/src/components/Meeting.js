@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Time from './Time';
 import Flash from '../lib/Flash';
+import ExportMeeting from './ExportMeeting';
 
 class Meeting extends Component {
   constructor(props) {
@@ -46,6 +47,7 @@ class Meeting extends Component {
                   onClick={this.handleDelete}>
             <i className="material-icons">delete</i>
           </button>
+          <ExportMeeting accountType="Google" />
         </div>
       </div>
     );
