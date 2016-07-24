@@ -117,40 +117,49 @@ class Meetings extends Component {
         <Errors errors={this.state.newMeetingErrors} />
         <div className="row add-meeting-form">
           <div className="col s12">
-            <div className="row">
-              <div className="input-field col s12">
-                <input type="text"
-                       id="meeting_description"
-                       name="meeting[description]"
-                       value={meeting.description}
-                       onChange={this.changeDescription} />
-                <label htmlFor="meeting_description">Description</label>
+            <div className="card orange lighten-5">
+              <div className="card-content">
+                <span className="card-title">
+                  New Meeting
+                </span>
+                <div className="row">
+                  <div className="input-field col s12">
+                    <input type="text"
+                           id="meeting_description"
+                           name="meeting[description]"
+                           value={meeting.description}
+                           onChange={this.changeDescription} />
+                    <label htmlFor="meeting_description">Description</label>
+                  </div>
+                </div>
+
+                <div className="input-field">
+                  <DateTimePicker id="meeting_start_time"
+                                  onChange={this.changeDateTime} />
+                </div>
+
+                <div className="row">
+                  <div className="input-field col s12">
+                    <input type="number"
+                           id="meeting_duration"
+                           step="5"
+                           value={meeting.duration}
+                           onChange={this.changeDuration} />
+                    <label htmlFor="meeting_duration">Duration (min):</label>
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="input-field col s12">
+                    <button className="btn"
+                            id="add_meeting"
+                            onClick={this.saveMeeting}>
+                      <i className="material-icons left">add</i>
+                      Add Meeting
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
-
-            <div className="input-field">
-              <DateTimePicker id="meeting_start_time"
-                              onChange={this.changeDateTime} />
-            </div>
-
-            <div className="row">
-              <div className="input-field col s12">
-                <input type="number"
-                       id="meeting_duration"
-                       step="5"
-                       value={meeting.duration}
-                       onChange={this.changeDuration} />
-                <label htmlFor="meeting_duration">Duration (min):</label>
-              </div>
-            </div>
-
-            <div className="input-field col s12">
-              <button className="btn"
-                      id="add_meeting"
-                      onClick={this.saveMeeting}>
-                <i className="material-icons left">add</i>
-                Add Meeting
-              </button>
             </div>
           </div>
         </div>
