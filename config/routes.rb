@@ -20,6 +20,7 @@ Rails.application.routes.draw do
         resources :google_calendars, only: [:create]
       end
       resources :google_calendars, only: [:index]
+      resources :microsoft_calendars, only: [:index]
     end
   end
 end

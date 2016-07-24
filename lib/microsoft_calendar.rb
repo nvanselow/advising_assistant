@@ -1,7 +1,7 @@
 require 'ruby_outlook'
 
 class MicrosoftCalendar
-  outlook_client = RubyOutlook::Client.new
+  @@outlook_client = RubyOutlook::Client.new
   cattr_accessor :outlook_client
 
   def initialize(user = nil)
@@ -19,15 +19,27 @@ class MicrosoftCalendar
 
   def get_calendars
     url = 'https://outlook.office.com/api/v2.0/me/calendars'
-    calendars = outlook_client.make_api_call('GET', url, @token)
-    return JSON.parse(calendars)
+    response = outlook_client.make_api_call('GET', url, @access_token)
+    calendars = JSON.parse(response)
+
+    calendars['value'].map do |calendar|
+      {
+        id: calendar['Id'],
+        name: calendar['Name'],
+        color: calendar['Color'],
+        change_key: calendar['ChangeKey']
+      }
+    end
   end
 
   def create_meeting(meeting, calendar_id = nil, notify = true)
-
-    outlook_client.create_event(@token,
-                                microsoft_meeting(meeting),
-                                calendar_id)
+    response = outlook_client.create_event(@access_token,
+                                           microsoft_meeting(meeting),
+                                           calendar_id)
+                                           binding.pry
+    calendar_event = JSON.parse(response)
+    binding.pry
+    calendar_event
   end
 
   private
@@ -45,17 +57,17 @@ class MicrosoftCalendar
       'End': {
         'DateTime': end_time,
         'TimeZone': 'UTC'
-      }
-    },
-    'Attendees': [
-      {
-        'EmailAddress': {
-          'Address': meeting.advisee.email,
-          'Name': meeting.advisee.full_name
-        },
-        'Type': 'Required'
-      }
-    ]
+      },
+      'Attendees': [
+        {
+          'EmailAddress': {
+            'Address': meeting.advisee.email,
+            'Name': meeting.advisee.full_name
+          },
+          'Type': 'Required'
+        }
+      ]
+    }
   end
 
   def expired?
