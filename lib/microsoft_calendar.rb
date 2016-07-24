@@ -5,10 +5,10 @@ class MicrosoftCalendar
   cattr_accessor :outlook_client
 
   def initialize(user = nil)
-    return nil if !user
+    raise Errors::MissingUser if !user
     @user = user
     token = Identity.where(user: user, provider: 'microsoft_office365').first
-    return nil if !token
+    raise Errors::MissingToken if !token
     @access_token = token.access_token
     @expires_at = token.expires_at
 
@@ -20,6 +20,7 @@ class MicrosoftCalendar
   def get_calendars
     url = 'https://outlook.office.com/api/v2.0/me/calendars'
     response = outlook_client.make_api_call('GET', url, @access_token)
+
     calendars = JSON.parse(response)
 
     calendars['value'].map do |calendar|

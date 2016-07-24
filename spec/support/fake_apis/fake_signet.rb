@@ -1,0 +1,2 @@
+class FakeSignet
+end

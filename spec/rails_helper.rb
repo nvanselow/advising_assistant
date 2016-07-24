@@ -75,3 +75,8 @@ require "valid_attribute"
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 end
+
+# SETUP FAKE APIS
+MicrosoftCalendar.outlook_client = FakeMicrosoftService.new
+GoogleCalendar.calendar_service = FakeGoogleCalendarService
+GoogleClient.signet = FakeSignet
