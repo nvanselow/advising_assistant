@@ -17,6 +17,6 @@ class Api::V1::GoogleCalendarsController < ApplicationController
   protected
 
   def token_error
-    redirect_to '/auth/google_oauth2'
+    render json: { message: 'Your link to Google has expired. Please authorize again.' }, status: :unauthorized
   end
 end

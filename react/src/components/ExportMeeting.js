@@ -71,6 +71,13 @@ class ExportMeeting extends Component {
       $('#export-meeting-modal').openModal();
     })
     .fail((response) => {
+      debugger;
+      if(response.status == 401) {
+        let data = response.responseJSON;
+        Flash.error(data.message);
+        return window.location.href = '/auth/google_oauth2';
+      }
+
       Flash.error('There was a problem getting your calendars. ' +
                   'Please try again later.');
     });
