@@ -5,10 +5,10 @@ class MicrosoftCalendar
   cattr_accessor :outlook_client
 
   def initialize(user = nil)
-    raise Errors::MissingUser if !user
+    raise Errors::MissingUser unless user
     @user = user
     token = Identity.where(user: user, provider: 'microsoft_office365').first
-    raise Errors::MissingToken if !token
+    raise Errors::MissingToken unless token
     @access_token = token.access_token
     @expires_at = token.expires_at
 
@@ -33,7 +33,7 @@ class MicrosoftCalendar
     end
   end
 
-  def create_meeting(meeting, calendar_id = nil, notify = true)
+  def create_meeting(meeting, calendar_id = nil, _notify = true)
     outlook_client.create_event(@access_token,
                                 microsoft_meeting(meeting),
                                 calendar_id)
@@ -68,6 +68,6 @@ class MicrosoftCalendar
   end
 
   def expired?
-    @expires_at != nil && Time.zone.now > @expires_at
+    !@expires_at.nil? && Time.zone.now > @expires_at
   end
 end

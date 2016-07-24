@@ -1,7 +1,7 @@
 class FakeGoogleCalendarService
   attr_accessor :authorization
 
-  def list_calendar_lists(min_access_role:)
+  def list_calendar_lists(*)
     calendar1 = Google::Apis::CalendarV3::CalendarListEntry.new
     calendar1.access_role = "owner"
     calendar1.id = 'main@gmail.com'
@@ -23,7 +23,7 @@ class FakeGoogleCalendarService
     list
   end
 
-  def insert_event(_calendar_id, event, send_notifications:)
+  def insert_event(_calendar_id, event, *)
     event.id = '1234'
     event.kind = 'calendar#event'
 

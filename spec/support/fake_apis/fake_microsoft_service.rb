@@ -21,7 +21,7 @@ class FakeMicrosoftService
   end
 
   def create_event(_token, _event, _calendar_id)
-    return {
+    {
       id: 'fake event',
       description: 'some description'
     }

@@ -35,7 +35,8 @@ describe MicrosoftCalendar do
     let!(:identity) { FactoryGirl.create(:microsoft_identity, user: user) }
 
     it 'returns list of Microsoft calendars that belong to the user as hash' do
-      expect(service.get_calendars).to eq([
+      expect(service.get_calendars).to eq(
+      [
         {
           id: "calendar_1",
           name: "Calendar",
@@ -62,17 +63,17 @@ describe MicrosoftCalendar do
     let!(:identity) { FactoryGirl.create(:microsoft_identity, user: user) }
     let(:meeting) { FactoryGirl.create(:meeting) }
     it 'creates a new event (based on meeting) on the specified calendar' do
-      expect(service.create_meeting(meeting)).to eq({
-          id: 'fake event',
-          description: 'some description'
-        })
+      expect(service.create_meeting(meeting)).to eq(
+        id: 'fake event',
+        description: 'some description'
+      )
     end
 
     it 'has an optional calendar id parameter' do
-      expect(service.create_meeting(meeting, 'id of calendar')).to eq({
-          id: 'fake event',
-          description: 'some description'
-        })
+      expect(service.create_meeting(meeting, 'id of calendar')).to eq(
+        id: 'fake event',
+        description: 'some description'
+      )
     end
   end
 end

@@ -6,7 +6,7 @@ class GoogleCalendar
   cattr_accessor :calendar_service
   include GoogleClient
 
-  PROVIDER = 'google_oauth2'
+  PROVIDER = 'google_oauth2'.freeze
   SimpleCalendar = Struct.new(:id, :name, :time_zone)
 
   def initialize(user)
@@ -19,11 +19,6 @@ class GoogleCalendar
   end
 
   def get_calendars
-    # CalendarList.items (array of CalendarListEntry)
-      # CalendarListEntry
-        # id
-        # summary
-        # time_zone
     calendars = @calendar.list_calendar_lists(min_access_role: "writer")
 
     simple_calendars = []
@@ -36,7 +31,7 @@ class GoogleCalendar
   end
 
   def create_meeting(meeting, calendar_id = nil, notify = true)
-    if(!calendar_id || calendar_id == "")
+    if !calendar_id || calendar_id == ""
       calendar_id = 'primary'
     end
     @meeting = meeting
@@ -75,7 +70,7 @@ class GoogleCalendar
 
   def set_authorization
     token = @user.identities.where(provider: 'google_oauth2').first
-    raise Errors::MissingToken if !token
+    raise Errors::MissingToken unless token
 
     @calendar.authorization = client_with_token(token)
   end

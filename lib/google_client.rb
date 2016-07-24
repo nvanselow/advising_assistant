@@ -12,10 +12,10 @@ module GoogleClient
       client_id: ENV['GOOGLE_CLIENT_ID'],
       client_secret: ENV['GOOGLE_CLIENT_SECRET'],
       scope: [
-            'profile',
-            'email',
-            'https://www.googleapis.com/auth/calendar',
-          ],
+        'profile',
+        'email',
+        'https://www.googleapis.com/auth/calendar',
+      ],
       redirect_uri: ENV['GOOGLE_REDIRECT_URI']
     )
   end
