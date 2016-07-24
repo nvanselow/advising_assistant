@@ -22,10 +22,13 @@ module GoogleClient
   end
 
   def add_token(token)
-    binding.pry
     @client.access_token = token.access_token
     @client.expires_at = token.expires_at
     @client.issued_at = token.updated_at
+
+    if expired?
+      raise Errors::TokenExpired
+    end
   end
 
   def client
@@ -35,5 +38,11 @@ module GoogleClient
   def client_with_token(token)
     add_token(token)
     @client
+  end
+
+  private
+
+  def expired?
+    Time.zone.now > @client.expires_at
   end
 end

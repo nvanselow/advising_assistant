@@ -8,15 +8,23 @@ class Identity < ActiveRecord::Base
   def self.find_or_create_from_omniauth(auth, current_user)
     provider = auth.provider
     uid = auth.uid
+    access_token = auth['credentials']['token']
+    expires_at = Time.at(auth['credentials']['expires_at']).to_datetime
 
-    find_or_create_by(provider: provider, uid: uid) do |identity|
-      credentials = auth['credentials']
+    identity = where(user: current_user, provider: provider, uid: uid).first
 
-      identity.provider = provider
-      identity.uid = uid
-      identity.user = current_user
-      identity.access_token = credentials['token']
-      identity.expires_at = Time.at(credentials['expires_at']).to_datetime
+    if(identity)
+      identity.access_token = access_token
+      identity.expires_at = expires_at
+      identity.save
+    else
+      create({
+        provider: provider,
+        uid: uid,
+        user: current_user,
+        access_token: access_token,
+        expires_at: expires_at
+      })
     end
   end
 end
