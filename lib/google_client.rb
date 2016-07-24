@@ -5,10 +5,6 @@ module GoogleClient
   cattr_accessor :signet
   attr_reader :client
 
-  def self.redirect_uri
-    ENV['GOOGLE_REDIRECT_URI']
-  end
-
   def initialize(user)
     @client = signet.new(
       authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
