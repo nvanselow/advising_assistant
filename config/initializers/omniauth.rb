@@ -9,7 +9,6 @@ Rails.application.config.middleware.use OmniAuth::Builder do
            ],
            access_type: 'offline',
            approval_prompt: 'force'
-           
 end
 
 Rails.application.config.middleware.use OmniAuth::Builder do
