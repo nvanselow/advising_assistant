@@ -69,8 +69,9 @@ class ExportMeetingDialogBox extends Component {
           </p>
         </div>
         <div className="modal-footer">
-          <a href="#!" className="modal-action waves-effect waves-light btn-flat" onClick={this.addClick}>
-            Add Calendar
+          <a href="#!" className="modal-action waves-effect waves-light"
+                       onClick={this.addClick}>
+            Export Meeting
           </a>
           <a href="#!" className="modal-action waves-effect waves-light btn-flat" onClick={this.cancelClick}>Cancel</a>
         </div>

@@ -8,6 +8,8 @@ class ExportMeeting extends Component {
     super(props);
 
     this.baseUrl = `/api/v1/${this.props.accountType.toLowerCase()}_calendars`;
+    this.addUrl = `/api/v1/meetings/${this.props.meeting.id}/` +
+                  `${this.props.accountType.toLowerCase()}_calendars`;
     this.addText = `Add to ${this.props.accountType} Calendar`;
 
     this.onClick = this.onClick.bind(this);
@@ -23,7 +25,22 @@ class ExportMeeting extends Component {
   }
 
   addClick(calendar, notify) {
-    this.cleanup();
+    $.ajax({
+      url: this.addUrl,
+      method: 'POST',
+      data: {
+        calendar: calendar,
+        notify: notify
+      }
+    })
+    .done((data) => {
+      Flash.success(data.message);
+      this.cleanup();
+    })
+    .fail((response) => {
+      data = response.responseJSON;
+      Flash.error(data.message);
+    });
   }
 
   cancelClick() {
@@ -68,7 +85,7 @@ class ExportMeeting extends Component {
       <div className="export-meeting">
         <button className="waves-effect waves-light btn"
                 onClick={this.onClick}>
-           {this.addText}
+           Add to Calendar
         </button>
       </div>
     );

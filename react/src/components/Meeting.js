@@ -47,7 +47,7 @@ class Meeting extends Component {
                   onClick={this.handleDelete}>
             <i className="material-icons">delete</i>
           </button>
-          <ExportMeeting accountType="Google" />
+          <ExportMeeting meeting={this.props.meeting} accountType="Google" />
         </div>
       </div>
     );
