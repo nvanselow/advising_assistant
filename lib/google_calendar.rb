@@ -2,6 +2,8 @@ require 'google/apis/calendar_v3'
 require_relative 'google_client'
 
 class GoogleCalendar
+  @@calendar_service = Google::Apis::CalendarV3::CalendarService
+  cattr_accessor :calendar_service
   include GoogleClient
 
   PROVIDER = 'google_oauth2'
@@ -9,7 +11,7 @@ class GoogleCalendar
 
   def initialize(user)
     @user = user
-    @calendar = Google::Apis::CalendarV3::CalendarService.new
+    @calendar = calendar_service.new
     @event = nil
     @slot = nil
     super

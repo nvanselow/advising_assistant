@@ -1,13 +1,16 @@
 require 'signet/oauth_2/client'
 
 module GoogleClient
+  @@signet = Signet::OAuth2::Client
+  cattr_accessor :signet
+  
   def self.redirect_uri
     ENV['GOOGLE_REDIRECT_URI']
   end
 
   def initialize(user = nil)
     return nil if !user
-    @client = Signet::OAuth2::Client.new(
+    @client = signet.new(
       authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
       token_credential_uri:  'https://accounts.google.com/o/oauth2/token',
       client_id: ENV['GOOGLE_CLIENT_ID'],
