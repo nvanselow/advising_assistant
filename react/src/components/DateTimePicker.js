@@ -46,6 +46,12 @@ class DateTimePicker extends Component {
         time: initialValue,
         dateTime: initialValue
       });
+    } else {
+      this.setState({
+        date: moment(),
+        time: moment(),
+        dateTime: moment()
+      })
     }
 
     $(this.jQueryDateId).pickadate({
@@ -134,7 +140,7 @@ class DateTimePicker extends Component {
                  onChange={this.onDateChange} />
         </div>
         <div className="input-field">
-          <label htmlFor={this.timeId}>
+          <label htmlFor={this.timeId} className="active">
             {this.timeLabel}
           </label>
           <input type="time"

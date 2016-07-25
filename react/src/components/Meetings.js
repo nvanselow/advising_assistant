@@ -133,9 +133,13 @@ class Meetings extends Component {
                   </div>
                 </div>
 
-                <div className="input-field">
-                  <DateTimePicker id="meeting_start_time"
-                                  onChange={this.changeDateTime} />
+                <div className="row">
+                  <div className="col s12">
+                    <div className="input-field">
+                      <DateTimePicker id="meeting_start_time"
+                                      onChange={this.changeDateTime} />
+                    </div>
+                  </div>
                 </div>
 
                 <div className="row">
