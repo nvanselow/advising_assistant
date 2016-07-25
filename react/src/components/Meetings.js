@@ -70,6 +70,14 @@ class Meetings extends Component {
   }
 
   renderMeetings() {
+    if(this.state.meetings.length == 0){
+      return (
+        <h5 className="no-meetings">
+          There are no meetings
+        </h5>
+      );
+    }
+
     return this.state.meetings.map((meeting) => {
       return <Meeting key={meeting.id}
                       meeting={meeting}
@@ -135,36 +143,24 @@ class Meetings extends Component {
   }
 
   renderToggleFormButton() {
+    let buttonText = 'Add New Meeting';
     if(this.state.showNewMeetingForm){
-      return (
-        <div className="center-align">
-          <button className="btn-flat" onClick={this.toggleFormVisibility}>
-            Hide
-          </button>
-        </div>
-      );
-
-    } else {
-      return (
-        <div className="center-align" key="2">
-          <button className="btn-flat" onClick={this.toggleFormVisibility}>
-            Add New Meeting
-          </button>
-        </div>
-      );
+      buttonText = 'Hide';
     }
+
+    return (
+      <div className="center-align">
+        <button className="btn" onClick={this.toggleFormVisibility}>
+          {buttonText}
+        </button>
+      </div>
+    );
   }
 
   render() {
     return (
       <div className="meetings-container">
-        <ReactCSSTransitionGroup transitionName="generic"
-                                 transitionEnterTimeout={500}
-                                 transitionLeaveTimeout={300}
-                                 transitionAppear={true}
-                                 transitionAppearTimeout={500}>
-          {this.renderToggleFormButton()}
-        </ReactCSSTransitionGroup>
+        {this.renderToggleFormButton()}
         <ReactCSSTransitionGroup transitionName="generic"
                                  transitionEnterTimeout={500}
                                  transitionLeaveTimeout={300}
