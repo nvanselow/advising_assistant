@@ -8,7 +8,7 @@ describe AdviseesController, type: :controller do
       sign_in user
     end
 
-    it 'deletes and advisee' do
+    it 'deletes an advisee' do
       advisee = FactoryGirl.create(:advisee)
 
       delete :destroy, id: advisee.id
