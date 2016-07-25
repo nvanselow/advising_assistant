@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Api::V1::UpcommingMeetingsController, type: :controller do
+describe Api::V1::UpcomingMeetingsController, type: :controller do
   let(:user) { FactoryGirl.create(:user) }
 
   before do

@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-feature 'View upcomming meetings', %{
+feature 'View upcoming meetings', %{
   As an advisor
-  I want to view a list of all upcomming meetings across advisees
-  So I can see a list of all meetings I have comming up soon
+  I want to view a list of all upcoming meetings across advisees
+  So I can see a list of all meetings I have coming up soon
 }, js: true do
   # [X] The meeting list displays all meetings across advisees
   #     ordered by start time
@@ -22,27 +22,27 @@ feature 'View upcomming meetings', %{
     visit advisees_path
   end
 
-  context 'There are many upcomming meetings' do
+  context 'There are many upcoming meetings' do
     let!(:advisee1_upcomming_meeting) do
       FactoryGirl.create(:meeting,
-                         start_time: Time.zone.now
+                         start_time: Time.zone.now,
                          advisee: advisee1,
                          user: user)
     end
     let!(:advisee1_old_meeting) do
       FactoryGirl.create(:meeting,
                          start_time: Time.zone.now - 1.day,
-                         advisee: advisee,
+                         advisee: advisee1,
                          user: user)
     end
     let!(:advisee2_upcomming_meeting) do
       FactoryGirl.create(:meeting,
-                         start_time: Time.zone.now - 30.minutes
-                         advisee: advisee1,
+                         start_time: Time.zone.now - 30.minutes,
+                         advisee: advisee2,
                          user: user)
     end
 
-    scenario 'view upcomming meetings on the advisees list (main page)' do
+    scenario 'view upcoming meetings on the advisees list (main page)' do
       expect(page).to have_content(advisee1_upcomming_meeting.description)
       expect(page).to have_content(advisee2_upcomming_meeting.description)
       expect(page).not_to have_content(advisee1_old_meeting.description)
@@ -80,10 +80,10 @@ feature 'View upcomming meetings', %{
     end
   end
 
-  context 'there is one upcomming meeting' do
+  context 'there is one upcoming meeting' do
     let!(:meeting) do
       FactoryGirl.create(:meeting,
-                         start_time: Time.zone.now
+                         start_time: Time.zone.now,
                          advisee: advisee1,
                          user: user)
     end

@@ -1,4 +1,4 @@
-class Api::V1::UpcommingMeetingsController < ApiController
+class Api::V1::UpcomingMeetingsController < ApiController
   def index
     meetings = Meeting.upcomming_for_user(current_user)
 
