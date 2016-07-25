@@ -27,3 +27,7 @@ end
 def get_note_ids(json)
   json['notes'].map { |c| c['id'] }
 end
+
+def get_meeting_ids(json)
+  json['meetings'].map { |c| c['id'] }
+end
