@@ -4,31 +4,28 @@
        data-start="<%= @meeting.start_time.to_datetime.to_s %>"
        data-end="<%= @meeting.end_time.to_datetime.to_s %>" />
 
-  <div class="row">
-    <div class="cols s12">
-      <h1>Meeting</h1>
-      <h4>
-        <div id="meeting-time">
-          <%= @meeting.formatted_time %>
-        </div>
-      </h4>
-
-      <%= link_to 'Edit Meeting',
-                  edit_meeting_path(@meeting),
-                  class: 'btn' %>
-      <%= button_to 'Delete Meeting',
-                    meeting_path(@meeting),
-                    method: 'delete',
-                    class: 'btn danger' %>
-
-      <h3>Meeting with:</h3>
-      <%= render partial: 'advisees/details' %>
-
-      <% if @meeting.description %>
-        <p><%= @meeting.description %></p>
-      <% end %>
+  <h1>Meeting</h1>
+  <h4>
+    <div id="meeting-time">
+      <%= @meeting.formatted_time %>
     </div>
-  </div>
+  </h4>
+
+  <%= link_to 'Edit Meeting',
+              edit_meeting_path(@meeting),
+              class: 'btn' %>
+
+  <button data-target="delete-meeting-modal" class="btn danger modal-trigger">
+    Delete Meeting
+  </button>
+  <%= render partial: 'meetings/delete_modal', locals: { meeting: @meeting } %>
+
+  <h3>Meeting with:</h3>
+  <%= render partial: 'advisees/details' %>
+
+  <% if @meeting.description %>
+    <p><%= @meeting.description %></p>
+  <% end %>
 
   <div id="meeting-notes">
   </div>

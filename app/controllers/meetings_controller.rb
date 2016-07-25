@@ -24,4 +24,12 @@ class MeetingsController < ApplicationController
       render 'meetings/edit'
     end
   end
+
+  def destroy
+    Meeting.destroy(params[:id])
+
+    flash[:success] = 'Meeting deleted!'
+
+    redirect_to advisees_path
+  end
 end
