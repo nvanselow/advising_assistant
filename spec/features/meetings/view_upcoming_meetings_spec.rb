@@ -19,7 +19,6 @@ feature 'View upcoming meetings', %{
 
   before do
     sign_in user
-    visit advisees_path
   end
 
   context 'There are many upcoming meetings' do
@@ -43,12 +42,14 @@ feature 'View upcoming meetings', %{
     end
 
     scenario 'view upcoming meetings on the advisees list (main page)' do
+      visit advisees_path
+
       expect(page).to have_content(advisee1_upcomming_meeting.description)
       expect(page).to have_content(advisee2_upcomming_meeting.description)
       expect(page).not_to have_content(advisee1_old_meeting.description)
 
-      expect(advisee2_upcomming_meeting.description)
-        .to appear_before(advisee1_upcomming_meeting.description)
+      expect(advisee1_upcomming_meeting.description)
+        .to appear_before(advisee2_upcomming_meeting.description)
     end
 
     context 'There is an old meeting' do
@@ -90,6 +91,8 @@ feature 'View upcoming meetings', %{
 
     scenario 'user clicks on the meeting time to see the meeting details' do
       note = FactoryGirl.create(:note, noteable: meeting)
+
+      visit advisees_path
       find('.meeting-time').click
 
       expect(page).to have_content(meeting.description)
@@ -99,6 +102,8 @@ feature 'View upcoming meetings', %{
     end
 
     scenario 'user clicks the advisee name to see the advisee details' do
+      visit advisees_path
+
       click_link(advisee1.full_name)
 
       expect(page).to have_content(advisee1.full_name)
