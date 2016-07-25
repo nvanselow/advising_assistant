@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :microsoft_calendars, only: [:index]
       resources :notes, only: [:update, :destroy]
       resources :search_advisees, only: [:index]
+      resources :upcomming_meetings, only: [:index]
 
       resources :advisees, only: [] do
         resources :advisee_notes, only: [:index, :create]
