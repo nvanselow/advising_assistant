@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Flash from '../lib/Flash';
-import Errors from './Errors';
 import moment from 'moment-timezone/builds/moment-timezone-with-data';
-import DateTimePicker from './DateTimePicker';
 import Meeting from './Meeting';
+import NewMeeting from './NewMeeting';
 
 class Meetings extends Component {
   constructor(props) {
@@ -13,7 +12,8 @@ class Meetings extends Component {
     this.state = {
       newMeeting: this.resetMeeting(),
       newMeetingErrors: [],
-      meetings: []
+      meetings: [],
+      showNewMeetingForm: false
     }
 
     this.getMeetings = this.getMeetings.bind(this);
@@ -23,6 +23,9 @@ class Meetings extends Component {
     this.saveMeeting = this.saveMeeting.bind(this);
     this.renderMeetings = this.renderMeetings.bind(this);
     this.onMeetingDelete = this.onMeetingDelete.bind(this);
+    this.toggleFormVisibility = this.toggleFormVisibility.bind(this);
+    this.renderNewMeetingForm = this.renderNewMeetingForm.bind(this);
+    this.renderToggleFormButton = this.renderToggleFormButton.bind(this);
   }
 
   componentDidMount() {
@@ -67,6 +70,14 @@ class Meetings extends Component {
   }
 
   renderMeetings() {
+    if(this.state.meetings.length == 0){
+      return (
+        <h5 className="no-meetings">
+          There are no meetings
+        </h5>
+      );
+    }
+
     return this.state.meetings.map((meeting) => {
       return <Meeting key={meeting.id}
                       meeting={meeting}
@@ -109,64 +120,54 @@ class Meetings extends Component {
     this.setState({ meetings: meetings });
   }
 
-  render() {
-    let meeting = this.state.newMeeting;
+  toggleFormVisibility() {
+    let currentVisibilty = this.state.showNewMeetingForm;
+
+    this.setState({ showNewMeetingForm: !currentVisibilty });
+  }
+
+  renderNewMeetingForm() {
+    if(this.state.showNewMeetingForm){
+      return (
+        <NewMeeting key="1"
+                    meeting={this.state.newMeeting}
+                    errors={this.state.newMeetingErrors}
+                    changeDescription={this.changeDescription}
+                    changeDateTime={this.changeDateTime}
+                    changeDuration={this.changeDuration}
+                    saveMeeting={this.saveMeeting} />
+      );
+    } else {
+      return null;
+    }
+  }
+
+  renderToggleFormButton() {
+    let buttonText = 'Add New Meeting';
+    if(this.state.showNewMeetingForm){
+      buttonText = 'Hide';
+    }
 
     return (
+      <div className="center-align">
+        <button className="btn" onClick={this.toggleFormVisibility}>
+          {buttonText}
+        </button>
+      </div>
+    );
+  }
+
+  render() {
+    return (
       <div className="meetings-container">
-        <Errors errors={this.state.newMeetingErrors} />
-        <div className="row add-meeting-form">
-          <div className="col s12">
-            <div className="card orange lighten-5">
-              <div className="card-content">
-                <span className="card-title">
-                  New Meeting
-                </span>
-                <div className="row">
-                  <div className="input-field col s12">
-                    <input type="text"
-                           id="meeting_description"
-                           name="meeting[description]"
-                           value={meeting.description}
-                           onChange={this.changeDescription} />
-                    <label htmlFor="meeting_description">Description</label>
-                  </div>
-                </div>
-
-                <div className="row">
-                  <div className="col s12">
-                    <div className="input-field">
-                      <DateTimePicker id="meeting_start_time"
-                                      onChange={this.changeDateTime} />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="row">
-                  <div className="input-field col s12">
-                    <input type="number"
-                           id="meeting_duration"
-                           step="5"
-                           value={meeting.duration}
-                           onChange={this.changeDuration} />
-                    <label htmlFor="meeting_duration">Duration (min):</label>
-                  </div>
-                </div>
-
-                <div className="row">
-                  <div className="input-field col s12">
-                    <button className="btn"
-                            id="add_meeting"
-                            onClick={this.saveMeeting}>
-                      <i className="material-icons left">add</i>
-                      Add Meeting
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        {this.renderToggleFormButton()}
+        <ReactCSSTransitionGroup transitionName="generic"
+                                 transitionEnterTimeout={500}
+                                 transitionLeaveTimeout={300}
+                                 transitionAppear={true}
+                                 transitionAppearTimeout={500}>
+          {this.renderNewMeetingForm()}
+        </ReactCSSTransitionGroup>
         <div className="meetings">
           <ReactCSSTransitionGroup transitionName="generic"
                                    transitionEnterTimeout={500}

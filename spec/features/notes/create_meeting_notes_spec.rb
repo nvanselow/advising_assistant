@@ -20,6 +20,7 @@ feature 'User creates a note for a meeting', %{
   before do
     sign_in user
     visit meeting_path(meeting)
+    click_button('Add New Note')
   end
 
   scenario 'User adds a note correctly' do

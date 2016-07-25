@@ -19,7 +19,8 @@ class Notes extends Component {
       newNoteBody: '',
       newNoteErrors: [],
       notes: [],
-      editingNoteId: null
+      editingNoteId: null,
+      currentVisibilty: false
     }
 
     this.getNotes = this.getNotes.bind(this);
@@ -32,6 +33,9 @@ class Notes extends Component {
     this.editNote = this.editNote.bind(this);
     this.updateNote = this.updateNote.bind(this);
     this.cancelUpdate = this.cancelUpdate.bind(this);
+    this.toggleFormVisibility = this.toggleFormVisibility.bind(this);
+    this.renderToggleFormButton = this.renderToggleFormButton.bind(this);
+    this.renderNoteForm = this.renderNoteForm.bind(this);
   }
 
   componentDidMount() {
@@ -48,6 +52,14 @@ class Notes extends Component {
   }
 
   renderNotes() {
+    if(this.state.notes.length == 0){
+      return (
+        <h5 className="no-notes">
+          There are no notes
+        </h5>
+      );
+    }
+
     return this.state.notes.map((note) => {
       if(this.state.editingNoteId === note.id) {
         return (
@@ -142,39 +154,76 @@ class Notes extends Component {
     this.setState({ editingNoteId: null });
   }
 
+  toggleFormVisibility() {
+    let currentVisibilty = this.state.showNoteForm;
+    this.setState({ showNoteForm: !currentVisibilty });
+  }
+
+  renderToggleFormButton() {
+    let buttonText = 'Add New Note';
+    if(this.state.showNoteForm){
+      buttonText = 'Hide';
+    }
+
+    return (
+      <div className="center-align">
+        <button className="btn" onClick={this.toggleFormVisibility}>
+          {buttonText}
+        </button>
+      </div>
+    );
+  }
+
+  renderNoteForm() {
+    if(this.state.showNoteForm){
+      return (
+        <div key="1" className="row col s12">
+          <div className="card blue-grey lighten-3">
+            <div className="card-content">
+              <span className="card-title">Add Note</span>
+                <div className="row">
+                  <div className="cols s12">
+                    <Errors errors={this.state.newNoteErrors} />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="input-field add-note col s12">
+                    <textarea id="note_body"
+                              name="note[body]"
+                              className="materialize-textarea"
+                              value={this.state.newNoteBody}
+                              onChange={this.updateNoteBody} >
+                    </textarea>
+                    <label htmlFor="note_body">Note</label>
+                    <div className="input-field">
+                      <button id="add-note" onClick={this.saveNote} className="btn">
+                        <i className="material-icons left">add</i>
+                        Add Note
+                      </button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      return null;
+    }
+  }
+
   render() {
     return (
       <div className="notes-container">
-        <div className="row add-note-form">
-          <div className="col s12">
-            <div className="card blue-grey lighten-3">
-              <div className="card-content">
-                <span className="card-title">Add Note</span>
-                  <div className="row">
-                    <div className="cols s12">
-                      <Errors errors={this.state.newNoteErrors} />
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="input-field add-note col s12">
-                      <textarea id="note_body"
-                                name="note[body]"
-                                className="materialize-textarea"
-                                value={this.state.newNoteBody}
-                                onChange={this.updateNoteBody} >
-                      </textarea>
-                      <label htmlFor="note_body">Note</label>
-                      <div className="input-field">
-                        <button id="add-note" onClick={this.saveNote} className="btn">
-                          <i className="material-icons left">add</i>
-                          Add Note
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-              </div>
-            </div>
-          </div>
+        {this.renderToggleFormButton()}
+        <div className="add-note-form">
+          <ReactCSSTransitionGroup transitionName="generic"
+                                   transitionEnterTimeout={500}
+                                   transitionLeaveTimeout={300}
+                                   transitionAppear={true}
+                                   transitionAppearTimeout={500}>
+            {this.renderNoteForm()}
+          </ReactCSSTransitionGroup>
         </div>
         <div className="row">
           <div className="col s12 notes">
