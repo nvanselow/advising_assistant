@@ -26,6 +26,26 @@ class Meeting < ActiveRecord::Base
       .limit(5)
   end
 
+  def self.format_for_upcoming(meetings)
+    meetings.map do |meeting|
+      advisee = meeting.advisee
+
+      {
+        id: meeting.id,
+        description: meeting.description,
+        start_time: meeting.start_time,
+        end_time: meeting.end_time,
+        duration: meeting.duration,
+        advisee: {
+          id: advisee.id,
+          full_name: advisee.full_name,
+          first_name: advisee.first_name,
+          last_name: advisee.last_name
+        }
+      }
+    end
+  end
+
   def duration
     if !start_time || !end_time
       0

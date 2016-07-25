@@ -94,6 +94,27 @@ describe Meeting, type: :model do
     end
   end
 
+  describe '.format_for_upcoming' do
+    it 'returns a hash formatted with info needed for upcoming meetings' do
+      meetings = FactoryGirl.create_list(:meeting, 2)
+
+      formatted_meetings = Meeting.format_for_upcoming(meetings)
+
+      expect(meetings.count).to eq(2)
+      first_meeting = formatted_meetings[0]
+
+      expect(first_meeting[:id]).not_to be(nil)
+      expect(first_meeting[:description]).not_to be(nil)
+      expect(first_meeting[:start_time]).not_to be(nil)
+      expect(first_meeting[:end_time]).not_to be(nil)
+      expect(first_meeting[:duration]).not_to be(nil)
+      expect(first_meeting[:advisee]).not_to be(nil)
+      advisee = first_meeting[:advisee]
+      expect(advisee[:id]).not_to be(nil)
+      expect(advisee[:full_name]).not_to be(nil)
+    end
+  end
+
   describe '#duration' do
     let(:start_time) { DateTime.new(2016, 01, 01, 11, 0, 0) }
 
