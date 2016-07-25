@@ -103,7 +103,7 @@ class Notes extends Component {
 
   deleteNote(note) {
     $.ajax({
-      url: `/api/v1/${this.controller}/${note.id}`,
+      url: `/api/v1/notes/${note.id}`,
       method: 'DELETE'
     })
     .done((data) => {

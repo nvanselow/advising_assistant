@@ -1,0 +1,22 @@
+<div class="container meeting-details">
+  <div id="meeting-data" data-id="<%= @meeting.id  %>" />
+
+  <div class="row">
+    <div class="cols s12">
+      <h1>Meeting</h1>
+      <h4>
+        <%= @meeting.formatted_time %>
+      </h4>
+
+      <h3>Meeting with:</h3>
+      <%= render partial: 'advisees/details' %>
+
+      <% if @meeting.description %>
+        <p><%= @meeting.description %></p>
+      <% end %>
+    </div>
+  </div>
+
+  <div id="meeting-notes">
+  </div>
+</div>

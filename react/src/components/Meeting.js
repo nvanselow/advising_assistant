@@ -2,15 +2,25 @@ import React, { Component, PropTypes } from 'react';
 import Time from './Time';
 import Flash from '../lib/Flash';
 import ExportOptions from './ExportOptions';
+import Confirmation from '../lib/Confirmation';
 
 class Meeting extends Component {
   constructor(props) {
     super(props);
 
     this.handleDelete = this.handleDelete.bind(this);
+    this.deleteMeetingConfirmed = this.deleteMeetingConfirmed.bind(this);
   }
 
   handleDelete() {
+    Confirmation.show({
+                        header: 'Delete this meeting?',
+                        okText: 'Yes, delete meeting',
+                        okCallback: this.deleteMeetingConfirmed
+                      });
+  }
+
+  deleteMeetingConfirmed() {
     $.ajax({
       url: `/api/v1/meetings/${this.props.meeting.id}`,
       method: 'DELETE'
@@ -24,6 +34,8 @@ class Meeting extends Component {
   render() {
     let meeting = this.props.meeting;
     let meetingDescription = 'Meeting';
+    let meetingUrl = `/meetings/${meeting.id}`;
+
     if(meeting.description && meeting.description.length){
       meetingDescription = meeting.description;
     }
@@ -32,8 +44,10 @@ class Meeting extends Component {
       <div className="meeting card orange darken-4">
         <div className="card-content white-text">
           <span className="card-title">
-            <Time dateTime={meeting.start_time} />
-            <small> ({meeting.duration} minutes)</small>
+            <a href={meetingUrl} className="meeting-details-link">
+              <Time dateTime={meeting.start_time} />
+              <small> ({meeting.duration} minutes)</small>
+            </a>
           </span>
           <p>
             <Time dateTime={meeting.start_time} displayType="timeago" />

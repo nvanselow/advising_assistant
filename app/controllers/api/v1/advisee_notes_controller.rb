@@ -1,4 +1,6 @@
-class Api::V1::AdviseeNotesController < ApplicationController
+class Api::V1::AdviseeNotesController < ApiController
+  include NoteParams
+
   before_filter :authenticate_user!
 
   def index
@@ -23,32 +25,5 @@ class Api::V1::AdviseeNotesController < ApplicationController
                      errors: errors
                    }, status: :bad_request
     end
-  end
-
-  def update
-    note = Note.find(params[:id])
-
-    if note.update(notes_params)
-      render json: { message: 'Note updated!', note: note }, status: :ok
-    else
-      errors = note.errors.full_messages
-
-      render json: {
-                      message: 'There were problems updating the note.',
-                      errors: errors
-                   }, status: :bad_request
-    end
-  end
-
-  def destroy
-    Note.destroy(params[:id])
-
-    render json: { message: 'Note deleted!' }, status: :ok
-  end
-
-  private
-
-  def notes_params
-    params.require(:note).permit(:body)
   end
 end

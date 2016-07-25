@@ -1,4 +1,4 @@
-class Api::V1::MeetingsController < ApplicationController
+class Api::V1::MeetingsController < ApiController
   before_filter :authenticate_user!
 
   def index

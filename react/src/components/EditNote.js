@@ -26,7 +26,7 @@ class EditNote extends Component {
     let controller = this.props.controller;
 
     $.ajax({
-      url: `/api/v1/${controller}/${this.state.note.id}`,
+      url: `/api/v1/notes/${this.state.note.id}`,
       method: 'PUT',
       data: {
         note: this.state.note

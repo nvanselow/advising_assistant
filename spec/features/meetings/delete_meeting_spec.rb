@@ -24,7 +24,18 @@ feature 'Delete a meeting with advisee', %{
   scenario 'User deletes a meeting' do
     find('.delete-meeting').click
 
+    click_button('Yes, delete meeting')
+
     expect(page).to have_content('Meeting deleted')
     expect(page).not_to have_content(meeting.description)
+  end
+
+  scenario 'User cancels deleting a meeting' do
+    find('.delete-meeting').click
+
+    click_button('Cancel')
+
+    expect(page).not_to have_content('Meeting deleted')
+    expect(page).to have_content(meeting.description)
   end
 end

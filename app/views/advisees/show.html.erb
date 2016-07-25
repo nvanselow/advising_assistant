@@ -1,17 +1,7 @@
 <div class="container advisee-details">
   <div id="advisee-data" data-id="<%= @advisee.id %>" />
 
-  <div class="row">
-    <div class="col s12 m3 photo">
-      <img src="<%= @advisee.photo_url %>"
-           alt="<%= "Photo of #{@advisee.full_name}" %>"
-           class="responsive-img circle" />
-    </div>
-    <div class="col s12 m9">
-      <h2><%= @advisee.full_name %> <small>(<%= @advisee.email %>)</small></h2>
-      <h3><%= @advisee.graduation_semester %> <%= @advisee.graduation_year %></h3>
-    </div>
-  </div>
+  <%= render partial: 'advisees/details' %>
 
   <%= link_to 'Edit Advisee', edit_advisee_path(@advisee), class: 'btn' %>
 

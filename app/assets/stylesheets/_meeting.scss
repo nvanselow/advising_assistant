@@ -3,6 +3,14 @@
 }
 
 .meeting {
+  .meeting-details-link {
+    color: $white;
+  }
+
+  .meeting-details-link:hover {
+    text-decoration: underline;
+  }
+
   .meeting-description {
     font-size: 1.25em;
   }
