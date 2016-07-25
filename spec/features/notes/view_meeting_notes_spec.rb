@@ -20,12 +20,14 @@ feature 'View notes for a meeting', %{
 
   scenario 'navigate to the meeting notes from the advisee page' do
     note = FactoryGirl.create(:note, noteable: meeting)
+    advisee_note = FactoryGirl.create(:note, noteable: advisee)
 
     visit advisee_path(advisee)
 
     find('.meeting-details-link').click
 
     expect(page).to have_content(note.body)
+    expect(page).not_to have_content(advisee_note.body)
   end
 
   scenario 'notes are ordered with most recently updated at the top' do
