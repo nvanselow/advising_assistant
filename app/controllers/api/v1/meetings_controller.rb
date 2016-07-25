@@ -1,4 +1,6 @@
 class Api::V1::MeetingsController < ApiController
+  include MeetingParams
+  
   before_filter :authenticate_user!
 
   def index
@@ -44,14 +46,5 @@ class Api::V1::MeetingsController < ApiController
     Meeting.destroy(params[:id])
 
     render json: { message: 'Meeting deleted!' }, status: :ok
-  end
-
-  private
-
-  def meeting_params
-    params.require(:meeting).permit(:description,
-                                    :start_time,
-                                    :end_time,
-                                    :duration)
   end
 end
