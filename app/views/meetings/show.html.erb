@@ -1,11 +1,16 @@
 <div class="container meeting-details">
-  <div id="meeting-data" data-id="<%= @meeting.id  %>" />
+  <div id="meeting-data"
+       data-id="<%= @meeting.id  %>"
+       data-start="<%= @meeting.start_time.to_datetime.to_s %>"
+       data-end="<%= @meeting.end_time.to_datetime.to_s %>" />
 
   <div class="row">
     <div class="cols s12">
       <h1>Meeting</h1>
       <h4>
-        <%= @meeting.formatted_time %>
+        <div id="meeting-time">
+          <%= @meeting.formatted_time %>
+        </div>
       </h4>
 
       <h3>Meeting with:</h3>

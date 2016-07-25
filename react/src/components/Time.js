@@ -11,6 +11,12 @@ class Time extends Component {
       this.displayType = props.displayType;
     }
 
+    if(!('format' in props)){
+      this.format = 'MMM D, YYYY h:mm a';
+    } else {
+      this.format = props.format;
+    }
+
     this.transformTime = this.transformTime.bind(this);
   }
 
@@ -24,7 +30,7 @@ class Time extends Component {
     if (this.displayType == 'timeago') {
       return dateTime.fromNow();
     } else {
-      return dateTime.format('MMM D, YYYY h:mm a');
+      return dateTime.format(this.format);
     }
   }
 
@@ -37,7 +43,8 @@ class Time extends Component {
 
 Time.propTypes = {
   dateTime: PropTypes.string.isRequired,
-  displayType: PropTypes.string
+  displayType: PropTypes.string,
+  format: PropTypes.string
 }
 
 export default Time;
