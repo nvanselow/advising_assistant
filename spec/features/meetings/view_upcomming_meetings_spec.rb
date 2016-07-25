@@ -8,10 +8,10 @@ feature 'View upcomming meetings', %{
   # [X] The meeting list displays all meetings across advisees
   #     ordered by start time
   # [X] The list starts an hour before the current time
-  # [ ] There is an option to see previous meetings (before current time)
+  # [X] There is an option to see previous meetings (before current time)
   # [X] Clicking on a meeting description or start time shows the details of
   #     that meeting
-  # [ ] Clicking on an advisee's name goes to the show page for that advisee
+  # [X] Clicking on an advisee's name goes to the show page for that advisee
 
   let(:user) { FactoryGirl.create(:user) }
   let!(:advisee1) { FactoryGirl.create(:advisee, user: user) }
@@ -49,6 +49,34 @@ feature 'View upcomming meetings', %{
 
       expect(advisee2_upcomming_meeting.description)
         .to appear_before(advisee1_upcomming_meeting.description)
+    end
+
+    context 'There is an old meeting' do
+      let(:old_meeting) do
+        FactoryGirl.create(:meeting,
+                           user: user,
+                           start_time: Time.zone.now - 1.day)
+      end
+
+      scenario 'User clicks "all meetings" to see the older meetings' do
+        visit advisees_path
+
+        expect(page).not_to have_content(old_meeting.description)
+
+        click_button('View All Meetings')
+
+        expect(page).to have_content(old_meeting.description)
+      end
+
+      scenario 'User hides "all meetings" to only see upcomming meetings' do
+        visit advisees_path
+
+        click_button('View All Meetings')
+        expect(page).to have_content(old_meeting.description)
+
+        click_button('Hide All Meetings')
+        expect(page).not_to have_content(old_meeting.description)
+      end
     end
   end
 
