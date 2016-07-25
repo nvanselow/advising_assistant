@@ -11,6 +11,7 @@ class Api::V1::MeetingsController < ApiController
   def create
     meeting = Meeting.new_from_duration(meeting_params)
     meeting.advisee_id = params[:advisee_id]
+    meeting.user = current_user
 
     if meeting.save
       message = 'Meeting created!'

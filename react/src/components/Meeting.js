@@ -10,6 +10,7 @@ class Meeting extends Component {
 
     this.handleDelete = this.handleDelete.bind(this);
     this.deleteMeetingConfirmed = this.deleteMeetingConfirmed.bind(this);
+    this.advisee = this.advisee.bind(this);
   }
 
   handleDelete() {
@@ -31,6 +32,24 @@ class Meeting extends Component {
     });
   }
 
+  advisee() {
+    let advisee = this.props.advisee;
+    if(advisee){
+      let adviseeUrl = `/advisees/${advisee.id}`;
+
+      return (
+        <p>
+          <span>Meeting with: </span>
+          <a href={adviseeUrl} className='advisee-link'>
+            {advisee.full_name}
+          </a>
+        </p>
+      );
+    } else {
+      return null;
+    }
+  }
+
   render() {
     let meeting = this.props.meeting;
     let meetingDescription = 'Meeting';
@@ -46,9 +65,10 @@ class Meeting extends Component {
           <span className="card-title">
             <a href={meetingUrl} className="meeting-details-link">
               <Time dateTime={meeting.start_time} />
-              <small> ({meeting.duration} minutes)</small>
             </a>
+            <small> ({meeting.duration} minutes)</small>
           </span>
+          {this.advisee()}
           <p>
             <Time dateTime={meeting.start_time} displayType="timeago" />
           </p>
@@ -69,7 +89,8 @@ class Meeting extends Component {
 }
 
 Meeting.propTypes = {
-  meeting: PropTypes.object.isRequired
+  meeting: PropTypes.object.isRequired,
+  advisee: PropTypes.object
 }
 
 export default Meeting;

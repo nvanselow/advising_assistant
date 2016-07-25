@@ -2,6 +2,7 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AdviseeSearch from './components/AdviseeSearch';
+import UpcomingMeetings from './components/UpcomingMeetings';
 import Notes from './components/Notes';
 import Meetings from './components/Meetings';
 import MeetingTime from './components/MeetingTime';
@@ -13,6 +14,15 @@ $(function() {
     ReactDOM.render(
       <AdviseeSearch />,
       adviseeSearch
+    );
+  }
+
+  let upcomingMeetings = document.getElementById('upcoming-meetings');
+
+  if(upcomingMeetings){
+    ReactDOM.render(
+      <UpcomingMeetings />,
+      upcomingMeetings
     );
   }
 

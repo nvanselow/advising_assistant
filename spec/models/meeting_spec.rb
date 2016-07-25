@@ -25,8 +25,94 @@ describe Meeting, type: :model do
 
     it { should validate_presence_of(:advisee) }
 
+    it { should belong_to(:user) }
     it { should belong_to(:advisee) }
     it { should have_many(:notes) }
+  end
+
+  describe '.new_from_duration' do
+    it 'sets an end time if a duration is provided' do
+      duration = 90
+      meeting = FactoryGirl.attributes_for(:meeting_with_duration,
+                                           end_time: nil,
+                                           duration: duration)
+      new_meeting = Meeting.new_from_duration(meeting)
+
+      old_start_time = DateTime.parse(meeting[:start_time])
+      expect(new_meeting.end_time).to eq(old_start_time + duration.minutes)
+    end
+
+    it 'does not set the end time if no duration is provided' do
+      meeting = FactoryGirl.attributes_for(:meeting, end_time: nil)
+
+      new_meeting = Meeting.new_from_duration(meeting)
+
+      expect(new_meeting.end_time).to eq(nil)
+    end
+  end
+
+  describe '.upcomming_for_user' do
+    it 'gets the meetings that are coming up for a user' do
+      user = FactoryGirl.create(:user)
+      FactoryGirl.create_list(:meeting,
+                              5,
+                              user: user,
+                              start_time: Time.zone.now + 1.day)
+
+      expect(Meeting.upcomming_for_user(user).count).to eq(5)
+    end
+
+    it 'gets meetings that started after 1 hour ago' do
+      user = FactoryGirl.create(:user)
+      FactoryGirl.create_list(:meeting,
+                              2,
+                              user: user,
+                              start_time: Time.zone.now - 55.minutes)
+
+      expect(Meeting.upcomming_for_user(user).count).to eq(2)
+    end
+
+    it 'does not get meetings that started more than an hour ago' do
+      user = FactoryGirl.create(:user)
+      FactoryGirl.create_list(:meeting,
+                              2,
+                              user: user,
+                              start_time: Time.zone.now - 1.day)
+
+      expect(Meeting.upcomming_for_user(user).count).to eq(0)
+    end
+
+    it 'does not get meetings for other users' do
+      user = FactoryGirl.create(:user)
+      another_user = FactoryGirl.create(:user)
+      FactoryGirl.create_list(:meeting,
+                              2,
+                              user: another_user,
+                              start_time: Time.zone.now + 1.day)
+
+      expect(Meeting.upcomming_for_user(user).count).to eq(0)
+    end
+  end
+
+  describe '.format_for_upcoming' do
+    it 'returns a hash formatted with info needed for upcoming meetings' do
+      meetings = FactoryGirl.create_list(:meeting, 2)
+
+      formatted_meetings = Meeting.format_for_upcoming(meetings)
+
+      expect(meetings.count).to eq(2)
+      first_meeting = formatted_meetings[0]
+
+      expect(first_meeting[:id]).not_to be(nil)
+      expect(first_meeting[:description]).not_to be(nil)
+      expect(first_meeting[:start_time]).not_to be(nil)
+      expect(first_meeting[:end_time]).not_to be(nil)
+      expect(first_meeting[:duration]).not_to be(nil)
+      expect(first_meeting[:advisee]).not_to be(nil)
+      advisee = first_meeting[:advisee]
+      expect(advisee[:id]).not_to be(nil)
+      expect(advisee[:full_name]).not_to be(nil)
+    end
   end
 
   describe '#duration' do
@@ -62,27 +148,6 @@ describe Meeting, type: :model do
       meeting = FactoryGirl.build(:meeting, end_time: nil)
 
       expect(meeting.duration).to eq(0)
-    end
-  end
-
-  describe '.new_from_duration' do
-    it 'sets an end time if a duration is provided' do
-      duration = 90
-      meeting = FactoryGirl.attributes_for(:meeting_with_duration,
-                                           end_time: nil,
-                                           duration: duration)
-      new_meeting = Meeting.new_from_duration(meeting)
-
-      old_start_time = DateTime.parse(meeting[:start_time])
-      expect(new_meeting.end_time).to eq(old_start_time + duration.minutes)
-    end
-
-    it 'does not set the end time if no duration is provided' do
-      meeting = FactoryGirl.attributes_for(:meeting, end_time: nil)
-
-      new_meeting = Meeting.new_from_duration(meeting)
-
-      expect(new_meeting.end_time).to eq(nil)
     end
   end
 

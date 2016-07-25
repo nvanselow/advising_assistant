@@ -14,10 +14,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      resources :all_meetings, only: [:index]
       resources :google_calendars, only: [:index]
       resources :microsoft_calendars, only: [:index]
       resources :notes, only: [:update, :destroy]
       resources :search_advisees, only: [:index]
+      resources :upcoming_meetings, only: [:index]
 
       resources :advisees, only: [] do
         resources :advisee_notes, only: [:index, :create]

@@ -3,11 +3,13 @@
 }
 
 .meeting {
-  .meeting-details-link {
+  .meeting-details-link,
+  .advisee-link {
     color: $white;
   }
 
-  .meeting-details-link:hover {
+  .meeting-details-link:hover,
+  .advisee-link:hover {
     text-decoration: underline;
   }
 

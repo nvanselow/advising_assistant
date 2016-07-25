@@ -123,7 +123,3 @@ describe Api::V1::MeetingsController, type: :controller do
     end
   end
 end
-
-def get_meeting_ids(json)
-  json['meetings'].map { |c| c['id'] }
-end

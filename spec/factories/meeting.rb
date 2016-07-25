@@ -4,6 +4,7 @@ FactoryGirl.define do
     start_time '2016-01-31 20:00'
     end_time '2016-01-31 21:00'
     advisee
+    user
 
     factory :meeting_with_duration do
       duration 60

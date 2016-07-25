@@ -1,0 +1,14 @@
+.upcoming-meetings {
+  border-left: 1px solid $primary-color-dark;
+  height: 100vh;
+
+  .upcoming-meetings-header {
+    font-size: 1.9em;
+    text-align: center;
+  }
+
+  .no-meetings {
+    font-size: 1.2em;
+    text-align: center;
+  }
+}
