@@ -25,6 +25,7 @@ describe Meeting, type: :model do
 
     it { should validate_presence_of(:advisee) }
 
+    it { should belong_to(:user) }
     it { should belong_to(:advisee) }
     it { should have_many(:notes) }
   end
@@ -47,6 +48,39 @@ describe Meeting, type: :model do
       new_meeting = Meeting.new_from_duration(meeting)
 
       expect(new_meeting.end_time).to eq(nil)
+    end
+  end
+
+  describe '.upcomming_for_user' do
+    it 'gets the meetings that are coming up for a user' do
+      user = FactoryGirl.create(:user)
+      meetings = FactoryGirl.create_list(:meeting,
+                                         5,
+                                         user: user,
+                                         start_time: Time.zone.now + 1.day)
+
+      expect(Meeting.upcomming_for_user(user).count).to eq(5)
+    end
+
+    it 'does not get meetings that already happened' do
+      user = FactoryGirl.create(:user)
+      meetings = FactoryGirl.create_list(:meeting,
+                                         2,
+                                         user: user,
+                                         start_time: Time.zone.now - 1.day)
+
+     expect(Meeting.upcomming_for_user(user).count).to eq(0)
+    end
+
+    it 'does not get meetings for other users' do
+      user = FactoryGirl.create(:user)
+      another_user = FactoryGirl.create(:user)
+      meetings = FactoryGirl.create_list(:meeting,
+                                         2,
+                                         user: another_user,
+                                         start_time: Time.zone.now + 1.day)
+
+     expect(Meeting.upcomming_for_user(user).count).to eq(0)
     end
   end
 

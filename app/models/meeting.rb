@@ -26,10 +26,6 @@ class Meeting < ActiveRecord::Base
       .limit(5)
   end
 
-  def user
-    advisee.user
-  end
-
   def duration
     if !start_time || !end_time
       0
