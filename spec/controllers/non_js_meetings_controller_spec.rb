@@ -7,7 +7,7 @@ describe MeetingsController, type: :controller do
     before do
       sign_in user
     end
-    
+  
     it 'deletes an a meeting' do
       meeting = FactoryGirl.create(:meeting)
 
