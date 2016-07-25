@@ -130,7 +130,7 @@ class DateTimePicker extends Component {
       <div className="date-time-picker">
         <input type="hidden" name={this.props.name} value={dateTimeValue} />
         <div className="input-field">
-          <label htmlFor={this.dateId}>
+          <label htmlFor={this.dateId} className="active">
             {this.dateLabel}
           </label>
           <input type="date"
