@@ -54,43 +54,43 @@ describe Meeting, type: :model do
   describe '.upcomming_for_user' do
     it 'gets the meetings that are coming up for a user' do
       user = FactoryGirl.create(:user)
-      meetings = FactoryGirl.create_list(:meeting,
-                                         5,
-                                         user: user,
-                                         start_time: Time.zone.now + 1.day)
+      FactoryGirl.create_list(:meeting,
+                              5,
+                              user: user,
+                              start_time: Time.zone.now + 1.day)
 
       expect(Meeting.upcomming_for_user(user).count).to eq(5)
     end
 
     it 'gets meetings that started after 1 hour ago' do
       user = FactoryGirl.create(:user)
-      meetings = FactoryGirl.create_list(:meeting,
-                                         2,
-                                         user: user,
-                                         start_time: Time.zone.now - 55.minutes)
+      FactoryGirl.create_list(:meeting,
+                              2,
+                              user: user,
+                              start_time: Time.zone.now - 55.minutes)
 
       expect(Meeting.upcomming_for_user(user).count).to eq(2)
     end
 
     it 'does not get meetings that started more than an hour ago' do
       user = FactoryGirl.create(:user)
-      meetings = FactoryGirl.create_list(:meeting,
-                                         2,
-                                         user: user,
-                                         start_time: Time.zone.now - 1.day)
+      FactoryGirl.create_list(:meeting,
+                              2,
+                              user: user,
+                              start_time: Time.zone.now - 1.day)
 
-     expect(Meeting.upcomming_for_user(user).count).to eq(0)
+      expect(Meeting.upcomming_for_user(user).count).to eq(0)
     end
 
     it 'does not get meetings for other users' do
       user = FactoryGirl.create(:user)
       another_user = FactoryGirl.create(:user)
-      meetings = FactoryGirl.create_list(:meeting,
-                                         2,
-                                         user: another_user,
-                                         start_time: Time.zone.now + 1.day)
+      FactoryGirl.create_list(:meeting,
+                              2,
+                              user: another_user,
+                              start_time: Time.zone.now + 1.day)
 
-     expect(Meeting.upcomming_for_user(user).count).to eq(0)
+      expect(Meeting.upcomming_for_user(user).count).to eq(0)
     end
   end
 
