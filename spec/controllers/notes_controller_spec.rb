@@ -6,7 +6,7 @@ describe Api::V1::NotesController, type: :controller do
   before do
     sign_in user
   end
-  
+
   describe 'PUT /api/v1/notes/:id' do
     it 'updates an existing note' do
       original_note = FactoryGirl.create(:note)

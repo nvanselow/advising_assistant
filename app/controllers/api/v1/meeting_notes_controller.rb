@@ -19,7 +19,8 @@ class Api::V1::MeetingNotesController < ApiController
     else
       errors = note.errors.full_messages
 
-      render json: { note: note,
+      render json: {
+        note: note,
         message: 'There were problems creating that note.',
         errors: errors
       }, status: :bad_request
