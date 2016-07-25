@@ -20,9 +20,9 @@ class Api::V1::MeetingNotesController < ApiController
       errors = note.errors.full_messages
 
       render json: { note: note,
-                     message: 'There were problems creating that note.',
-                     errors: errors
-                   }, status: :bad_request
+        message: 'There were problems creating that note.',
+        errors: errors
+      }, status: :bad_request
     end
   end
 end

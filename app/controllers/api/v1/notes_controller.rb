@@ -12,9 +12,9 @@ class Api::V1::NotesController < ApiController
       errors = note.errors.full_messages
 
       render json: {
-                      message: 'There were problems updating the note.',
-                      errors: errors
-                   }, status: :bad_request
+        message: 'There were problems updating the note.',
+        errors: errors
+      }, status: :bad_request
     end
   end
 
