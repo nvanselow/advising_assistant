@@ -53,7 +53,7 @@ feature 'View upcoming meetings', %{
     end
 
     context 'There is an old meeting' do
-      let(:old_meeting) do
+      let!(:old_meeting) do
         FactoryGirl.create(:meeting,
                            user: user,
                            start_time: Time.zone.now - 1.day)
@@ -64,7 +64,7 @@ feature 'View upcoming meetings', %{
 
         expect(page).not_to have_content(old_meeting.description)
 
-        click_button('View All Meetings')
+        click_button('Show All Meetings')
 
         expect(page).to have_content(old_meeting.description)
       end
@@ -72,7 +72,7 @@ feature 'View upcoming meetings', %{
       scenario 'User hides "all meetings" to only see upcomming meetings' do
         visit advisees_path
 
-        click_button('View All Meetings')
+        click_button('Show All Meetings')
         expect(page).to have_content(old_meeting.description)
 
         click_button('Hide All Meetings')
@@ -93,7 +93,7 @@ feature 'View upcoming meetings', %{
       note = FactoryGirl.create(:note, noteable: meeting)
 
       visit advisees_path
-      find('.meeting-time').click
+      find('.meeting-details-link').click
 
       expect(page).to have_content(meeting.description)
       expect(page).to have_content('Meeting with')

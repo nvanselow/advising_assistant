@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Meeting from './Meeting';
 
 class UpcomingMeetings extends Component {
@@ -6,11 +7,13 @@ class UpcomingMeetings extends Component {
     super(props);
 
     this.state = {
-      meetings: []
+      meetings: [],
+      showAllMeetings: false
     }
 
     this.getUpcomingMeetings = this.getUpcomingMeetings.bind(this);
     this.getAllMeetings = this.getAllMeetings.bind(this);
+    this.receivedMeetings = this.receivedMeetings.bind(this);
     this.renderMeetings = this.renderMeetings.bind(this);
   }
 
@@ -23,13 +26,21 @@ class UpcomingMeetings extends Component {
       url: '/api/v1/upcoming_meetings',
       method: 'GET'
     })
-    .done((data) => {
-      this.setState({ meetings: data.meetings });
-    });
+    .done(this.receivedMeetings);
+    this.setState({ showAllMeetings: false });
   }
 
   getAllMeetings() {
+    $.ajax({
+      url: '/api/v1/all_meetings',
+      method: 'GET'
+    })
+    .done(this.receivedMeetings);
+    this.setState({ showAllMeetings: true });
+  }
 
+  receivedMeetings(data) {
+    this.setState({ meetings: data.meetings });
   }
 
   renderMeetings() {
@@ -46,11 +57,40 @@ class UpcomingMeetings extends Component {
     }
   }
 
+  renderShowAllMeetingsButton() {
+    if(this.state.showAllMeetings){
+      return (
+        <button key="1" className="btn-flat" onClick={this.getUpcomingMeetings}>
+          Hide All Meetings
+        </button>
+      );
+    } else {
+      return (
+        <button key="2" className="btn-flat" onClick={this.getAllMeetings}>
+          Show All Meetings
+        </button>
+      );
+    }
+  }
+
   render() {
     return (
       <div className="upcoming-meetings">
         <h2 className="upcoming-meetings-header">Upcoming Meetings</h2>
-        {this.renderMeetings()}
+        <ReactCSSTransitionGroup transitionName="generic"
+                                 transitionEnterTimeout={500}
+                                 transitionLeaveTimeout={300}
+                                 transitionAppear={true}
+                                 transitionAppearTimeout={500}>
+          {this.renderMeetings()}
+        </ReactCSSTransitionGroup>
+        <ReactCSSTransitionGroup transitionName="generic"
+                                 transitionEnterTimeout={500}
+                                 transitionLeaveTimeout={300}
+                                 transitionAppear={true}
+                                 transitionAppearTimeout={500}>
+          {this.renderShowAllMeetingsButton()}
+        </ReactCSSTransitionGroup>
       </div>
     );
   }
