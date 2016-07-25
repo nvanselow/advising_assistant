@@ -14,6 +14,7 @@ describe AdviseesController, type: :controller do
       delete :destroy, id: advisee.id
 
       expect(Advisee.all.count).to eq(0)
+      expect(response).to redirect_to(advisees_path)
     end
   end
 end
