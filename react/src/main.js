@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import AdviseeSearch from './components/AdviseeSearch';
 import Notes from './components/Notes';
 import Meetings from './components/Meetings';
-import DateTimePicker from './components/DateTimePicker';
+import MeetingTime from './components/MeetingTime';
 
 $(function() {
   let adviseeSearch = document.getElementById('advisee-search');
@@ -50,6 +50,18 @@ $(function() {
              noteableId={meetingId}
              controller="meeting_notes" />,
       meetingNotes
+    );
+  }
+
+  let meetingTime = document.getElementById('meeting-time');
+
+  if(meetingTime){
+    let meetingStart = $('#meeting-data').data('start');
+    let meetingEnd = $('#meeting-data').data('end');
+
+    ReactDOM.render(
+      <MeetingTime startTime={meetingStart} endTime={meetingEnd} />,
+      meetingTime
     );
   }
 });
