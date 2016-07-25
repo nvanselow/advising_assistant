@@ -19,6 +19,15 @@ class Meeting < ActiveRecord::Base
     meeting
   end
 
+  def self.update_from_duration(meeting, params)
+    if params[:start_time] && params[:start_time] != ''
+      params[:end_time] = Time.zone.parse(params[:start_time]) +
+      params[:duration].to_i.minutes
+    end
+
+    meeting.update(params)
+  end
+
   def self.upcomming_for_user(user)
     where(user: user)
       .where('start_time > ?', Time.zone.now - 1.hour)

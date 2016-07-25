@@ -8,9 +8,10 @@ class DateTimePicker extends Component {
     super(props)
 
     this.state = {
-      date: null,
-      time: null,
-      timezone: moment.tz.guess()
+      date: moment(),
+      time: moment(),
+      timezone: moment.tz.guess(),
+      dateTime: moment()
     }
 
     if (!('dateLabel' in props)){
@@ -38,6 +39,21 @@ class DateTimePicker extends Component {
   }
 
   componentDidMount() {
+    if('initialValue' in this.props){
+      let initialValue = moment(this.props.initialValue);
+      this.setState({
+        date: initialValue,
+        time: initialValue,
+        dateTime: initialValue
+      });
+    } else {
+      this.setState({
+        date: moment(),
+        time: moment(),
+        dateTime: moment()
+      })
+    }
+
     $(this.jQueryDateId).pickadate({
       selectMonths: true, // Creates a dropdown to control month
       selectYears: 5 // Creates a dropdown of 15 years to control year
@@ -99,29 +115,39 @@ class DateTimePicker extends Component {
   }
 
   onChange(dateTime) {
+    this.setState({ dateTime: moment(dateTime) });
     if(this.props.onChange){
       this.props.onChange(dateTime);
     }
   }
 
   render() {
+    let dateTimeValue = this.state.dateTime.format();
+    let dateValue = this.state.date.format('D MMMM, YYYY');
+    let timeValue = this.state.time.format('hh:mmA');
+
     return (
       <div className="date-time-picker">
+        <input type="hidden" name={this.props.name} value={dateTimeValue} />
         <div className="input-field">
           <label htmlFor={this.dateId}>
             {this.dateLabel}
           </label>
           <input type="date"
                  className="datepicker"
-                 id={this.dateId} />
+                 id={this.dateId}
+                 value={dateValue}
+                 onChange={this.onDateChange} />
         </div>
         <div className="input-field">
-          <label htmlFor={this.timeId}>
+          <label htmlFor={this.timeId} className="active">
             {this.timeLabel}
           </label>
           <input type="time"
                  className="timepicker"
-                 id={this.timeId} />
+                 id={this.timeId}
+                 value={timeValue}
+                 onChange={this.onTimeChange} />
         </div>
 
         <div className="input-field">

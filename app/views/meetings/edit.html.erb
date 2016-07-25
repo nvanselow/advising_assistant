@@ -1,0 +1,38 @@
+<div class="container">
+  <h2>Edit Meeting</h2>
+
+  <%= render partial: 'layouts/errors' %>
+
+  <div class="row">
+    <div class="col s12">
+      <%= form_for @meeting do |f| %>
+        <div class="input-field">
+          <%= f.text_field :description %>
+          <%= f.label :description, class: 'active' %>
+        </div>
+
+        <% if @meeting.start_time %>
+          <div id="edit-meeting-start-time-data"
+               data-start="<%= @meeting.start_time.to_datetime.to_s %>" />
+        <% else %>
+          <div id="edit-meeting-start-time-data"
+               data-start="" />
+        <% end %>
+
+        <div class="input-field" id='edit-meeting-start-time'>
+          <%= f.text_field :start_time %>
+          <%= f.label :start_time, 'Start Time', class: 'active' %>
+        </div>
+
+        <div class="input-field">
+          <%= f.number_field :duration, step: 5 %>
+          <%= f.label :duration, 'Duration', class: 'active' %>
+        </div>
+
+        <div class="input-field">
+          <%= f.submit 'Save Meeting', class: 'btn' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
