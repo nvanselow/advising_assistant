@@ -6,6 +6,7 @@ import UpcomingMeetings from './components/UpcomingMeetings';
 import Notes from './components/Notes';
 import Meetings from './components/Meetings';
 import MeetingTime from './components/MeetingTime';
+import DateTimePicker from './components/DateTimePicker';
 
 $(function() {
   let adviseeSearch = document.getElementById('advisee-search');
@@ -72,6 +73,19 @@ $(function() {
     ReactDOM.render(
       <MeetingTime startTime={meetingStart} endTime={meetingEnd} />,
       meetingTime
+    );
+  }
+
+  let editMeetingStartTime = document.getElementById('edit-meeting-start-time');
+
+  if(editMeetingStartTime){
+    let meetingStartTime = $('#edit-meeting-start-time-data').data('start');
+
+    ReactDOM.render(
+      <DateTimePicker name="meeting[start_time]"
+                      initialValue={meetingStartTime}
+                      id="meeting_start_time" />,
+      editMeetingStartTime
     );
   }
 });

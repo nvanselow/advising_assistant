@@ -8,17 +8,19 @@
       <%= form_for @meeting do |f| %>
         <div class="input-field">
           <%= f.text_field :description %>
-          <%= f.label :description %>
+          <%= f.label :description, class: 'active' %>
         </div>
 
-        <div class="input-field">
+        <div id="edit-meeting-start-time-data"
+             data-start="<%= @meeting.start_time.to_datetime.to_s %>" />
+        <div class="input-field" id='edit-meeting-start-time'>
           <%= f.text_field :start_time %>
-          <%= f.label :start_time, 'Start Time' %>
+          <%= f.label :start_time, 'Start Time', class: 'active' %>
         </div>
 
         <div class="input-field">
           <%= f.number_field :duration, step: 5 %>
-          <%= f.label :duration, 'Duration' %>
+          <%= f.label :duration, 'Duration', class: 'active' %>
         </div>
 
         <div class="input-field">

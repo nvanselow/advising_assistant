@@ -13,6 +13,7 @@ class MeetingsController < ApplicationController
   end
 
   def update
+    binding.pry
     @meeting = Meeting.find(params[:id])
 
     if(Meeting.update_from_duration(@meeting, meeting_params))
