@@ -2,6 +2,7 @@ class Meeting < ActiveRecord::Base
   attr_writer :duration
 
   belongs_to :advisee
+  belongs_to :user
   has_many :notes, as: :noteable, dependent: :destroy
 
   validates :start_time, presence: true, timeliness: true
@@ -16,6 +17,17 @@ class Meeting < ActiveRecord::Base
     end
 
     meeting
+  end
+
+  def self.upcomming_for_user(user)
+    where(user: user)
+      .where('start_time > ?', Time.zone.now)
+      .order(start_time: :desc)
+      .limit(5)
+  end
+
+  def user
+    advisee.user
   end
 
   def duration
