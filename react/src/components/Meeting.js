@@ -24,6 +24,8 @@ class Meeting extends Component {
   render() {
     let meeting = this.props.meeting;
     let meetingDescription = 'Meeting';
+    let meetingUrl = `/meetings/${meeting.id}`;
+
     if(meeting.description && meeting.description.length){
       meetingDescription = meeting.description;
     }
@@ -32,8 +34,10 @@ class Meeting extends Component {
       <div className="meeting card orange darken-4">
         <div className="card-content white-text">
           <span className="card-title">
-            <Time dateTime={meeting.start_time} />
-            <small> ({meeting.duration} minutes)</small>
+            <a href={meetingUrl} className="meeting-details-link">
+              <Time dateTime={meeting.start_time} />
+              <small> ({meeting.duration} minutes)</small>
+            </a>
           </span>
           <p>
             <Time dateTime={meeting.start_time} displayType="timeago" />

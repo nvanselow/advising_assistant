@@ -24,7 +24,9 @@ describe Meeting, type: :model do
     it { should_not have_valid(:end_time).when(*invalid_end_dates) }
 
     it { should validate_presence_of(:advisee) }
+
     it { should belong_to(:advisee) }
+    it { should have_many(:notes) }
   end
 
   describe '#duration' do
@@ -81,6 +83,15 @@ describe Meeting, type: :model do
       new_meeting = Meeting.new_from_duration(meeting)
 
       expect(new_meeting.end_time).to eq(nil)
+    end
+  end
+
+  describe '#formatted_time' do
+    it 'outputs a formatted string with the start and end time' do
+      meeting = FactoryGirl.create(:meeting)
+
+      expect(meeting.formatted_time).to eq('Jan 31, 2016 from 8:00 PM to  '\
+                                           '9:00 PM')
     end
   end
 end

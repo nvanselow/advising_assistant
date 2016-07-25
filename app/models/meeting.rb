@@ -2,6 +2,7 @@ class Meeting < ActiveRecord::Base
   attr_writer :duration
 
   belongs_to :advisee
+  has_many :notes, as: :noteable, dependent: :destroy
 
   validates :start_time, presence: true, timeliness: true
   validates :end_time, presence: true, timeliness: true
@@ -23,6 +24,11 @@ class Meeting < ActiveRecord::Base
     else
       (end_time - start_time) / 60.to_f
     end
+  end
+
+  def formatted_time
+    "#{start_time.strftime('%b %d, %Y from%l:%M %p')} to "\
+                           "#{end_time.strftime('%l:%M %p')}"
   end
 
   def as_json(options = {})

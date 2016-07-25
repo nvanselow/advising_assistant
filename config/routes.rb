@@ -5,9 +5,13 @@ Rails.application.routes.draw do
   get "/auth/:provider/callback" => 'identities#create'
 
   resources :advisees
+  resources :meetings, only: [:show]
 
   namespace :api do
     namespace :v1 do
+      resources :google_calendars, only: [:index]
+      resources :microsoft_calendars, only: [:index]
+      resources :notes, only: [:update, :destroy]
       resources :search_advisees, only: [:index]
 
       resources :advisees, only: [] do
@@ -15,13 +19,11 @@ Rails.application.routes.draw do
         resources :meetings, only: [:index, :create]
       end
 
-      resources :advisee_notes, only: [:update, :destroy]
       resources :meetings, only: [:update, :destroy] do
+        resources :meeting_notes, only: [:index, :create]
         resources :google_calendars, only: [:create]
         resources :microsoft_calendars, only: [:create]
       end
-      resources :google_calendars, only: [:index]
-      resources :microsoft_calendars, only: [:index]
     end
   end
 end

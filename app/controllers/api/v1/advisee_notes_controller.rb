@@ -1,4 +1,6 @@
-class Api::V1::AdviseeNotesController < ApplicationController
+class Api::V1::AdviseeNotesController < ApiController
+  include NoteParams
+
   before_filter :authenticate_user!
 
   def index
@@ -44,11 +46,5 @@ class Api::V1::AdviseeNotesController < ApplicationController
     Note.destroy(params[:id])
 
     render json: { message: 'Note deleted!' }, status: :ok
-  end
-
-  private
-
-  def notes_params
-    params.require(:note).permit(:body)
   end
 end

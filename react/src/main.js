@@ -39,4 +39,17 @@ $(function() {
       adviseeMeetings
     );
   }
+
+  let meetingNotes = document.getElementById('meeting-notes');
+
+  if(meetingNotes){
+    let meetingId = $('#meeting-data').data('id');
+
+    ReactDOM.render(
+      <Notes noteableType="meetings"
+             noteableId={meetingId}
+             controller="meeting_notes" />,
+      meetingNotes
+    );
+  }
 });
