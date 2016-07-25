@@ -8,12 +8,13 @@ describe AdviseesController, type: :controller do
       sign_in user
     end
 
-    it 'deletes and advisee' do
+    it 'deletes an advisee' do
       advisee = FactoryGirl.create(:advisee)
 
       delete :destroy, id: advisee.id
 
       expect(Advisee.all.count).to eq(0)
+      expect(response).to redirect_to(advisees_path)
     end
   end
 end
