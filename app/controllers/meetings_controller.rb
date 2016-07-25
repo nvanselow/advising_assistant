@@ -15,7 +15,7 @@ class MeetingsController < ApplicationController
   def update
     @meeting = Meeting.find(params[:id])
 
-    if(Meeting.update_from_duration(@meeting, meeting_params))
+    if Meeting.update_from_duration(@meeting, meeting_params)
       flash[:success] = 'Meeting updated!'
       redirect_to meeting_path(@meeting)
     else

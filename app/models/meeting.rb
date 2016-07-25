@@ -22,7 +22,7 @@ class Meeting < ActiveRecord::Base
   def self.update_from_duration(meeting, params)
     if params[:start_time] && params[:start_time] != ''
       params[:end_time] = Time.zone.parse(params[:start_time]) +
-        params[:duration].to_i.minutes
+      params[:duration].to_i.minutes
     end
 
     meeting.update(params)
