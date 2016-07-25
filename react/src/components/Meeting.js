@@ -2,15 +2,25 @@ import React, { Component, PropTypes } from 'react';
 import Time from './Time';
 import Flash from '../lib/Flash';
 import ExportOptions from './ExportOptions';
+import Confirmation from '../lib/Confirmation';
 
 class Meeting extends Component {
   constructor(props) {
     super(props);
 
     this.handleDelete = this.handleDelete.bind(this);
+    this.deleteMeetingConfirmed = this.deleteMeetingConfirmed.bind(this);
   }
 
   handleDelete() {
+    Confirmation.show({
+                        header: 'Delete this meeting?',
+                        okText: 'Yes, delete meeting',
+                        okCallback: this.deleteMeetingConfirmed
+                      });
+  }
+
+  deleteMeetingConfirmed() {
     $.ajax({
       url: `/api/v1/meetings/${this.props.meeting.id}`,
       method: 'DELETE'
