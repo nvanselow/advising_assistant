@@ -123,6 +123,7 @@ class Meetings extends Component {
       return (
         <NewMeeting key="1"
                     meeting={this.state.newMeeting}
+                    errors={this.state.newMeetingErrors}
                     changeDescription={this.changeDescription}
                     changeDateTime={this.changeDateTime}
                     changeDuration={this.changeDuration}

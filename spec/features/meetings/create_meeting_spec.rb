@@ -20,6 +20,7 @@ feature 'Create a meeting', %{
   before do
     sign_in user
     visit advisee_path(advisee)
+    click_button('Add New Meeting')
   end
 
   scenario 'User can create a new meeting' do
