@@ -23,5 +23,4 @@ feature 'User views meeting details', %{
     expect(page).to have_content('Jan 31, 2016')
     expect(page).to have_content(meeting.advisee.full_name)
   end
-
 end
