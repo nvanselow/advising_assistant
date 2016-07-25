@@ -11,8 +11,14 @@
           <%= f.label :description, class: 'active' %>
         </div>
 
-        <div id="edit-meeting-start-time-data"
-             data-start="<%= @meeting.start_time.to_datetime.to_s %>" />
+        <% if @meeting.start_time %>
+          <div id="edit-meeting-start-time-data"
+               data-start="<%= @meeting.start_time.to_datetime.to_s %>" />
+        <% else %>
+          <div id="edit-meeting-start-time-data"
+               data-start="" />
+        <% end %>
+
         <div class="input-field" id='edit-meeting-start-time'>
           <%= f.text_field :start_time %>
           <%= f.label :start_time, 'Start Time', class: 'active' %>
