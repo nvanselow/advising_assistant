@@ -62,7 +62,17 @@ describe Meeting, type: :model do
       expect(Meeting.upcomming_for_user(user).count).to eq(5)
     end
 
-    it 'does not get meetings that already happened' do
+    it 'gets meetings that started after 1 hour ago' do
+      user = FactoryGirl.create(:user)
+      meetings = FactoryGirl.create_list(:meeting,
+                                         2,
+                                         user: user,
+                                         start_time: Time.zone.now - 55.minutes)
+
+      expect(Meeting.upcomming_for_user(user).count).to eq(2)
+    end
+
+    it 'does not get meetings that started more than an hour ago' do
       user = FactoryGirl.create(:user)
       meetings = FactoryGirl.create_list(:meeting,
                                          2,

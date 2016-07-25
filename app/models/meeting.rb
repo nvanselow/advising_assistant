@@ -21,7 +21,7 @@ class Meeting < ActiveRecord::Base
 
   def self.upcomming_for_user(user)
     where(user: user)
-      .where('start_time > ?', Time.zone.now)
+      .where('start_time > ?', Time.zone.now - 1.hour)
       .order(start_time: :desc)
       .limit(5)
   end
