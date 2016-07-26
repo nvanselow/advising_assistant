@@ -7,6 +7,7 @@ class Advisee < ActiveRecord::Base
   belongs_to :user
   has_many :notes, as: :noteable, dependent: :destroy
   has_many :meetings, dependent: :destroy
+  has_many :graduation_plans, dependent: :destroy
 
   validates :first_name, presence: true
   validates :last_name, presence: true
