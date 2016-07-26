@@ -1,38 +1,106 @@
 <div class="index-banner parallax-container">
-  <div class="section no-pad-bot">
-    <div class="container">
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <h1 class="header center white-text">Advising Assistant</h1>
-    </div>
-  </div>
   <div class="parallax">
-    <%= image_tag 'college.jpg', height: '800px' %>
+    <%= image_tag 'college.jpg', height: 800 %>
   </div>
 </div>
 
 <div class="container">
-  <h1>Advising Assistant</h1>
-  <p>
-    Welcome
-
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ullamcorper fringilla enim id pulvinar. Aliquam semper turpis non volutpat venenatis. Donec ac felis feugiat, rhoncus neque eget, venenatis libero. Suspendisse non nulla rutrum, pulvinar ex vitae, tincidunt lorem. Morbi sit amet luctus mauris. Pellentesque maximus mauris nisi, eget placerat purus consequat eget. Maecenas porta enim tellus, id convallis metus condimentum at. Donec rhoncus eros eget tellus finibus congue. Suspendisse sed orci ullamcorper, sagittis urna sed, dictum sapien. Vestibulum congue ipsum non arcu scelerisque, at facilisis arcu tempor. Etiam ut neque vel mauris euismod consequat. Cras aliquet bibendum eros bibendum lacinia. Nullam vel molestie magna, eu suscipit sem. Nullam porttitor mauris nec molestie varius.
-
-    Nulla venenatis ac odio ut scelerisque. Phasellus tempus pulvinar cursus. Duis rutrum erat eu purus imperdiet sodales. Vivamus gravida turpis ut purus interdum, condimentum molestie nisl semper. Nunc sit amet elit non mi lobortis fermentum. Aenean massa erat, aliquam id commodo id, vehicula ut magna. Vivamus massa ante, elementum in tempus commodo, imperdiet sit amet purus.
-
-    Quisque ultrices lacinia auctor. Etiam gravida dolor tortor, eget ornare urna suscipit ac. Sed in sodales lacus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sagittis porta velit nec aliquet. Vestibulum porta, odio et aliquet viverra, massa nunc ornare tellus, at fermentum nulla dui nec turpis. Vestibulum tincidunt sapien imperdiet, placerat arcu ac, dignissim sapien. Aliquam at rutrum est. Curabitur sed ultricies enim, consequat faucibus leo. Suspendisse eu tellus tincidunt, finibus tortor id, porta enim. Nullam facilisis eu erat eget vehicula.
-
-    Fusce sed tellus mi. Integer vestibulum dui id tempus luctus. Praesent in leo lacus. Vestibulum ac pretium urna. Nunc efficitur nibh ut eros ornare, sed sodales est aliquet. Phasellus accumsan lectus nec tristique euismod. Phasellus gravida dolor lacus, in pharetra nunc lobortis vitae. Phasellus varius neque est, sed pharetra elit congue sed. Nam tempor turpis nec erat fermentum pulvinar. Etiam fermentum venenatis dui, ultricies vehicula erat imperdiet vitae. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Fusce elementum erat mi, ut aliquam felis sodales vel.
-
-    Nulla sit amet sapien elit. Pellentesque rhoncus volutpat libero a eleifend. Sed blandit convallis arcu, a iaculis libero tempor sit amet. Maecenas vestibulum arcu gravida aliquam ultrices. Aliquam condimentum nec metus in imperdiet. In hac habitasse platea dictumst. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent condimentum sed nulla in vulputate. Morbi eu ante sagittis, ultricies enim eget, feugiat est. Mauris ut risus a lacus feugiat volutpat id in mi. Aenean in faucibus ex. Ut placerat elementum ex eu lacinia. Sed vel sodales dui. Vivamus lacinia sodales tempor.
-  </p>
-
-  <%= link_to "Sign In", new_user_session_path %>
-
-  <%= link_to "Sign Up", new_user_registration_path %>
-
-  <%= button_to "Log Out", destroy_user_session_path, method: :delete, class: 'waves-effect waves-light btn danger' %>
-
+  <h1 class="header center orange-text">Advising Assistant</h1>
+  <div class="row center">
+    <h5 class="header col s12 light">
+      The modern way to keep track of your advisees
+    </h5>
+    <p class="light">
+      Tired of large Excel files, binders of paper, or endless word documents
+      to keep track of your advisees? Me too!
+    </p>
+    <p>
+      As a professor with over 100 advisees, I wanted to build a system I
+      could use to quickly track my advisees, remember what I told them,
+      and quickly send emails to the advisee regarding what we discussed.
+      Start tracking your advisees the modern way by signing up below.
+    </p>
+    <%= link_to 'Sign Up Now',
+                new_user_registration_path,
+                class: 'sign-up btn-large waves-effect waves-light orange' %>
+  </div>
 </div>
+<div class="container">
+  <div class="section row blue-grey-text">
+    <div class="col s12 m4">
+      <div class="icon-block">
+        <h2 class="center">
+          <i class="material-icons">add_a_photo</i>
+        </h2>
+      </div>
+      <h5 class="center">
+        Upload Photos
+      </h5>
+      <p class="light">
+        Add photos of each advisee so you can recognize
+        who walks in to your office.
+      </p>
+    </div>
+    <div class="col s12 m4">
+      <div class="icon-block">
+        <h2 class="center">
+          <i class="material-icons">schedule</i>
+        </h2>
+      </div>
+      <h5 class="center">
+        Schedule Meetings
+      </h5>
+      <p class="light">
+        Quickly add meetings with your advisee then export the meeting
+        to your Google or Microsoft calendar and send an
+        invite to the advisee.
+      </p>
+    </div>
+    <div class="col s12 m4">
+      <div class="icon-block">
+        <h2 class="center">
+          <i class="material-icons">email</i>
+        </h2>
+      </div>
+      <h5 class="center">
+        Email Meeting Notes
+      </h5>
+      <p class="light">
+        Take notes during a meeting and then send a summary email to your
+        advisee so they have a record of what you discussed.
+      </p>
+    </div>
+  </div>
+</div>
+
+<footer class="page-footer orange">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">
+          Nick Vanselow
+        </h5>
+        <p class="gray-text text-lighten-4">
+          Nick Vanselow is a web developer located in the Greater Boston area.
+          He recently completed the Launch Academy program learning web
+          development.
+        </p>
+        <h5 class="white-text">
+          Interested in hiring Nick? <br>
+          Check him out on:
+          <a href="https://www.linkedin.com/in/nickvanselow">LinkedIn</a>
+          or
+          <a href="https://github.com/nvanselow">Github</a>
+        </h5>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+      Made by
+      <a class="orage-text text-lighten-3" href="https://github.com/nvanselow">
+        Nick Vanselow
+      </a>
+    </div>
+  </div>
+</footer>
