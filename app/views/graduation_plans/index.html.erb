@@ -4,11 +4,14 @@
   <h3>Plans for:</h3>
   <%= render partial: 'advisees/details' %>
 
-  <%= link_to new_advisee_graduation_plan_path(@advisee),
-              class: 'btn standard' do %>
-    <i class="material-icons left">add</i>
-    Add Graduation Plan
-  <% end %>
+  <div class="center">
+    <%= link_to new_advisee_graduation_plan_path(@advisee),
+                class: 'btn standard' do %>
+      <i class="material-icons left">add</i>
+      Add Graduation Plan
+    <% end %>
+  </div>
+
 
   <div class="graduation-plans">
     <% if @graduation_plans.empty? %>
@@ -26,7 +29,8 @@
             <div class="card-content white-text">
               <span class="card-title"><%= graduation_plan.name %></span>
               <p>
-                Last Updated: <%= graduation_plan.updated_at.strftime('%B %d, %Y') %>
+                Last Updated: <br>
+                <%= graduation_plan.updated_at.strftime('%B %d, %Y') %>
               </p>
             </div>
           </div>
