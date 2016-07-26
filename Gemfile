@@ -16,6 +16,7 @@ gem 'signet'
 gem 'google-api-client', '0.9'
 gem 'omniauth-microsoft-office365'
 gem 'ruby_outlook'
+gem 'faker'
 
 group :development, :test do
   gem 'capybara'
@@ -25,7 +26,6 @@ group :development, :test do
   gem 'shoulda'
   gem 'valid_attribute'
   gem 'dotenv-rails', '~> 2.1', '>= 2.1.1'
-  gem 'faker'
 end
 
 group :test do
