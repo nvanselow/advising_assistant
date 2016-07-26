@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20160726210551) do
   add_index "advisees", ["user_id"], name: "index_advisees_on_user_id", using: :btree
 
   create_table "graduation_plans", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.integer  "advisee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
