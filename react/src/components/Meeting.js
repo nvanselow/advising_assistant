@@ -60,7 +60,7 @@ class Meeting extends Component {
     }
 
     return (
-      <div className="meeting card cyan darken-4">
+      <div className="meeting card cyan darken-3">
         <div className="card-content white-text">
           <span className="card-title">
             <a href={meetingUrl} className="meeting-details-link">
