@@ -11,7 +11,9 @@ feature 'View graduation plans', %{
 
   let(:user) { FactoryGirl.create(:user) }
   let(:advisee) { FactoryGirl.create(:advisee) }
-  let!(:grad_plans) { FactoryGirl.create_list(:graduation_plan, 3) }
+  let!(:grad_plans) do
+    FactoryGirl.create_list(:graduation_plan, 3, advisee: advisee)
+  end
 
   before do
     sign_in user
@@ -23,7 +25,7 @@ feature 'View graduation plans', %{
     click_link('Graduation Plans')
 
     grad_plans.each do |grad_plan|
-      expect(page).to have_content(grad_plans.name)
+      expect(page).to have_content(grad_plan.name)
     end
   end
 end
