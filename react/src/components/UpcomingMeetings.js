@@ -84,13 +84,15 @@ class UpcomingMeetings extends Component {
                                  transitionAppearTimeout={500}>
           {this.renderMeetings()}
         </ReactCSSTransitionGroup>
-        <ReactCSSTransitionGroup transitionName="generic"
-                                 transitionEnterTimeout={500}
-                                 transitionLeaveTimeout={300}
-                                 transitionAppear={true}
-                                 transitionAppearTimeout={500}>
-          {this.renderShowAllMeetingsButton()}
-        </ReactCSSTransitionGroup>
+        <div className="center">
+          <ReactCSSTransitionGroup transitionName="generic"
+                                   transitionEnterTimeout={500}
+                                   transitionLeaveTimeout={300}
+                                   transitionAppear={true}
+                                   transitionAppearTimeout={500}>
+            {this.renderShowAllMeetingsButton()}
+          </ReactCSSTransitionGroup>
+        </div>
       </div>
     );
   }
