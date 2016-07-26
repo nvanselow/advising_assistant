@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get "/auth/:provider/callback" => 'identities#create'
 
   resources :advisees do
-    resources :graduation_plans, only: [:index]
+    resources :graduation_plans, only: [:index, :new, :create]
   end
 
   resources :meetings, only: [:show, :edit, :update, :destroy] do
