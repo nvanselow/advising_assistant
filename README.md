@@ -32,6 +32,11 @@ with many third party APIs.
 
 ## Features
 
+### Upload Photos
+
+Upload photos of your advisees so you can more easily recognize them. If you
+don't have a photo, the app will attempt to find one using the Gravatar API.
+
 ### Search Advisees
 
 Quickly search for advisees. Advisees are filtered as you type.
