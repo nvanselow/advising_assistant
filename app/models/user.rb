@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :advisees, dependent: :destroy
   has_many :identities, dependent: :destroy
+  has_many :meetings, dependent: :destroy
 
   validates :first_name, presence: true
   validates :last_name, presence: true

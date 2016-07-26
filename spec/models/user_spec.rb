@@ -9,4 +9,5 @@ describe User, type: :model do
 
   it { should have_many(:advisees).dependent(:destroy) }
   it { should have_many(:identities).dependent(:destroy) }
+  it { should have_many(:meetings).dependent(:destroy) }
 end
