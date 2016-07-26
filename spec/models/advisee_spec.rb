@@ -24,6 +24,7 @@ describe Advisee, type: :model do
   it { should belong_to(:user) }
   it { should have_many(:notes).dependent(:destroy) }
   it { should have_many(:meetings).dependent(:destroy) }
+  it { should have_many(:graduation_plans).dependent(:destroy) }
 
   describe '.all_for' do
     it 'returns all advisee for a user' do
