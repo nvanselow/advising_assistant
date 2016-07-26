@@ -3,9 +3,13 @@
 
   <%= render partial: 'advisees/details' %>
 
-  <%= link_to 'Edit Advisee', edit_advisee_path(@advisee), class: 'btn primary' %>
+  <%= link_to edit_advisee_path(@advisee), class: 'btn primary' do %>
+    <i class="material-icons left">mode_edit</i>
+    Edit Advisee
+  <% end %>
 
   <button data-target="delete-advisee-modal" class="btn danger modal-trigger">
+    <i class="material-icons left">delete</i>
     Delete Advisee
   </button>
   <%= render partial: 'advisees/delete_modal', locals: { advisee: @advisee } %>
@@ -39,5 +43,4 @@
       </div>
     </div>
   </div>
-
 </div>
