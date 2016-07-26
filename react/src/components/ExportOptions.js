@@ -18,8 +18,8 @@ class ExportOptions extends Component {
     let id = `calendar-export-options-${this.props.meeting.id}`;
 
     return (
-      <div className="calendar-export-options">
-        <a className='dropdown-button btn' href='#' data-activates={id}>
+      <div className="calendar-export-options right">
+        <a className='dropdown-button btn primary' href='#' data-activates={id}>
           Add to Calendar
         </a>
 

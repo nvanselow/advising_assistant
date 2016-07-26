@@ -150,7 +150,7 @@ class Meetings extends Component {
 
     return (
       <div className="center-align">
-        <button className="btn" onClick={this.toggleFormVisibility}>
+        <button className="btn primary" onClick={this.toggleFormVisibility}>
           {buttonText}
         </button>
       </div>

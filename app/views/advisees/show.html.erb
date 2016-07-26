@@ -3,7 +3,7 @@
 
   <%= render partial: 'advisees/details' %>
 
-  <%= link_to 'Edit Advisee', edit_advisee_path(@advisee), class: 'btn' %>
+  <%= link_to 'Edit Advisee', edit_advisee_path(@advisee), class: 'btn primary' %>
 
   <button data-target="delete-advisee-modal" class="btn danger modal-trigger">
     Delete Advisee
@@ -18,7 +18,7 @@
           <p>
             There are no notes for this advisee.
           </p>
-          <button class="btn">
+          <button class="btn primary">
             <i class="material-icons left">add</i> Add Note
           </button>
         <% end %>

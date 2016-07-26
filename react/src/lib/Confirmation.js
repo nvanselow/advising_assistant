@@ -50,7 +50,7 @@ class ConfirmationDialogBox extends Component {
                   onClick={this.handleCancelClick}>
             {this.cancelText}
           </button>
-          <button className="ok-btn modal-action modal-close waves-effect btn"
+          <button className="ok-btn modal-action modal-close waves-effect btn primary"
                   onClick={this.handleOkClick}>
             {this.okText}
           </button>

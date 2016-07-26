@@ -52,7 +52,7 @@ let NewMeeting = (props) => {
 
               <div className="row">
                 <div className="input-field col s12">
-                  <button className="btn"
+                  <button className="btn primary"
                           id="add_meeting"
                           onClick={props.saveMeeting}>
                     <i className="material-icons left">add</i>

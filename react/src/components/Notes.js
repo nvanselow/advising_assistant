@@ -167,7 +167,7 @@ class Notes extends Component {
 
     return (
       <div className="center-align">
-        <button className="btn" onClick={this.toggleFormVisibility}>
+        <button className="btn primary" onClick={this.toggleFormVisibility}>
           {buttonText}
         </button>
       </div>
@@ -196,7 +196,9 @@ class Notes extends Component {
                     </textarea>
                     <label htmlFor="note_body">Note</label>
                     <div className="input-field">
-                      <button id="add-note" onClick={this.saveNote} className="btn">
+                      <button id="add-note"
+                              onClick={this.saveNote}
+                              className="btn primary">
                         <i className="material-icons left">add</i>
                         Add Note
                       </button>

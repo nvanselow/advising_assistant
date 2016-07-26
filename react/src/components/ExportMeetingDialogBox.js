@@ -83,7 +83,7 @@ class ExportMeetingDialogBox extends Component {
           </p>
         </div>
         <div className="modal-footer">
-          <a href="#!" className="modal-action waves-effect waves-light btn"
+          <a href="#!" className="modal-action waves-effect waves-light btn primary"
                        onClick={this.addClick}>
             Export Meeting
           </a>

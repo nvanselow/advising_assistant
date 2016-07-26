@@ -64,7 +64,7 @@ class EditNote extends Component {
         </div>
         <div className="row">
           <div className="col s6 input-field">
-            <button id="save-note" onClick={this.saveNote} className="btn">
+            <button id="save-note" onClick={this.saveNote} className="btn primary">
               Save
             </button>
           </div>
