@@ -160,14 +160,17 @@ class Notes extends Component {
   }
 
   renderToggleFormButton() {
+    let buttonIcon = <i className="material-icons left">add</i>;
     let buttonText = 'Add New Note';
     if(this.state.showNoteForm){
+      buttonIcon = null;
       buttonText = 'Hide';
     }
 
     return (
       <div className="center-align">
         <button className="btn primary" onClick={this.toggleFormVisibility}>
+          {buttonIcon}
           {buttonText}
         </button>
       </div>
