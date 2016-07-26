@@ -11,6 +11,11 @@
     </div>
   </h4>
 
+  <%= link_to 'Email Summary',
+              meeting_meeting_summaries_path(@meeting),
+              method: 'post',
+              class: 'btn' %>
+
   <%= link_to 'Edit Meeting',
               edit_meeting_path(@meeting),
               class: 'btn' %>

@@ -151,6 +151,14 @@ describe Meeting, type: :model do
     end
   end
 
+  describe '#formatted_start_time' do
+    it 'outputs the start time as a formatted string' do
+      meeting = FactoryGirl.create(:meeting)
+
+      expect(meeting.formatted_start_time).to eq('Jan 31, 2016 -  8:00 PM')
+    end
+  end
+
   describe '#formatted_time' do
     it 'outputs a formatted string with the start and end time' do
       meeting = FactoryGirl.create(:meeting)

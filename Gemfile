@@ -38,10 +38,14 @@ group :test do
   gem 'selenium-webdriver'
 end
 
-group :production do
-  gem 'rails_12factor'
+group :development do
+  gem 'mailcatcher'
 end
 
 group :development, :production do
   gem 'fog'
+end
+
+group :production do
+  gem 'rails_12factor'
 end

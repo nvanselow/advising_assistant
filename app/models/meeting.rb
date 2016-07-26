@@ -68,6 +68,10 @@ class Meeting < ActiveRecord::Base
                            "#{end_time.strftime('%l:%M %p')}"
   end
 
+  def formatted_start_time
+    start_time.strftime('%b %d, %Y - %l:%M %p')
+  end
+
   def as_json(options = {})
     m = super(options)
     m[:duration] = duration
