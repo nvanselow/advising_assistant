@@ -11,16 +11,20 @@
     </div>
   </h4>
 
-  <%= link_to 'Email Summary',
-              meeting_meeting_summaries_path(@meeting),
+  <%= link_to meeting_meeting_summaries_path(@meeting),
               method: 'post',
-              class: 'btn primary' %>
+              class: 'btn primary' do %>
+    <i class="material-icons left">email</i>
+    Email Summary
+  <% end %>
 
-  <%= link_to 'Edit Meeting',
-              edit_meeting_path(@meeting),
-              class: 'btn primary' %>
+  <%= link_to edit_meeting_path(@meeting), class: 'btn primary' do %>
+    <i class="material-icons left">mode_edit</i>
+    Edit Meeting
+  <% end %>
 
   <button data-target="delete-meeting-modal" class="btn danger modal-trigger">
+    <i class="material-icons left">delete</i>
     Delete Meeting
   </button>
   <%= render partial: 'meetings/delete_modal', locals: { meeting: @meeting } %>
