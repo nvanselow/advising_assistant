@@ -1,16 +1,30 @@
 <ul id="user_dropdown" class="dropdown-content">
-  <li><%= link_to 'Edit Account Info', edit_user_registration_path %></li>
   <li>
-    <%= link_to 'Link Microsoft Account', '/auth/microsoft_office365' %>
+    <%= link_to 'Edit Account Info',
+        edit_user_registration_path,
+        class: 'nav-option' %>
   </li>
   <li>
-    <%= link_to 'Microsoft Calendars', api_v1_microsoft_calendars_path %>
+    <% if current_user.identities.where(provider: 'google_oauth2') %>
+      <a href="#" class="nav-option">
+        Google Account linked!
+      </a>
+    <% else %>
+      <%= link_to 'Link Google Account',
+                  '/auth/google_oauth2',
+                  class: 'nav-option' %>
+    <% end %>
   </li>
   <li>
-    <%= link_to 'Link Google Account', '/auth/google_oauth2' %>
-  </li>
-  <li>
-    <%= link_to 'View Calendars', api_v1_google_calendars_path %>
+    <% if current_user.identities.where(provider: 'microsoft_office365') %>
+      <a href="#" class="nav-option">
+        Microsoft Account linked!
+      </a>
+    <% else %>
+      <%= link_to 'Link Microsoft Account',
+                  '/auth/microsoft_office365',
+                  class: 'nav-option' %>
+    <% end %>
   </li>
 </ul>
 
