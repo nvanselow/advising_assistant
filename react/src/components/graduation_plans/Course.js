@@ -6,7 +6,8 @@ const courseSource = {
   beginDrag(props) {
     return {
       id: props.id,
-      name: props.name
+      name: props.name,
+      semesterId: props.semesterId
     };
   }
 };
@@ -41,6 +42,7 @@ class Course extends Component {
 Course.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
+  semesterId: PropTypes.number.isRequired,
   connectDragSource: PropTypes.func.isRequired,
   isDragging: PropTypes.bool.isRequired
 }

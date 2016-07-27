@@ -5,12 +5,15 @@ import Course from './Course';
 
 const semesterTarget = {
   drop(props, monitor) {
+    $('.graduation-plan').trigger('courseDropped', {
+      props: props,
+      item: monitor.getItem()
+    });
     addCourse(props, monitor.getItem());
   }
 }
 
 function addCourse(props, course) {
-  debugger;
 }
 
 function collect(connect, monitor) {
@@ -21,27 +24,52 @@ function collect(connect, monitor) {
 }
 
 class Semester extends Component {
+  constructor(props) {
+    super(props);
+
+    this.renderCourses = this.renderCourses.bind(this);
+  }
+
+  renderCourses() {
+    let { id, courses } = this.props;
+    return this.props.courses.map((course) => {
+      return (
+        <Course key={course.id}
+                id={course.id}
+                name={course.name}
+                semesterId={id} />
+      );
+    });
+  }
+
   render() {
-    const { connectDropTarget, isOver } = this.props;
+    const { semester, year, remainingCourses, connectDropTarget, isOver } = this.props;
 
     let classes = 'col s4 semester';
+    if(remainingCourses) {
+      classes = 'col s12 semester';
+    }
     if(isOver) {
       classes = classes + ' hovering';
+    }
+
+    let semesterHeader = `${semester} ${year}`;
+    if(remainingCourses) {
+      semesterHeader = 'Remaining Courses';
     }
 
     return connectDropTarget(
       <div className={classes}>
         <div className="row text-center">
-          <div className="col">
+          <div className="col s12">
             <h5 className="text-center">
-              {this.props.semester} {this.props.year}
+              {semesterHeader}
             </h5>
           </div>
         </div>
         <div className="row">
-          <div className="col">
-            <Course id={1} name="PSY 325" />
-            <Course id={2} name="PSY 399" />
+          <div className="col s12">
+            {this.renderCourses()}
           </div>
         </div>
       </div>
@@ -53,6 +81,8 @@ Semester.propTypes = {
   id: PropTypes.number.isRequired,
   semester: PropTypes.string.isRequired,
   year: PropTypes.number.isRequired,
+  courses: PropTypes.array.isRequired,
+  remainingCourses: PropTypes.bool.isRequired,
   isOver: PropTypes.bool.isRequired
 }
 

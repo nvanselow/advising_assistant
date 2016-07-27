@@ -7,7 +7,7 @@ import Notes from './components/Notes';
 import Meetings from './components/Meetings';
 import MeetingTime from './components/MeetingTime';
 import DateTimePicker from './components/DateTimePicker';
-import GraduationPlan from './components/GraduationPlan';
+import GraduationPlan from './components/graduation_plans/GraduationPlan';
 
 $(function() {
   let adviseeSearch = document.getElementById('advisee-search');

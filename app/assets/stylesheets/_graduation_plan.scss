@@ -7,8 +7,6 @@
     border-bottom: 1px solid $primary-color-dark;
     font-size: 1.2em;
     margin-bottom: 0;
-    text-align: center;
-    width: 100%;
   }
 
   .chip {
@@ -19,13 +17,14 @@
     margin-top: 20px;
   }
 
-  .remaining-courses,
   .semester {
     border: 1px solid $primary-color-dark;
+    min-height: 325px;
     text-align: center;
+    width: 100%;
+  }
 
-    .hovering {
-      background-color: green;
-    }
+  .hovering {
+    background-color: $primary-color-light;
   }
 }
