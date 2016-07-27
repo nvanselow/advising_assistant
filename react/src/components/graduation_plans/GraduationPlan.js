@@ -51,7 +51,25 @@ class GraduationPlan extends Component {
   }
 
   updatePlanName(event) {
-    this.setState({ planName: event.target.value });
+    let newName = event.target.value;
+    this.setState({ planName: newName });
+
+    $.ajax({
+      url: `/api/v1/graduation_plans/${this.props.planId}`,
+      method: 'PUT',
+      data: {
+        graduation_plan: {
+          name: newName
+        }
+      }
+    })
+    .fail((response) => {
+      let data = response.responseJSON;
+      Flash.error(data.message)
+      data.errors.forEach((error) => {
+        Flash.error(error);
+      });
+    });
   }
 
   updateNewCourseName(event) {
