@@ -31,3 +31,7 @@ end
 def get_meeting_ids(json)
   json['meetings'].map { |c| c['id'] }
 end
+
+def get_semester_ids(json)
+  json['semesters'].map { |c| c['id'] }
+end

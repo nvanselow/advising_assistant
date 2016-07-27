@@ -38,6 +38,10 @@ Rails.application.routes.draw do
         resources :google_calendars, only: [:create]
         resources :microsoft_calendars, only: [:create]
       end
+
+      resources :graduation_plans, only: [:update] do
+        resources :semesters, only: [:index]
+      end
     end
   end
 end
