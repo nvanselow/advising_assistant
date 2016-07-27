@@ -7,5 +7,5 @@ describe GraduationPlan, type: :model do
   it { should validate_presence_of(:advisee) }
 
   it { should belong_to(:advisee) }
-  it { should have_many(:semesters) }
+  it { should have_many(:semesters).dependent(:destroy) }
 end

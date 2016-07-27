@@ -12,4 +12,5 @@ describe Semester, type: :model do
   it { should validate_presence_of(:graduation_plan) }
 
   it { should belong_to(:graduation_plan) }
+  it { should have_many(:courses).dependent(:destroy) }
 end

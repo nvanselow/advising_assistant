@@ -1,6 +1,6 @@
 class Semester < ActiveRecord::Base
   belongs_to :graduation_plan
-  has_many :courses
+  has_many :courses, dependent: :destroy
 
   validates :semester, presence: true, inclusion: { in: Semesters.all }
   validates :year, presence: true, numericality: { only_integer: true,
