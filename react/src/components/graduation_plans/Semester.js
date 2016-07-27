@@ -54,7 +54,14 @@ class Semester extends Component {
   }
 
   render() {
-    const { semester, year, remainingCourses, connectDropTarget, isOver } = this.props;
+    const {
+      semester,
+      year,
+      courses,
+      remainingCourses,
+      connectDropTarget,
+      isOver
+    } = this.props;
 
     let classes = 'col s4';
     if(remainingCourses) {
@@ -71,6 +78,20 @@ class Semester extends Component {
       semesterHeader = 'Remaining Courses';
     }
 
+    let noClassesWarning = (
+      <div className="no-classes-warning">
+        <p>
+          There are no classes remaining.
+        </p>
+        <p>
+          Add some using the form above.
+        </p>
+      </div>
+    );
+    if(!remainingCourses || courses.length){
+      noClassesWarning = null;
+    }
+
     return connectDropTarget(
       <div className={classes}>
         <div className={semesterClass}>
@@ -81,6 +102,7 @@ class Semester extends Component {
             <span className="credits">
               ({this.calculateCredits()} credits)
             </span>
+            {noClassesWarning}
             {this.renderCourses()}
           </div>
         </div>
