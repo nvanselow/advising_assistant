@@ -1,4 +1,6 @@
 class Api::V1::CoursesController < ApiController
+  before_filter :authenticate_user!
+
   def create
     semester = Semester.find(params[:semester_id])
     course = semester.courses.new(course_params)
