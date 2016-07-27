@@ -128,15 +128,29 @@ class GraduationPlan extends Component {
     let newSemesterId = data.props.id;
     let semesters = this.state.semesters;
 
-    console.log('original semesters', semesters[0]);
-
     let previousSemester = this.findSemester(previousSemesterId);
     let newSemester = this.findSemester(newSemesterId);
 
-    previousSemester.courses = this.removeCourse(course, previousSemester);
-    newSemester.courses = this.addCourse(course, newSemester);
-
-    this.setState({ semesters: semesters });
+    $.ajax({
+      url: `/api/v1/courses/${course.id}`,
+      method: 'PUT',
+      data: {
+        new_semester_id: newSemester.id
+      }
+    })
+    .done((data) => {
+      Flash.success(data.message);
+      previousSemester.courses = this.removeCourse(course, previousSemester);
+      newSemester.courses = this.addCourse(course, newSemester);
+      this.setState({ semesters: semesters });
+    })
+    .fail((response) => {
+      data = response.responseJSON;
+      Flash.error(data.message);
+      data.errors.forEach((error) => {
+        Flash.error(error);
+      });
+    });
   }
 
   removeCourse(course, semester) {
