@@ -42,6 +42,10 @@ Rails.application.routes.draw do
       resources :graduation_plans, only: [:update] do
         resources :semesters, only: [:index]
       end
+
+      resources :semesters, only: [] do
+        resources :courses, only: [:create]
+      end
     end
   end
 end
