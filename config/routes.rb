@@ -27,7 +27,7 @@ Rails.application.routes.draw do
       resources :notes, only: [:update, :destroy]
       resources :search_advisees, only: [:index]
       resources :upcoming_meetings, only: [:index]
-      resources :courses, only: [:destroy]
+      resources :courses, only: [:update, :destroy]
 
       resources :advisees, only: [] do
         resources :advisee_notes, only: [:index, :create]

@@ -14,6 +14,21 @@ class Api::V1::CoursesController < ApiController
     end
   end
 
+  def update
+    course = Course.find(params[:id])
+    course.semester_id = params[:new_semester_id]
+
+    if course.save
+      render json: { message: 'Course moved!', course: course }
+    else
+      errors = course.errors.full_messages
+      render json: {
+        message: 'There was a problem moving that course.',
+        errors: errors
+      }, status: :bad_request
+    end
+  end
+
   def destroy
     course_id = params[:id]
     Course.destroy(course_id)
