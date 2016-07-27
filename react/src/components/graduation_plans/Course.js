@@ -36,7 +36,7 @@ class Course extends Component {
     let formatted_credits = credits / 10;
 
     return connectDragSource(
-      <span className="chip course" style={{
+      <span className="chip course z-depth-2" style={{
         opacity: isDragging ? 0.5 : 1,
         cursor: 'move'
       }}>

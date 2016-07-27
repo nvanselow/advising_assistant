@@ -3,10 +3,19 @@
 }
 
 .graduation-plan {
-  h5 {
-    border-bottom: 1px solid $primary-color-dark;
+  .card-title {
     font-size: 1.2em;
-    margin-bottom: 0;
+    margin: 0;
+  }
+
+  .card-content {
+    padding: 5px;
+  }
+
+  .credits {
+    display: block;
+    font-size: 1em;
+    margin-bottom: 20px;
   }
 
   .chip {
