@@ -12,7 +12,7 @@ class GraduationPlan < ActiveRecord::Base
     final_year = advisee.graduation_year
 
     beginning_semester = get_first_semester(final_semester)
-    beginning_year = final_year - years
+    beginning_year = final_year.to_i - years
 
     semesters.create!(semester: 'Remaining', year: 1991, remaining_courses: true)
 
