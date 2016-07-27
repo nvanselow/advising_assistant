@@ -38,6 +38,7 @@ class Api::V1::CoursesController < ApiController
   private
 
   def course_params
-    params.require(:course).permit(:name)
+    params[:course][:credits] = (params[:course][:credits].to_f * 10).round
+    params.require(:course).permit(:name, :credits)
   end
 end

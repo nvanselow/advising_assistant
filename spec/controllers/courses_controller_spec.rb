@@ -11,13 +11,18 @@ describe Api::V1::CoursesController, type: :controller do
   describe 'POST /api/v1/semesters/:semester_id/courses' do
     it 'creates a new course' do
       name = 'PSY 100'
-      post :create, semester_id: semester.id, course: { name: name }
+      credits = 2.51
+      post :create, semester_id: semester.id, course: {
+        name: name,
+        credits: credits
+      }
 
       json = parse_json(response)
 
       expect(json['message']).to include('Course created')
       expect(json['course']['id']).not_to be(nil)
       expect(json['course']['name']).to eq(name)
+      expect(json['course']['credits']).to eq((credits * 10).round)
     end
 
     it 'returns errors if the course is invalid' do
