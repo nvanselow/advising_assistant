@@ -3,6 +3,7 @@ import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import Semester from './Semester';
 import Course from './Course';
+import Flash from '../../lib/Flash';
 
 class GraduationPlan extends Component {
   constructor(props) {
@@ -58,13 +59,26 @@ class GraduationPlan extends Component {
     let semesters = this.state.semesters;
     let semester = this.findRemainingCoursesSemester(semesters);
 
-    semester.courses.push({
-      id: semester.courses.length + 3,
-      name: this.state.newCourseName,
-      semesterId: semester.id
-    });
+    $.ajax({
+      url: `/api/v1/semesters/${semester.id}/courses`,
+      method: 'post',
+      data: {
+        course: { name: this.state.newCourseName }
+      }
+    })
+    .done((data) => {
+      Flash.success(data.message);
+      semester.courses.push(data.course);
+      this.setState({ semesters: semesters, newCourseName: '' });
+    })
+    .fail((response) => {
+      let data = response.responseJSON;
 
-    this.setState({ semesters: semesters, newCourseName: '' });
+      Flash.error(data.message);
+      data.errors.forEach((error) => {
+        Flash.error(error);
+      });
+    });
   }
 
   deleteCourse(course) {
