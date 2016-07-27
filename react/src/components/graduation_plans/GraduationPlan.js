@@ -11,13 +11,17 @@ class GraduationPlan extends Component {
 
     this.state = {
       planName: this.props.planName,
-      newCourseName: '',
+      newCourse: {
+        name: '',
+        credits: 3
+      },
       semesters: []
     }
 
     this.getSemesters = this.getSemesters.bind(this);
     this.updatePlanName = this.updatePlanName.bind(this);
     this.updateNewCourseName = this.updateNewCourseName.bind(this);
+    this.updateNewCourseCredits = this.updateNewCourseCredits.bind(this);
     this.addNewCourse = this.addNewCourse.bind(this);
     this.courseDropped = this.courseDropped.bind(this);
     this.deleteCourse = this.deleteCourse.bind(this);
@@ -51,7 +55,15 @@ class GraduationPlan extends Component {
   }
 
   updateNewCourseName(event) {
-    this.setState({ newCourseName: event.target.value });
+    let course = this.state.newCourse;
+    course.name = event.target.value
+    this.setState({ newCourse: course });
+  }
+
+  updateNewCourseCredits(event){
+    let course = this.state.newCourse;
+    course.credits = event.target.value;
+    this.setState({ newCourse: course });
   }
 
   addNewCourse(event) {
@@ -139,7 +151,6 @@ class GraduationPlan extends Component {
       }
     })
     .done((data) => {
-      Flash.success(data.message);
       previousSemester.courses = this.removeCourse(course, previousSemester);
       newSemester.courses = this.addCourse(course, newSemester);
       this.setState({ semesters: semesters });
@@ -192,10 +203,19 @@ class GraduationPlan extends Component {
               <div className="input-field col m6">
                 <input id="new-course-name"
                        type="text"
-                       value={this.state.newCourseName}
+                       value={this.state.newCourse.name}
                        onChange={this.updateNewCourseName}/>
                 <label htmlFor="new-course-name" className="active">
                   New Course Name
+                </label>
+              </div>
+              <div className="input-field col m6">
+                <input id="new-course-credits"
+                       type="number"
+                       value={this.state.newCourse.credits}
+                       onChange={this.updateNewCourseCredits}/>
+                <label htmlFor="new-course-credits" className="active">
+                  Credits
                 </label>
               </div>
               <div className="col m6">

@@ -28,6 +28,7 @@ class Semester extends Component {
     super(props);
 
     this.renderCourses = this.renderCourses.bind(this);
+    this.calculateCredits = this.calculateCredits.bind(this);
   }
 
   renderCourses() {
@@ -37,10 +38,19 @@ class Semester extends Component {
         <Course key={course.id}
                 id={course.id}
                 name={course.name}
+                credits={course.credits}
                 semesterId={id}
                 onDelete={this.props.onDeleteCourse}/>
       );
     });
+  }
+
+  calculateCredits() {
+    let total = 0;
+    this.props.courses.forEach((course) => {
+      total += (course.credits / 10);
+    });
+    return total;
   }
 
   render() {
@@ -68,6 +78,7 @@ class Semester extends Component {
             <div className="col s12">
               <h5 className="text-center">
                 {semesterHeader}
+                <small> ({this.calculateCredits()} credits)</small>
               </h5>
             </div>
           </div>

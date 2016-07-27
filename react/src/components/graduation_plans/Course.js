@@ -7,6 +7,7 @@ const courseSource = {
     return {
       id: props.id,
       name: props.name,
+      credits: props.credits,
       semesterId: props.semesterId
     };
   }
@@ -31,7 +32,8 @@ class Course extends Component {
   }
 
   render() {
-    const { connectDragSource, isDragging } = this.props;
+    const { credits, connectDragSource, isDragging } = this.props;
+    let formatted_credits = credits / 10;
 
     return connectDragSource(
       <span className="chip course" style={{
@@ -39,6 +41,7 @@ class Course extends Component {
         cursor: 'move'
       }}>
         {this.props.name}
+        <small> ({formatted_credits} credits)</small>
         <i className="close material-icons" onClick={this.onDelete}>
           close
         </i>
@@ -50,6 +53,7 @@ class Course extends Component {
 Course.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
+  credits: PropTypes.number.isRequired,
   semesterId: PropTypes.number.isRequired,
   connectDragSource: PropTypes.func.isRequired,
   isDragging: PropTypes.bool.isRequired
