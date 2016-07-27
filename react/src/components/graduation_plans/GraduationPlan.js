@@ -74,7 +74,7 @@ class GraduationPlan extends Component {
       semesterId: semester.id
     });
 
-    this.setState({ semesters: semesters });
+    this.setState({ semesters: semesters, newCourseName: '' });
   }
 
   deleteCourse(course) {
