@@ -29,6 +29,16 @@ class GraduationPlansController < ApplicationController
     end
   end
 
+  def destroy
+    graduation_plan = GraduationPlan.find(params[:id])
+    advisee = graduation_plan.advisee
+
+    graduation_plan.destroy
+
+    flash[:success] = 'Graduation plan deleted!'
+    redirect_to advisee_graduation_plans_path(advisee)
+  end
+
   private
 
   def grad_plan_params
