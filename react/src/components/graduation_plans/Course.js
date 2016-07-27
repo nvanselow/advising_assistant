@@ -22,6 +22,12 @@ function collect(connect, monitor) {
 class Course extends Component {
   constructor(props) {
     super(props);
+
+    this.onDelete = this.onDelete.bind(this);
+  }
+
+  onDelete(event) {
+    this.props.onDelete(this.props);
   }
 
   render() {
@@ -33,7 +39,9 @@ class Course extends Component {
         cursor: 'move'
       }}>
         {this.props.name}
-        <i className="close material-icons">close</i>
+        <i className="close material-icons" onClick={this.onDelete}>
+          close
+        </i>
       </span>
     );
   }

@@ -10,6 +10,7 @@ class GraduationPlan extends Component {
 
     this.state = {
       planName: this.props.planName,
+      newCourseName: '',
       semesters: [
         {
           id: 1,
@@ -36,8 +37,12 @@ class GraduationPlan extends Component {
     }
 
     this.updatePlanName = this.updatePlanName.bind(this);
+    this.updateNewCourseName = this.updateNewCourseName.bind(this);
+    this.addNewCourse = this.addNewCourse.bind(this);
     this.courseDropped = this.courseDropped.bind(this);
+    this.deleteCourse = this.deleteCourse.bind(this);
     this.findSemester = this.findSemester.bind(this);
+    this.findRemainingCoursesSemester = this.findRemainingCoursesSemester.bind(this);
     this.renderRemainingCourseSemesters = this.renderRemainingCourseSemesters.bind(this);
     this.renderSemesters = this.renderSemesters.bind(this);
   }
@@ -52,6 +57,45 @@ class GraduationPlan extends Component {
 
   updatePlanName(event) {
     this.setState({ planName: event.target.value });
+  }
+
+  updateNewCourseName(event) {
+    this.setState({ newCourseName: event.target.value });
+  }
+
+  addNewCourse(event) {
+    event.preventDefault();
+    let semesters = this.state.semesters;
+    let semester = this.findRemainingCoursesSemester(semesters);
+
+    semester.courses.push({
+      id: semester.courses.length + 3,
+      name: this.state.newCourseName,
+      semesterId: semester.id
+    });
+
+    this.setState({ semesters: semesters });
+  }
+
+  deleteCourse(course) {
+    let semesters = this.state.semesters;
+    let semester = this.findSemester(course.semesterId);
+
+    this.removeCourse(course, semester);
+
+    this.setState({ semesters: semesters });
+  }
+
+  findRemainingCoursesSemester(semesters) {
+    let remaininCourseSemesters = this.state.semesters.filter((semester) => {
+      return semester.remainingCourses;
+    });
+
+    if(remaininCourseSemesters.length){
+      return remaininCourseSemesters[0];
+    } else {
+      return null;
+    }
   }
 
   findSemester(id) {
@@ -103,7 +147,8 @@ class GraduationPlan extends Component {
                   semester={semester.semester}
                   year={semester.year}
                   courses={semester.courses}
-                  remainingCourses={semester.remainingCourses} />
+                  remainingCourses={semester.remainingCourses}
+                  onDeleteCourse={this.deleteCourse} />
       );
     });
   }
@@ -135,6 +180,31 @@ class GraduationPlan extends Component {
               <label htmlFor="plan-name" className="active">Plan Name</label>
             </div>
           </div>
+
+          <form onSubmit={this.addNewCourse}>
+            <div className="row center">
+              <div className="col m5">
+                <div className="row">
+                  <div className="input-field col m6">
+                    <input id="new-course-name"
+                           type="text"
+                           value={this.state.newCourseName}
+                           onChange={this.updateNewCourseName}/>
+                    <label htmlFor="new-course-name" className="active">
+                      New Course Name
+                    </label>
+                  </div>
+                  <div className="col m6">
+                    <button type="submit"
+                            className="btn standard add-course-button">
+                      <i className="material-icons left">add</i>
+                      Add Course
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
 
           <div className="row">
             <div className="col m3">

@@ -37,7 +37,8 @@ class Semester extends Component {
         <Course key={course.id}
                 id={course.id}
                 name={course.name}
-                semesterId={id} />
+                semesterId={id}
+                onDelete={this.props.onDeleteCourse}/>
       );
     });
   }
