@@ -32,4 +32,12 @@
   .course {
     display: block;
   }
+
+  .semesters {
+    border-bottom: 1px solid $primary-color-dark;
+    border-top: 1px solid $primary-color-dark;
+    max-height: 90vh;
+    overflow-y: scroll;
+    padding-top: 10px;
+  }
 }

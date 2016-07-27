@@ -263,7 +263,7 @@ class GraduationPlan extends Component {
             </div>
 
             <div className="col m9">
-              <div className="row">
+              <div className="row semesters">
                 {this.renderSemesters()}
               </div>
             </div>
