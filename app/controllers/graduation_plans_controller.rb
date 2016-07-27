@@ -4,6 +4,10 @@ class GraduationPlansController < ApplicationController
     @graduation_plans = @advisee.graduation_plans
   end
 
+  def show
+    @graduation_plan = GraduationPlan.find(params[:id])
+  end
+
   def new
     @advisee = Advisee.find(params[:advisee_id])
     @graduation_plan = GraduationPlan.new
@@ -14,8 +18,10 @@ class GraduationPlansController < ApplicationController
     @graduation_plan = @advisee.graduation_plans.new(grad_plan_params)
 
     if @graduation_plan.save
+      @graduation_plan.create_default_semesters
+
       flash[:success] = 'Graduation plan created!'
-      redirect_to advisee_graduation_plans_path(@advisee)
+      redirect_to graduation_plan_path(@graduation_plan)
     else
       flash[:error] = 'There was a problem with that graduation plan'
       @errors = @graduation_plan.errors.full_messages

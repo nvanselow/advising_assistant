@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160726210551) do
+ActiveRecord::Schema.define(version: 20160727174339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20160726210551) do
     t.string   "last_name",           null: false
     t.string   "email",               null: false
     t.string   "graduation_semester", null: false
-    t.string   "graduation_year",     null: false
+    t.integer  "graduation_year",     null: false
     t.integer  "user_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
@@ -29,6 +29,14 @@ ActiveRecord::Schema.define(version: 20160726210551) do
   end
 
   add_index "advisees", ["user_id"], name: "index_advisees_on_user_id", using: :btree
+
+  create_table "courses", force: :cascade do |t|
+    t.string   "name",                     null: false
+    t.integer  "semester_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "credits",     default: 30, null: false
+  end
 
   create_table "graduation_plans", force: :cascade do |t|
     t.string   "name",       null: false
@@ -73,6 +81,15 @@ ActiveRecord::Schema.define(version: 20160726210551) do
   end
 
   add_index "notes", ["noteable_type", "noteable_id"], name: "index_notes_on_noteable_type_and_noteable_id", using: :btree
+
+  create_table "semesters", force: :cascade do |t|
+    t.string   "semester",                           null: false
+    t.integer  "year",                               null: false
+    t.boolean  "remaining_courses",  default: false, null: false
+    t.integer  "graduation_plan_id"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

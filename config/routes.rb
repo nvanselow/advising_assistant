@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     resources :graduation_plans, only: [:index, :new, :create]
   end
 
+  resources :graduation_plans, only: [:show]
+
   resources :meetings, only: [:show, :edit, :update, :destroy] do
     resources :meeting_summaries, only: [:create]
   end
@@ -25,6 +27,7 @@ Rails.application.routes.draw do
       resources :notes, only: [:update, :destroy]
       resources :search_advisees, only: [:index]
       resources :upcoming_meetings, only: [:index]
+      resources :courses, only: [:update, :destroy]
 
       resources :advisees, only: [] do
         resources :advisee_notes, only: [:index, :create]
@@ -35,6 +38,14 @@ Rails.application.routes.draw do
         resources :meeting_notes, only: [:index, :create]
         resources :google_calendars, only: [:create]
         resources :microsoft_calendars, only: [:create]
+      end
+
+      resources :graduation_plans, only: [:update] do
+        resources :semesters, only: [:index]
+      end
+
+      resources :semesters, only: [] do
+        resources :courses, only: [:create]
       end
     end
   end

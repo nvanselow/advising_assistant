@@ -6,8 +6,8 @@ feature 'Create a graduation plan', %{
   So that I have a place to organize courses for my advisee
 } do
   # ACCEPTANCE CRITERIA
-  # [ ] There is an option to create a graduation plan on the index page
-  # [ ] I must provide a name for the graduation plan
+  # [X] There is an option to create a graduation plan on the index page
+  # [X] I must provide a name for the graduation plan
 
   let(:user) { FactoryGirl.create(:user) }
   let(:advisee) { FactoryGirl.create(:advisee) }
@@ -26,7 +26,7 @@ feature 'Create a graduation plan', %{
     fill_in('Name', with: grad_plan[:name])
     click_button('Save Graduation Plan')
 
-    expect(page).to have_content(grad_plan[:name])
+    expect(page).to have_content('Graduation plan created')
   end
 
   scenario 'user tries to submit an invalid graduation plan' do

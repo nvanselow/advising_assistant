@@ -1,3 +1,52 @@
 .graduation-plans {
   margin-top: 25px;
 }
+
+.graduation-plan {
+  .card-title {
+    font-size: 1.2em;
+    margin: 0;
+  }
+
+  .card-content {
+    padding: 5px;
+  }
+
+  .credits {
+    display: block;
+    font-size: 1em;
+    margin-bottom: 20px;
+  }
+
+  .chip {
+    margin-top: 10px;
+  }
+
+  .graduation-plan-name {
+    margin-top: 20px;
+  }
+
+  .semester {
+    border: 1px solid $primary-color-dark;
+    min-height: 325px;
+    text-align: center;
+    width: 98%;
+    margin-bottom: 20px;
+  }
+
+  .hovering {
+    background-color: $primary-color-light;
+  }
+
+  .course {
+    display: block;
+  }
+
+  .semesters {
+    border-bottom: 1px solid $primary-color-dark;
+    border-top: 1px solid $primary-color-dark;
+    max-height: 90vh;
+    overflow-y: scroll;
+    padding-top: 10px;
+  }
+}

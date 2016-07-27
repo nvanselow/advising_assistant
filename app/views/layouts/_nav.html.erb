@@ -6,7 +6,7 @@
           class: 'nav-option' %>
     </li>
     <li>
-      <% if current_user.identities.where(provider: 'google_oauth2') %>
+      <% if !current_user.identities.where(provider: 'google_oauth2').empty? %>
         <a href="#" class="nav-option">
           Google Account linked!
         </a>
@@ -17,7 +17,7 @@
       <% end %>
     </li>
     <li>
-      <% if current_user.identities.where(provider: 'microsoft_office365') %>
+      <% if !current_user.identities.where(provider: 'microsoft_office365').empty? %>
         <a href="#" class="nav-option">
           Microsoft Account linked!
         </a>
