@@ -29,4 +29,17 @@ describe Api::V1::CoursesController, type: :controller do
       expect(json['errors']).to include("Name can't be blank")
     end
   end
+
+  describe 'DELETE /api/v1/courses/:course_id' do
+    it 'deletes a course' do
+      course = FactoryGirl.create(:course)
+
+      delete :destroy, id: course.id
+
+      json = parse_json(response)
+
+      expect(json['message']).to include('Course deleted')
+      expect(json['course_id'].to_i).to eq(course.id)
+    end
+  end
 end

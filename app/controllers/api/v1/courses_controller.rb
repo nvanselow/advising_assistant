@@ -14,6 +14,12 @@ class Api::V1::CoursesController < ApiController
     end
   end
 
+  def destroy
+    course_id = params[:id]
+    Course.destroy(course_id)
+    render json: { message: 'Course deleted!', course_id: course_id }
+  end
+
   private
 
   def course_params
