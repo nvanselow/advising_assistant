@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import Semester from './Semester';
 import Course from './Course';
 
 class GraduationPlan extends Component {
@@ -53,19 +54,7 @@ class GraduationPlan extends Component {
 
             <div className="col m9">
               <div className="row">
-                <div className="col s4 semester">
-                  <div className="row text-center">
-                    <div className="col">
-                      <h5 className="text-center">Fall 2016</h5>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col">
-                      <Course id={1} name="PSY 325" />
-                      <Course id={2} name="PSY 399" />
-                    </div>
-                  </div>
-                </div>
+                <Semester id={1} semester="Fall" year={2016} />
               </div>
             </div>
           </div>

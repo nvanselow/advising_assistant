@@ -23,5 +23,9 @@
   .semester {
     border: 1px solid $primary-color-dark;
     text-align: center;
+
+    .hovering {
+      background-color: green;
+    }
   }
 }
