@@ -75,13 +75,16 @@ class GraduationPlan extends Component {
       url: `/api/v1/semesters/${semester.id}/courses`,
       method: 'POST',
       data: {
-        course: { name: this.state.newCourseName }
+        course: this.state.newCourse
       }
     })
     .done((data) => {
       Flash.success(data.message);
       semester.courses.push(data.course);
-      this.setState({ semesters: semesters, newCourseName: '' });
+      this.setState({
+        semesters: semesters,
+        newCourse: { name: '', credits: 3 }
+      });
     })
     .fail((response) => {
       let data = response.responseJSON;
