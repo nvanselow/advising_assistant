@@ -61,7 +61,7 @@ class GraduationPlan extends Component {
 
     $.ajax({
       url: `/api/v1/semesters/${semester.id}/courses`,
-      method: 'post',
+      method: 'POST',
       data: {
         course: { name: this.state.newCourseName }
       }
@@ -88,6 +88,14 @@ class GraduationPlan extends Component {
     this.removeCourse(course, semester);
 
     this.setState({ semesters: semesters });
+
+    $.ajax({
+      url: `/api/v1/courses/${course.id}`,
+      method: 'DELETE'
+    })
+    .done((data) => {
+      Flash.success(data.message);
+    });
   }
 
   findRemainingCoursesSemester(semesters) {
