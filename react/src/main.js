@@ -7,6 +7,7 @@ import Notes from './components/Notes';
 import Meetings from './components/Meetings';
 import MeetingTime from './components/MeetingTime';
 import DateTimePicker from './components/DateTimePicker';
+import GraduationPlan from './components/GraduationPlan';
 
 $(function() {
   let adviseeSearch = document.getElementById('advisee-search');
@@ -86,6 +87,19 @@ $(function() {
                       initialValue={meetingStartTime}
                       id="meeting_start_time" />,
       editMeetingStartTime
+    );
+  }
+
+  let graduationPlan = document.getElementById('graduation-plan');
+
+  if(graduationPlan){
+    let gradPlanData = $('#graduation-plan-data');
+    let planId = gradPlanData.data('id');
+    let planName = gradPlanData.data('name');
+
+    ReactDOM.render(
+      <GraduationPlan planId={planId} planName={planName} />,
+      graduationPlan
     );
   }
 });

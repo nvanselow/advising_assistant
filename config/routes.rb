@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     resources :graduation_plans, only: [:index, :new, :create]
   end
 
+  resources :graduation_plans, only: [:show]
+
   resources :meetings, only: [:show, :edit, :update, :destroy] do
     resources :meeting_summaries, only: [:create]
   end
