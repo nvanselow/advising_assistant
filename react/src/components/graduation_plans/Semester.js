@@ -46,12 +46,14 @@ class Semester extends Component {
   render() {
     const { semester, year, remainingCourses, connectDropTarget, isOver } = this.props;
 
-    let classes = 'col s4 semester';
+    let classes = 'col s4';
     if(remainingCourses) {
-      classes = 'col s12 semester';
+      classes = 'col s12';
     }
+
+    let semesterClass = 'semester'
     if(isOver) {
-      classes = classes + ' hovering';
+      semesterClass = semesterClass + ' hovering';
     }
 
     let semesterHeader = `${semester} ${year}`;
@@ -61,16 +63,18 @@ class Semester extends Component {
 
     return connectDropTarget(
       <div className={classes}>
-        <div className="row text-center">
-          <div className="col s12">
-            <h5 className="text-center">
-              {semesterHeader}
-            </h5>
+        <div className={semesterClass}>
+          <div className="row text-center">
+            <div className="col s12">
+              <h5 className="text-center">
+                {semesterHeader}
+              </h5>
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col s12">
-            {this.renderCourses()}
+          <div className="row">
+            <div className="col s12">
+              {this.renderCourses()}
+            </div>
           </div>
         </div>
       </div>

@@ -11,29 +11,7 @@ class GraduationPlan extends Component {
     this.state = {
       planName: this.props.planName,
       newCourseName: '',
-      semesters: [
-        {
-          id: 1,
-          semester: 'Fall',
-          year: 2016,
-          courses: [
-            {id: 1, name: 'PSY 325'},
-            {id: 2, name: 'PSY 399'}
-          ],
-          remainingCourses: false
-        },
-        {
-          id: 0,
-          semester: 'Remaining Courses',
-          year: 0,
-          courses: [
-            {id: 3, name: 'PSY 100'},
-            {id: 4, name: 'PSY 220'},
-            {id: 5, name: 'PSY 400'}
-          ],
-          remainingCourses: true
-        }
-      ]
+      semesters: []
     }
 
     this.getSemesters = this.getSemesters.bind(this);
@@ -100,7 +78,7 @@ class GraduationPlan extends Component {
 
   findRemainingCoursesSemester(semesters) {
     let remaininCourseSemesters = this.state.semesters.filter((semester) => {
-      return semester.remainingCourses;
+      return semester.remaining_courses;
     });
 
     if(remaininCourseSemesters.length){
@@ -159,7 +137,7 @@ class GraduationPlan extends Component {
                   semester={semester.semester}
                   year={semester.year}
                   courses={semester.courses}
-                  remainingCourses={semester.remainingCourses}
+                  remainingCourses={semester.remaining_courses}
                   onDeleteCourse={this.deleteCourse} />
       );
     });
@@ -200,14 +178,14 @@ class GraduationPlan extends Component {
 
   renderRemainingCourseSemesters() {
     let semesters = this.state.semesters.filter((semester) => {
-      return semester.remainingCourses;
+      return semester.remaining_courses;
     });
     return this.mapSemesters(semesters);
   }
 
   renderSemesters() {
     let semesters = this.state.semesters.filter((semester) => {
-      return !semester.remainingCourses
+      return !semester.remaining_courses
     });
     return this.mapSemesters(semesters);
   }
