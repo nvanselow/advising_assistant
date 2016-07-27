@@ -1,3 +1,6 @@
+<%= render partial: 'graduation_plans/delete_modal',
+           locals: { graduation_plan: @graduation_plan} %>
+
 <div id="graduation-plan-data"
      data-id="<%= @graduation_plan.id %>"
      data-name="<%= @graduation_plan.name %>" />

@@ -1,0 +1,22 @@
+<div id="delete-plan-modal-<%= graduation_plan.id %>" class="modal">
+  <div class="modal-content">
+    <h4>Delete Advisee?</h4>
+    <p>
+      Are you sure you want to delete the graduation plan
+      named "<%= graduation_plan.name %>?
+    </p>
+    <p>
+      <b>Warning:</b> This cannot be undone.
+    </p>
+  </div>
+  <div class="modal-footer">
+    <%= button_to 'Yes, Delete Plan',
+                  graduation_plan_path(graduation_plan),
+                  id: "delete-plan-#{graduation_plan.id}",
+                  method: 'delete',
+                  class: 'btn danger modal-action modal-close' %>
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">
+      Cancel
+    </a>
+  </div>
+</div>

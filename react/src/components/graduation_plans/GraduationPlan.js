@@ -280,16 +280,25 @@ class GraduationPlan extends Component {
       noSemestersMessage = null;
     }
 
+    let deletePlanModalId = `delete-plan-modal-${this.props.planId}`;
+
     return (
       <div className="graduation-plan">
         <div className="hide-on-small-only">
           <div className="row graduation-plan-name">
-            <div className="col s12 m6 offset-m1 input-field">
+            <div className="col s12 m6 input-field">
               <input id="plan-name"
                      type="text"
                      value={this.state.planName}
                      onChange={this.updatePlanName} />
               <label htmlFor="plan-name" className="active">Plan Name</label>
+            </div>
+            <div className="col s12 offset-m3 m3">
+              <button data-target={deletePlanModalId}
+                      className="delete-plan btn danger modal-trigger">
+                <i className="material-icons left">delete</i>
+                Delete Plan
+              </button>
             </div>
           </div>
 
