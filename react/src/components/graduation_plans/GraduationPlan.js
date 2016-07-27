@@ -36,6 +36,7 @@ class GraduationPlan extends Component {
       ]
     }
 
+    this.getSemesters = this.getSemesters.bind(this);
     this.updatePlanName = this.updatePlanName.bind(this);
     this.updateNewCourseName = this.updateNewCourseName.bind(this);
     this.addNewCourse = this.addNewCourse.bind(this);
@@ -48,11 +49,22 @@ class GraduationPlan extends Component {
   }
 
   componentDidMount() {
-    $('.graduation-plan').on('courseDropped', this.courseDropped)
+    $('.graduation-plan').on('courseDropped', this.courseDropped);
+    this.getSemesters();
   }
 
   componentWillUnmount() {
     $('.graduationPlan').unbind();
+  }
+
+  getSemesters() {
+    $.ajax({
+      url: `/api/v1/graduation_plans/${this.props.planId}/semesters`,
+      method: 'get'
+    })
+    .done((data) => {
+      this.setState({ semesters: data.semesters });
+    });
   }
 
   updatePlanName(event) {
@@ -153,6 +165,39 @@ class GraduationPlan extends Component {
     });
   }
 
+  renderAddCourseForm() {
+    if(this.state.semesters.length == 0){
+      return null;
+    }
+
+    return (
+      <form onSubmit={this.addNewCourse}>
+        <div className="row center">
+          <div className="col m5">
+            <div className="row">
+              <div className="input-field col m6">
+                <input id="new-course-name"
+                       type="text"
+                       value={this.state.newCourseName}
+                       onChange={this.updateNewCourseName}/>
+                <label htmlFor="new-course-name" className="active">
+                  New Course Name
+                </label>
+              </div>
+              <div className="col m6">
+                <button type="submit"
+                        className="btn standard add-course-button">
+                  <i className="material-icons left">add</i>
+                  Add Course
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    );
+  }
+
   renderRemainingCourseSemesters() {
     let semesters = this.state.semesters.filter((semester) => {
       return semester.remainingCourses;
@@ -168,6 +213,17 @@ class GraduationPlan extends Component {
   }
 
   render() {
+    let noSemestersMessage = (
+      <h5>
+        There are no semesters for this graduation plan!!
+      </h5>
+    );
+
+
+    if(this.state.semesters.length){
+      noSemestersMessage = null;
+    }
+
     return (
       <div className="graduation-plan">
         <div className="hide-on-small-only">
@@ -181,30 +237,9 @@ class GraduationPlan extends Component {
             </div>
           </div>
 
-          <form onSubmit={this.addNewCourse}>
-            <div className="row center">
-              <div className="col m5">
-                <div className="row">
-                  <div className="input-field col m6">
-                    <input id="new-course-name"
-                           type="text"
-                           value={this.state.newCourseName}
-                           onChange={this.updateNewCourseName}/>
-                    <label htmlFor="new-course-name" className="active">
-                      New Course Name
-                    </label>
-                  </div>
-                  <div className="col m6">
-                    <button type="submit"
-                            className="btn standard add-course-button">
-                      <i className="material-icons left">add</i>
-                      Add Course
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
+          {noSemestersMessage}
+
+          {this.renderAddCourseForm()}
 
           <div className="row">
             <div className="col m3">
