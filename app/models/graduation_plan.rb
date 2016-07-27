@@ -21,7 +21,7 @@ class GraduationPlan < ActiveRecord::Base
       semesters.create!(semester: 'Spring', year: beginning_year + num + 1)
       semesters.create!(semester: 'Summer', year: beginning_year + num + 1)
 
-      if(num == 3 && final_semester == 'Fall')
+      if num == 3 && final_semester == 'Fall'
         semesters.create!(semester: 'Fall', year: beginning_year + num + 1)
       end
     end
