@@ -132,12 +132,12 @@ class GraduationPlan extends Component {
   }
 
   findRemainingCoursesSemester(semesters) {
-    let remaininCourseSemesters = this.state.semesters.filter((semester) => {
+    let remainingCourseSemesters = this.state.semesters.filter((semester) => {
       return semester.remaining_courses;
     });
 
-    if(remaininCourseSemesters.length){
-      return remaininCourseSemesters[0];
+    if(remainingCourseSemesters.length){
+      return remainingCourseSemesters[0];
     } else {
       return null;
     }
@@ -186,9 +186,10 @@ class GraduationPlan extends Component {
   }
 
   removeCourse(course, semester) {
-    return semester.courses.filter((currentCourse) => {
+    semester.courses = semester.courses.filter((currentCourse) => {
       return course.id != currentCourse.id;
     });
+    semester.courses;
   }
 
   addCourse(course, semester) {
