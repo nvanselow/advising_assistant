@@ -32,3 +32,13 @@
     padding: 15px;
   }
 }
+
+.advisee-name {
+  a {
+    color: $primary-text-color;
+  }
+
+  a:hover {
+    border-bottom: 1px solid $primary-text-color;
+  }
+}

@@ -5,7 +5,10 @@
          class="responsive-img circle" />
   </div>
   <div class="col s12 m9">
-    <h2><%= @advisee.full_name %> <small>(<%= @advisee.email %>)</small></h2>
+    <h2 class="advisee-name">
+      <%= link_to @advisee.full_name, advisee_path(@advisee) %>
+      <small>(<%= mail_to @advisee.email %>)</small>
+    </h2>
     <h3><%= @advisee.graduation_semester %> <%= @advisee.graduation_year %></h3>
   </div>
 </div>
