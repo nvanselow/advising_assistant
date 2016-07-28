@@ -35,3 +35,8 @@ end
 def get_semester_ids(json)
   json['semesters'].map { |c| c['id'] }
 end
+
+def expect_controller_permission_error(response, flash)
+  expect(flash[:error]).to include('You do not have permission')
+  expect(response).to redirect_to(root_path)
+end

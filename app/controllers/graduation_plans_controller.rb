@@ -1,4 +1,12 @@
 class GraduationPlansController < ApplicationController
+  before_filter :authenticate_user!
+  before_filter only: [:index] do
+    check_permissions(Advisee.find(params[:advisee_id]))
+  end
+  before_filter only: [:show, :destroy] do
+    check_permissions(GraduationPlan.find(params[:id]).advisee)
+  end
+
   def index
     @advisee = Advisee.find(params[:advisee_id])
     @graduation_plans = @advisee.graduation_plans
