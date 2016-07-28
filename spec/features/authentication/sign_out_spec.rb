@@ -29,7 +29,9 @@ feature 'User can sign out', %{
     end
 
     scenario 'Sign out of app' do
-      click_link('Sign Out')
+      within('#nav-links') do
+        click_link('Sign Out')
+      end
 
       expect(page).to have_content('Signed out successfully')
       within('nav') do

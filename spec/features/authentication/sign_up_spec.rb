@@ -37,7 +37,7 @@ feature 'Sign up for an account', %{
     scenario 'unauthenticated user can see the sign up link' do
       visit root_path
 
-      within('nav') do
+      within('#nav-links') do
         expect(page).to have_link('Sign Up')
       end
     end
@@ -45,13 +45,17 @@ feature 'Sign up for an account', %{
     scenario 'user signs up for an account correctly' do
       visit root_path
 
-      within('nav') { click_link('Sign Up') }
+      within('#nav-links') do
+        click_link('Sign Up')
+      end
       fill_in('Email', with: user[:email])
       fill_in('First Name', with: user[:first_name])
       fill_in('Last Name', with: user[:last_name])
       fill_in('Password', with: user[:password])
       fill_in('Password Confirmation', with: user[:password])
-      click_button('Sign Up')
+      within('.actions') do
+        click_button('Sign Up')
+      end
 
       within('nav') do
         expect(page).to have_content(user[:email])

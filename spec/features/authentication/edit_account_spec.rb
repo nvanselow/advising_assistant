@@ -21,8 +21,12 @@ feature 'user can edit their account information', %{
   scenario 'user navigates to account edit form from navbar' do
     visit root_path
 
-    click_link user.email
-    click_link 'Edit Account Info'
+    within('#nav-links') do
+      click_link user.email
+    end
+    within('#user_dropdown') do
+      click_link 'Edit Account Info'      
+    end
 
     expect(page).to have_content('Edit Account Information')
     expect(page).to have_css('form')

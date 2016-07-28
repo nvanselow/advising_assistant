@@ -33,8 +33,9 @@ feature 'Advisor can view all of their advisees', %{
 
     scenario 'Advisor navigates to their advisee list' do
       visit root_path
-
-      click_link('Advisees')
+      within('#nav-links') do
+        click_link('Advisees')
+      end
 
       advisees.each do |advisee|
         expect(page).to have_content(advisee.first_name)
