@@ -9,9 +9,13 @@ describe Api::V1::MicrosoftCalendarsController, type: :controller do
 
   describe 'GET /api/v1/microsoft_calendars' do
     it 'raises an error if there is no token' do
-      expect do
-        get :index
-      end.to raise_error(Errors::MissingToken)
+      get :index
+
+      json = parse_json(response, :unauthorized)
+
+      expect(json['message']).to include('You have not linked your account to '\
+                                         'Microsoft. Redirecting you')
+      expect(json['provider']).to eq('microsoft_office365')
     end
 
     it 'raises an error if the token is expired' do

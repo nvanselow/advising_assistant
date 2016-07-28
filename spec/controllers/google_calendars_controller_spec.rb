@@ -9,9 +9,13 @@ describe Api::V1::GoogleCalendarsController, type: :controller do
 
   describe 'GET /api/v1/google_calendars' do
     it 'raises an error if there is no token' do
-      expect do
-        get :index
-      end.to raise_error(Errors::MissingToken)
+      get :index
+
+      json = parse_json(response, :unauthorized)
+
+      expect(json['message']).to include('You have not linked your account to '\
+                                         'Google. Redirecting you')
+      expect(json['provider']).to eq('google_oauth2')
     end
 
     it 'raises an error if the token is expired' do

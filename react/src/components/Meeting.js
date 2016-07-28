@@ -55,6 +55,11 @@ class Meeting extends Component {
     let meetingDescription = 'Meeting';
     let meetingUrl = `/meetings/${meeting.id}`;
 
+    let currentUrl = this.props.currentUrl;
+    if(!currentUrl){
+      currentUrl = `/advisees/${meeting.advisee_id}`;
+    }
+
     if(meeting.description && meeting.description.length){
       meetingDescription = meeting.description;
     }
@@ -81,7 +86,8 @@ class Meeting extends Component {
                   onClick={this.handleDelete}>
             <i className="material-icons">delete</i>
           </button>
-          <ExportOptions meeting={this.props.meeting} />
+          <ExportOptions meeting={this.props.meeting}
+                         currentUrl={currentUrl} />
         </div>
       </div>
     );
