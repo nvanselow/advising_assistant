@@ -1,5 +1,8 @@
 class AdviseesController < ApplicationController
   before_filter :authenticate_user!
+  before_filter except: [:index, :new] do
+    check_permissions(Advisee.find(params[:id]))
+  end
 
   def index
     @advisees = Advisee.all_for(current_user)

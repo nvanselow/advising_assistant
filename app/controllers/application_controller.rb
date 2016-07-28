@@ -23,4 +23,12 @@ class ApplicationController < ActionController::Base
       user_params.permit(keys)
     end
   end
+
+  def check_permissions(resource)
+    unless current_user.can_modify?(resource)
+      flash[:error] = 'You do not have permission to do that. Please login '\
+                      'with an account that has that permission.'
+      redirect_to root_path
+    end
+  end
 end
