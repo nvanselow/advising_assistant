@@ -33,7 +33,7 @@
   .semester {
     border: 1px solid $primary-color-dark;
     margin-bottom: 20px;
-    min-height: 325px;
+    min-height: 350px;
     text-align: center;
     width: 98%;
   }
@@ -52,5 +52,21 @@
     max-height: 90vh;
     overflow-y: scroll;
     padding-top: 10px;
+  }
+
+  .chip {
+    .close-btn {
+      cursor: pointer;
+      float: right;
+      font-size: 16px;
+      line-height: 32px;
+      padding-left: 0px;
+      text-rendering: optimizeLegibility;
+      font-feature-settings: 'liga';
+      font-family: 'Material Icons';
+      font-weight: normal;
+      font-style: normal;
+      display: inline-block;
+    }
   }
 }

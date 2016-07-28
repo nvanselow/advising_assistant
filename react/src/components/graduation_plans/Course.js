@@ -42,7 +42,7 @@ class Course extends Component {
       }}>
         {this.props.name}
         <small> ({formatted_credits} credits)</small>
-        <i className="close material-icons" onClick={this.onDelete}>
+        <i className="close-btn" onClick={this.onDelete}>
           close
         </i>
       </span>

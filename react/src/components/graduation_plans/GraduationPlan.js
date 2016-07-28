@@ -115,6 +115,10 @@ class GraduationPlan extends Component {
   }
 
   deleteCourse(course) {
+    let semesters = this.state.semesters;
+    let semester = this.findSemester(course.semesterId);
+    this.removeCourse(course, semester);
+    this.setState({ semesters: semesters });
     $.ajax({
       url: `/api/v1/courses/${course.id}`,
       method: 'DELETE'
