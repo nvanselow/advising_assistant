@@ -30,7 +30,8 @@ class ExportMeeting extends Component {
       method: 'POST',
       data: {
         calendar: calendar,
-        notify: notify
+        notify: notify,
+        current_url: this.props.currentUrl
       }
     })
     .done((data) => {
@@ -57,7 +58,10 @@ class ExportMeeting extends Component {
   getCalendars() {
     $.ajax({
       url: this.baseUrl,
-      method: 'GET'
+      method: 'GET',
+      data: {
+        current_url: this.props.currentUrl
+      }
     })
     .done((data) => {
       ReactDOM.render(

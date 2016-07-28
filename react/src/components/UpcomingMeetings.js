@@ -52,7 +52,8 @@ class UpcomingMeetings extends Component {
       return meetings.map((meeting) => {
         return <Meeting key={meeting.id}
                         meeting={meeting}
-                        advisee={meeting.advisee} />
+                        advisee={meeting.advisee}
+                        currentUrl="/advisees" />
       });
     }
   }

@@ -25,8 +25,14 @@ class ExportOptions extends Component {
 
         <ul id={id} className='dropdown-content'>
           <li>
-            <ExportMeeting meeting={this.props.meeting} accountType="Google" />
-            <ExportMeeting meeting={this.props.meeting} accountType="Microsoft" />
+            <ExportMeeting meeting={this.props.meeting}
+                           currentUrl={this.props.currentUrl}
+                           accountType="Google" />
+          </li>
+          <li>
+            <ExportMeeting meeting={this.props.meeting}
+                           currentUrl={this.props.currentUrl}
+                           accountType="Microsoft" />
           </li>
         </ul>
       </div>
