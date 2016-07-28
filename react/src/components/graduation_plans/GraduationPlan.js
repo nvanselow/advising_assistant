@@ -156,6 +156,7 @@ class GraduationPlan extends Component {
   }
 
   courseDropped(event, data) {
+    debugger;
     let course = data.item;
     let previousSemesterId = course.semesterId;
     let newSemesterId = data.props.id;
@@ -172,8 +173,8 @@ class GraduationPlan extends Component {
       }
     })
     .done((data) => {
-      previousSemester.courses = this.removeCourse(course, previousSemester);
-      newSemester.courses = this.addCourse(course, newSemester);
+      this.removeCourse(course, previousSemester);
+      this.addCourse(course, newSemester);
       this.setState({ semesters: semesters });
     })
     .fail((response) => {
@@ -189,7 +190,7 @@ class GraduationPlan extends Component {
     semester.courses = semester.courses.filter((currentCourse) => {
       return course.id != currentCourse.id;
     });
-    semester.courses;
+    return semester.courses;
   }
 
   addCourse(course, semester) {
