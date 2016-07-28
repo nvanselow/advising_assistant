@@ -1,0 +1,22 @@
+<% if current_user %>
+  <li><%= link_to 'Advisees', advisees_path %></li>
+  <li>
+     <%= link_to current_user.email,
+                 edit_user_registration_path,
+                 class: 'nav-option' %>
+  </li>
+  <li>
+    <%= link_to "Sign Out",
+                destroy_user_session_path,
+                method: :delete,
+                class: 'waves-effect waves-light btn danger' %>
+  </li>
+  <%= render partial: 'layouts/identities_links' %>
+<% else %>
+  <li>
+    <%= link_to "Sign Up", new_user_registration_path, class: 'btn primary' %>
+  </li>
+  <li>
+    <%= link_to "Sign In", new_user_session_path, class: 'btn primary' %>
+  </li>
+<% end %>

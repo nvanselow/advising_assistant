@@ -1,66 +1,20 @@
-<% if current_user %>
-  <ul id="user_dropdown" class="dropdown-content">
-    <li>
-      <%= link_to 'Edit Account Info',
-          edit_user_registration_path,
-          class: 'nav-option' %>
-    </li>
-    <li>
-      <% if !current_user.identities.where(provider: 'google_oauth2').empty? %>
-        <a href="#" class="nav-option">
-          Google Account linked!
-        </a>
-      <% else %>
-        <%= link_to 'Link Google Account',
-                    '/auth/google_oauth2',
-                    class: 'nav-option' %>
-      <% end %>
-    </li>
-    <li>
-      <% if !current_user.identities.where(provider: 'microsoft_office365').empty? %>
-        <a href="#" class="nav-option">
-          Microsoft Account linked!
-        </a>
-      <% else %>
-        <%= link_to 'Link Microsoft Account',
-                    '/auth/microsoft_office365',
-                    class: 'nav-option' %>
-      <% end %>
-    </li>
-  </ul>
-<% end %>
+<%= render partial: 'layouts/identities_links_dropdown' %>
 
 <nav>
-   <div class="nav-wrapper">
-     <ul>
-       <li><a href="/" class="brand-logo">Advising Assistant</a></li>
-     </ul>
+  <div class="nav-wrapper">
+    <ul>
+      <li><a href="/" class="brand-logo">Advising Assistant</a></li>
+    </ul>
+    
+    <a href="#" data-activates="mobile-nav" class="button-collapse">
+      <i class="material-icons">menu</i>
+    </a>
 
-     <ul id="nav-mobile" class="right hide-on-med-and-down">
-       <% if current_user %>
-         <li><%= link_to 'Advisees', advisees_path %></li>
-         <li>
-           <a class="dropdown-button"
-              href="#!"
-              data-activates="user_dropdown">
-              <%= current_user.email %>
-              <i class="material-icons right">arrow_drop_down</i>
-            </a>
-         </li>
-         <li>
-           <%= link_to "Sign Out",
-                       destroy_user_session_path,
-                       method: :delete,
-                       class: 'waves-effect waves-light btn danger' %>
-         </li>
-       <% else %>
-         <li>
-           <%= link_to "Sign Up", new_user_registration_path, class: 'btn primary' %>
-         </li>
-         <li>
-           <%= link_to "Sign In", new_user_session_path, class: 'btn primary' %>
-         </li>
-       <% end %>
-     </ul>
-   </div>
+    <ul class="right hide-on-med-and-down">
+      <%= render partial: 'layouts/nav_links' %>
+    </ul>
+    <ul class="side-nav" id="mobile-nav">
+      <%= render partial: 'layouts/mobile_nav_links' %>
+    </ul>
+  </div>
  </nav>

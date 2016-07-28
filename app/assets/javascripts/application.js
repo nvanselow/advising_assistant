@@ -16,17 +16,10 @@
 //= require_tree .
 
 $(document).ready(function() {
+  // Initialize materialize components
   Materialize.updateTextFields();
-});
-
-$(document).ready(function() {
-    $('select').material_select();
-});
-
-$(document).ready(function(){
+  $('select').material_select();
   $('.modal-trigger').leanModal();
-});
-
-$(document).ready(function(){
-  $(".dropdown-button").dropdown();
+  $('.dropdown-button').dropdown();
+  $('.button-collapse').sideNav();
 });

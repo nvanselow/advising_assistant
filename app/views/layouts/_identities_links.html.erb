@@ -1,0 +1,27 @@
+<li>
+  <%= link_to 'Edit Account Info',
+      edit_user_registration_path,
+      class: 'nav-option' %>
+</li>
+<li>
+  <% if !current_user.identities.where(provider: 'google_oauth2').empty? %>
+    <a href="#" class="nav-option">
+      Google Account linked!
+    </a>
+  <% else %>
+    <%= link_to 'Link Google Account',
+                '/auth/google_oauth2',
+                class: 'nav-option' %>
+  <% end %>
+</li>
+<li>
+  <% if !current_user.identities.where(provider: 'microsoft_office365').empty? %>
+    <a href="#" class="nav-option">
+      Microsoft Account linked!
+    </a>
+  <% else %>
+    <%= link_to 'Link Microsoft Account',
+                '/auth/microsoft_office365',
+                class: 'nav-option' %>
+  <% end %>
+</li>
