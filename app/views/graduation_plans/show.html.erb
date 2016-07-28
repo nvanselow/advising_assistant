@@ -5,5 +5,14 @@
      data-id="<%= @graduation_plan.id %>"
      data-name="<%= @graduation_plan.name %>" />
 
+<div class="row advisee-info">
+  <div class="col s12">
+    <h5 class="advisee-name">
+      Graduation Plan for:
+      <%= link_to @advisee.full_name, advisee_path(@advisee) %>
+    </h5>
+  </div>
+</div>
+
 <div id="graduation-plan">
 </div>

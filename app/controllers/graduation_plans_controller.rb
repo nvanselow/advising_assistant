@@ -6,6 +6,7 @@ class GraduationPlansController < ApplicationController
 
   def show
     @graduation_plan = GraduationPlan.find(params[:id])
+    @advisee = @graduation_plan.advisee
   end
 
   def new
