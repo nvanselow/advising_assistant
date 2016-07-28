@@ -41,10 +41,16 @@ don't have a photo, the app will attempt to find one using the Gravatar API.
 
 Quickly search for advisees. Advisees are filtered as you type.
 
-### Add Notes and Meetings
+![Search for Advisees](/readme_gifs/search.gif)
+
+### Add and Edit Notes and Meetings
 
 Quickly add notes about an advisee's progress or schedule a meeting with
 an advisee.
+
+Quickly edit notes by editing inline without a page refresh.
+
+![Add Notes](/readme_gifs/add_edit_notes.gif)
 
 
 ### Add Meetings to Google Calendar or Microsoft Outlook (Office 365)
@@ -53,14 +59,21 @@ You can link your account to a Google or Microsoft Office 365 account (or both!)
 so that you can quickly export meetings you schedule in the app to your calendar
 and send invites to your advisee about the meeting.
 
-### Edit Notes Inline
-
-Quickly edit notes by editing inline without a page refresh.
+![Export Meeting to Calendar](/readme_gifs/export_meeting.gif)
 
 ### Send Summary Emails
 
 After taking notes during a meeting, send a summary email to your advisee
 that reviews what was discussed.
+
+![Summary Email](/readme_gifs/email_summary.gif)
+
+### Create Graduation Plans
+
+Drag and drop courses on to a semester schedule to quickly plan out how
+your advisee can graduate.
+
+![Graduation Plan](/readme_gifs/graduation_plans.gif)
 
 ### Download
 ```
