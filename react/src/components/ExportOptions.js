@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ExportMeeting from './ExportMeeting';
 
 class ExportOptions extends Component {
@@ -38,6 +38,11 @@ class ExportOptions extends Component {
       </div>
     );
   }
+}
+
+ExportOptions.propTypes = {
+  meeting: PropTypes.object.isRequired,
+  currentUrl: PropTypes.string
 }
 
 export default ExportOptions;

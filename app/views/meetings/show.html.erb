@@ -1,33 +1,48 @@
 <div class="container meeting-details">
   <div id="meeting-data"
        data-id="<%= @meeting.id  %>"
+       data-description="<%= @meeting.description %>"
+       data-advisee-id="<%= @meeting.advisee_id %>"
        data-start="<%= @meeting.start_time.to_datetime.to_s %>"
        data-end="<%= @meeting.end_time.to_datetime.to_s %>" />
 
+  <div id="export-meeting-options">
+  </div>
+  
   <h1>Meeting</h1>
-  <h4>
-    <div id="meeting-time">
-      <%= @meeting.formatted_time %>
+  <div class="row">
+    <div class="col s12">
+      <h4>
+        <div id="meeting-time">
+          <%= @meeting.formatted_time %>
+        </div>
+      </h4>
+
+
     </div>
-  </h4>
+  </div>
 
-  <%= link_to meeting_meeting_summaries_path(@meeting),
-              method: 'post',
-              class: 'btn primary' do %>
-    <i class="material-icons left">email</i>
-    Email Summary
-  <% end %>
+  <div class="row">
+    <div class="col s12">
+      <%= link_to meeting_meeting_summaries_path(@meeting),
+                  method: 'post',
+                  class: 'btn primary' do %>
+        <i class="material-icons left">email</i>
+        Email Summary
+      <% end %>
 
-  <%= link_to edit_meeting_path(@meeting), class: 'btn primary' do %>
-    <i class="material-icons left">mode_edit</i>
-    Edit Meeting
-  <% end %>
+      <%= link_to edit_meeting_path(@meeting), class: 'btn primary' do %>
+        <i class="material-icons left">mode_edit</i>
+        Edit Meeting
+      <% end %>
 
-  <button data-target="delete-meeting-modal" class="btn danger modal-trigger">
-    <i class="material-icons left">delete</i>
-    Delete Meeting
-  </button>
-  <%= render partial: 'meetings/delete_modal', locals: { meeting: @meeting } %>
+      <button data-target="delete-meeting-modal" class="btn danger modal-trigger">
+        <i class="material-icons left">delete</i>
+        Delete Meeting
+      </button>
+      <%= render partial: 'meetings/delete_modal', locals: { meeting: @meeting } %>
+    </div>
+  </div>
 
   <h3>Meeting with:</h3>
   <%= render partial: 'advisees/details' %>
