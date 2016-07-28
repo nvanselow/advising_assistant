@@ -115,13 +115,6 @@ class GraduationPlan extends Component {
   }
 
   deleteCourse(course) {
-    let semesters = this.state.semesters;
-    let semester = this.findSemester(course.semesterId);
-
-    this.removeCourse(course, semester);
-
-    this.setState({ semesters: semesters });
-
     $.ajax({
       url: `/api/v1/courses/${course.id}`,
       method: 'DELETE'
@@ -172,8 +165,8 @@ class GraduationPlan extends Component {
       }
     })
     .done((data) => {
-      previousSemester.courses = this.removeCourse(course, previousSemester);
-      newSemester.courses = this.addCourse(course, newSemester);
+      this.removeCourse(course, previousSemester);
+      this.addCourse(course, newSemester);
       this.setState({ semesters: semesters });
     })
     .fail((response) => {
@@ -189,7 +182,7 @@ class GraduationPlan extends Component {
     semester.courses = semester.courses.filter((currentCourse) => {
       return course.id != currentCourse.id;
     });
-    semester.courses;
+    return semester.courses;
   }
 
   addCourse(course, semester) {
