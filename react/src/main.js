@@ -8,10 +8,10 @@ import Meetings from './components/Meetings';
 import MeetingTime from './components/MeetingTime';
 import DateTimePicker from './components/DateTimePicker';
 import GraduationPlan from './components/graduation_plans/GraduationPlan';
+import ExportOptions from './components/ExportOptions';
 
 $(function() {
   let adviseeSearch = document.getElementById('advisee-search');
-
   if(adviseeSearch){
     ReactDOM.render(
       <AdviseeSearch />,
@@ -20,7 +20,6 @@ $(function() {
   }
 
   let upcomingMeetings = document.getElementById('upcoming-meetings');
-
   if(upcomingMeetings){
     ReactDOM.render(
       <UpcomingMeetings />,
@@ -29,7 +28,6 @@ $(function() {
   }
 
   let adviseeNotes = document.getElementById('advisee-notes');
-
   if(adviseeNotes){
     let adviseeId = $('#advisee-data').data('id');
 
@@ -42,7 +40,6 @@ $(function() {
   }
 
   let adviseeMeetings = document.getElementById('advisee-meetings');
-
   if(adviseeMeetings){
     let adviseeId = $('#advisee-data').data('id');
 
@@ -53,7 +50,6 @@ $(function() {
   }
 
   let meetingNotes = document.getElementById('meeting-notes');
-
   if(meetingNotes){
     let meetingId = $('#meeting-data').data('id');
 
@@ -66,7 +62,6 @@ $(function() {
   }
 
   let meetingTime = document.getElementById('meeting-time');
-
   if(meetingTime){
     let meetingStart = $('#meeting-data').data('start');
     let meetingEnd = $('#meeting-data').data('end');
@@ -78,7 +73,6 @@ $(function() {
   }
 
   let editMeetingStartTime = document.getElementById('edit-meeting-start-time');
-
   if(editMeetingStartTime){
     let meetingStartTime = $('#edit-meeting-start-time-data').data('start');
 
@@ -91,7 +85,6 @@ $(function() {
   }
 
   let graduationPlan = document.getElementById('graduation-plan');
-
   if(graduationPlan){
     let gradPlanData = $('#graduation-plan-data');
     let planId = gradPlanData.data('id');
@@ -102,4 +95,23 @@ $(function() {
       graduationPlan
     );
   }
+
+  let exportMeetingOptions = document.getElementById('export-meeting-options');
+  if(exportMeetingOptions){
+    let meetingData = $('#meeting-data');
+    let meeting = {
+      id: meetingData.data('id'),
+      description: meetingData.data('description'),
+      advisee_id: meetingData.data('advisee-id'),
+      start_time: meetingData.data('start'),
+      end_time: meetingData.data('end')
+    }
+    let currentUrl = `/meetings/${meeting.id}`;
+
+    ReactDOM.render(
+      <ExportOptions meeting={meeting} currentUrl={currentUrl} />,
+      exportMeetingOptions
+    );
+  }
+
 });
