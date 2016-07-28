@@ -155,7 +155,7 @@ describe Meeting, type: :model do
     it 'ouputs only the date as a formatted string' do
       meeting = FactoryGirl.create(:meeting)
 
-      expect(meeting.formatted_date_only).to eq('Jan 31, 2016')
+      expect(meeting.formatted_date_only).to eq('January 31, 2016')
     end
   end
 

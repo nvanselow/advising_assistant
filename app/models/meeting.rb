@@ -64,7 +64,7 @@ class Meeting < ActiveRecord::Base
   end
 
   def formatted_date_only
-    start_time.strftime('%b %d, %Y')
+    start_time.strftime('%B %d, %Y')
   end
 
   def formatted_time
