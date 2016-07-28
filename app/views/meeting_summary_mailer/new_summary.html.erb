@@ -1448,7 +1448,7 @@ body.outlook p {
                               <tr>
                                 <th>
                                   <h1>Hi, <%= @advisee.full_name %></h1>
-                                  <p class="lead">You met with your advisor on <%= @meeting.formatted_time %></p>
+                                  <p class="lead">You met with your advisor on <%= @meeting.formatted_date_only %></p>
                                   <p>Your advisor, <%= @user.first_name %> <%= @user.last_name %>, wanted to send you a summary of your meeting.</p>
                                   <table class="callout">
                                     <tr>

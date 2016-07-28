@@ -151,6 +151,14 @@ describe Meeting, type: :model do
     end
   end
 
+  describe '#formatted_date_only' do
+    it 'ouputs only the date as a formatted string' do
+      meeting = FactoryGirl.create(:meeting)
+
+      expect(meeting.formatted_date_only).to eq('Jan 31, 2016')
+    end
+  end
+
   describe '#formatted_start_time' do
     it 'outputs the start time as a formatted string' do
       meeting = FactoryGirl.create(:meeting)
