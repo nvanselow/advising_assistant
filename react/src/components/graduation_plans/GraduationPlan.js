@@ -217,9 +217,9 @@ class GraduationPlan extends Component {
     return (
       <form onSubmit={this.addNewCourse}>
         <div className="row center">
-          <div className="col m5">
+          <div className="col m8">
             <div className="row">
-              <div className="input-field col m6">
+              <div className="input-field col m5 l4">
                 <input id="new-course-name"
                        type="text"
                        value={this.state.newCourse.name}
@@ -228,7 +228,7 @@ class GraduationPlan extends Component {
                   New Course Name
                 </label>
               </div>
-              <div className="input-field col m6">
+              <div className="input-field col m2 l2">
                 <input id="new-course-credits"
                        type="number"
                        value={this.state.newCourse.credits}
@@ -237,7 +237,7 @@ class GraduationPlan extends Component {
                   Credits
                 </label>
               </div>
-              <div className="col m6">
+              <div className="col m5 l5 left-align">
                 <button type="submit"
                         className="btn standard add-course-button">
                   <i className="material-icons left">add</i>
