@@ -21,6 +21,10 @@ describe User, type: :model do
       expect(user.can_modify?(advisee)).to be(true)
     end
 
+    it 'returns true if the resource does not exist' do
+      expect(user.can_modify?(nil)).to be(true)
+    end
+
     it 'returns false if the user is not allowed to modify the resource' do
       advisee = FactoryGirl.create(:advisee, user: another_user)
 

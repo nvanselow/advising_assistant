@@ -12,6 +12,6 @@ class User < ActiveRecord::Base
   validates :last_name, presence: true
 
   def can_modify?(resource)
-    id == resource.user_id
+    resource == nil || id == resource.user_id
   end
 end
