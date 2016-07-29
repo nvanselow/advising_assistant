@@ -10,6 +10,7 @@ class AdviseePhotoUploader < CarrierWave::Uploader::Base
     storage :file
   else
     storage :fog
+
   end
 
   # Override the directory where uploaded files will be stored.

@@ -9,8 +9,8 @@ describe AdviseesController, type: :controller do
 
   Fog.mock!
   Fog.credentials_path = Rails.root.join('fog_test_credentials.yml')
-  connection = Fog::Storage.new(:provider => 'AWS')
-  connection.directories.create(:key => 'my_bucket')
+  connection = Fog::Storage.new(provider: 'AWS')
+  connection.directories.create(key: 'my_bucket')
 
   describe 'POST /advisees' do
     it 'calls :fog in production for photo upload' do
