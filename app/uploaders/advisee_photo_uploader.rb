@@ -7,8 +7,10 @@ class AdviseePhotoUploader < CarrierWave::Uploader::Base
 
   # Choose what kind of storage to use for this uploader:
   if Rails.env.test?
+    puts 'setting storage to file'
     storage :file
   else
+    puts 'setting storage to fog'
     storage :fog
   end
 
