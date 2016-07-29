@@ -10,7 +10,7 @@ class Api::V1::CoursesController < ApiController
   end
   before_filter only: [:update] do
     semester = Semester.where(id: params[:new_semester_id]).first
-    if(semester)
+    if semester
       check_permissions(semester.graduation_plan.advisee)
     end
   end

@@ -5,7 +5,6 @@ feature "User's cannot edit each other's resources", %{
   I can't edit another user's advisees, meetings, or notes
   So that I can't accidentally or maliciously ruin someone else's info
 } do
-
   let(:user) { FactoryGirl.create(:user) }
   let(:another_user) { FactoryGirl.create(:user) }
 
@@ -14,7 +13,7 @@ feature "User's cannot edit each other's resources", %{
   end
 
   context 'advisees' do
-    let(:advisee) { FactoryGirl.create(:advisee, user: another_user)}
+    let(:advisee) { FactoryGirl.create(:advisee, user: another_user) }
 
     scenario "a user cannot view another user's advisee" do
       visit advisee_path(advisee)
