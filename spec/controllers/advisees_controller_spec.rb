@@ -1,6 +1,16 @@
 require 'rails_helper'
 
 describe AdviseesController, type: :controller do
+  describe 'POST /advisees' do
+    it 'calls :fog in production for photo upload' do
+      allow(Rails).to receive_message_chain(:env, :test?).and_return(false)
+
+      advisee = FactoryGirl.attributes_for(:advisee)
+
+      post :create, advisee: advisee
+    end
+  end
+
   describe 'DELETE /advisees/:advisee_id' do
     let(:user) { FactoryGirl.create(:user) }
 
