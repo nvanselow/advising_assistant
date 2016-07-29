@@ -42,7 +42,7 @@ describe Api::V1::GoogleCalendarsController, type: :controller do
   describe 'POST /api/v1/meetings/:meeting_id/google_calendars' do
     let!(:identity) { FactoryGirl.create(:identity, user: user) }
     let(:advisee) { FactoryGirl.create(:advisee, user: user) }
-    let(:meeting) { FactoryGirl.create(:meeting, advisee: advisee) }
+    let(:meeting) { FactoryGirl.create(:meeting, advisee: advisee, user: user) }
 
     it "adds a meeting to the user's google calendar" do
       post :create, meeting_id: meeting.id
@@ -50,6 +50,17 @@ describe Api::V1::GoogleCalendarsController, type: :controller do
       json = parse_json(response)
 
       expect(json['message']).to include('Meeting added')
+    end
+
+    it 'returns an error if the user cannot modify the meeting' do
+      another_user = FactoryGirl.create(:user)
+      sign_in another_user
+
+      post :create, meeting_id: meeting.id
+
+      json = parse_json(response, :unauthorized)
+
+      expect(json['message']).to include('You do not have permission')
     end
   end
 end

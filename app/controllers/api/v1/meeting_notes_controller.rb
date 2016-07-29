@@ -2,6 +2,9 @@ class Api::V1::MeetingNotesController < ApiController
   include NoteParams
 
   before_filter :authenticate_user!
+  before_filter only: [:index, :create] do
+    check_permissions(Meeting.find(params[:meeting_id]))
+  end
 
   def index
     meeting = Meeting.find(params[:meeting_id])

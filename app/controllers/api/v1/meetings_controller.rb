@@ -1,7 +1,13 @@
 class Api::V1::MeetingsController < ApiController
   include MeetingParams
-  
+
   before_filter :authenticate_user!
+  before_filter only: [:index, :create] do
+    check_permissions(Advisee.find(params[:advisee_id]))
+  end
+  before_filter only: [:update, :destroy] do
+    check_permissions(Meeting.find(params[:id]))
+  end
 
   def index
     advisee = Advisee.find(params[:advisee_id])

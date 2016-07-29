@@ -1,5 +1,8 @@
 class Api::V1::GoogleCalendarsController < ApiController
   before_filter :authenticate_user!
+  before_filter only: [:create] do
+    check_permissions(Meeting.find(params[:meeting_id]))
+  end
 
   def index
     calendar_api = GoogleCalendar.new(current_user)

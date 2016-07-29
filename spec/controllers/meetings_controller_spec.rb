@@ -81,7 +81,7 @@ describe Api::V1::MeetingsController, type: :controller do
 
   describe 'PUT /api/v1/meetings/:id' do
     it 'updates an existing meeting' do
-      meeting = FactoryGirl.create(:meeting)
+      meeting = FactoryGirl.create(:meeting, user: user)
 
       put :update, id: meeting.id, meeting: {
         description: 'Updated!'
@@ -94,7 +94,7 @@ describe Api::V1::MeetingsController, type: :controller do
     end
 
     it 'returns error is the meeting is invalid' do
-      meeting = FactoryGirl.create(:meeting)
+      meeting = FactoryGirl.create(:meeting, user: user)
 
       put :update, id: meeting.id, meeting: {
         description: '',
@@ -113,7 +113,7 @@ describe Api::V1::MeetingsController, type: :controller do
 
   describe 'DELETE /api/v1/meetings/:id' do
     it 'deletes a meeting' do
-      meeting = FactoryGirl.create(:meeting)
+      meeting = FactoryGirl.create(:meeting, user: user)
 
       delete :destroy, id: meeting.id
 

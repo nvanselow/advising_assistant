@@ -11,8 +11,8 @@ feature 'Delete a graduation plan', %{
   # [X] If deleted, the plan is removed from the list and I see a message
   #     indicating the plan was deleted
 
-  let(:user) { FactoryGirl.create(:user) }
   let(:graduation_plan) { FactoryGirl.create(:graduation_plan) }
+  let(:user) { graduation_plan.advisee.user }
 
   before do
     sign_in user

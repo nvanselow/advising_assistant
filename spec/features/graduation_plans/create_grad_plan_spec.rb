@@ -10,7 +10,7 @@ feature 'Create a graduation plan', %{
   # [X] I must provide a name for the graduation plan
 
   let(:user) { FactoryGirl.create(:user) }
-  let(:advisee) { FactoryGirl.create(:advisee) }
+  let(:advisee) { FactoryGirl.create(:advisee, user: user) }
 
   before do
     sign_in user

@@ -14,7 +14,7 @@ feature 'User creates a note for a meeting', %{
   #     information about what to fix.
 
   let(:user) { FactoryGirl.create(:user) }
-  let(:meeting) { FactoryGirl.create(:meeting) }
+  let(:meeting) { FactoryGirl.create(:meeting, user: user) }
   let(:note_body) { 'This is my thoughtful comment about this meeting.' }
 
   before do

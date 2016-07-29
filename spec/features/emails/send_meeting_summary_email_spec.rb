@@ -10,7 +10,7 @@ feature 'Send email summary', %{
   # [X] The email will contain the meeting date, time, and any public notes
 
   let(:user) { FactoryGirl.create(:user) }
-  let(:meeting) { FactoryGirl.create(:meeting) }
+  let(:meeting) { FactoryGirl.create(:meeting, user: user) }
   let!(:notes) { FactoryGirl.create_list(:note, 2, noteable: meeting) }
 
   before do

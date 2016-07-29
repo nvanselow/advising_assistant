@@ -11,8 +11,8 @@ feature 'View notes for a meeting', %{
   #     were updated
 
   let(:user) { FactoryGirl.create(:user) }
-  let(:advisee) { FactoryGirl.create(:advisee) }
-  let!(:meeting) { FactoryGirl.create(:meeting, advisee: advisee) }
+  let(:advisee) { FactoryGirl.create(:advisee, user: user) }
+  let!(:meeting) { FactoryGirl.create(:meeting, advisee: advisee, user: user) }
 
   before do
     sign_in user
