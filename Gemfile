@@ -19,6 +19,7 @@ gem 'google-api-client', '0.9'
 gem 'omniauth-microsoft-office365'
 gem 'ruby_outlook'
 gem 'faker'
+gem 'mini_magick'
 
 group :development, :test do
   gem 'capybara'
