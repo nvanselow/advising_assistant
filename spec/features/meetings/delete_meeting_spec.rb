@@ -14,7 +14,7 @@ feature 'Delete a meeting with advisee', %{
 
   let(:user) { FactoryGirl.create(:user) }
   let(:advisee) { FactoryGirl.create(:advisee, user: user) }
-  let!(:meeting) { FactoryGirl.create(:meeting, advisee: advisee) }
+  let!(:meeting) { FactoryGirl.create(:meeting, advisee: advisee, user: user) }
 
   before do
     sign_in user

@@ -26,9 +26,15 @@ class ApplicationController < ActionController::Base
 
   def check_permissions(resource)
     unless current_user.can_modify?(resource)
-      flash[:error] = 'You do not have permission to do that. Please login '\
-                      'with an account that has that permission.'
-      redirect_to root_path
+      if request.path.include?('api')
+        render json: {
+          message: 'You do not have permission to do that'
+        }, status: :unauthorized
+      else
+        flash[:error] = 'You do not have permission to do that. Please login '\
+                        'with an account that has that permission.'
+        redirect_to root_path
+      end
     end
   end
 end

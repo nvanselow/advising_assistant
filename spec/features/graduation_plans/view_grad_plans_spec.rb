@@ -10,7 +10,7 @@ feature 'View graduation plans', %{
   # [ ] I can see a list of all grad plans for that advisee
 
   let(:user) { FactoryGirl.create(:user) }
-  let(:advisee) { FactoryGirl.create(:advisee) }
+  let(:advisee) { FactoryGirl.create(:advisee, user: user) }
   let!(:grad_plans) do
     FactoryGirl.create_list(:graduation_plan, 3, advisee: advisee)
   end

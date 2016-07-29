@@ -44,7 +44,7 @@ describe Api::V1::MicrosoftCalendarsController, type: :controller do
   describe 'POST /api/v1/meetings/:meeting_id/microsoft_calendars' do
     let!(:identity) { FactoryGirl.create(:microsoft_identity, user: user) }
     let(:advisee) { FactoryGirl.create(:advisee, user: user) }
-    let(:meeting) { FactoryGirl.create(:meeting, advisee: advisee) }
+    let(:meeting) { FactoryGirl.create(:meeting, advisee: advisee, user: user) }
 
     it "adds a meeting to the user's microsoft calendar" do
       post :create, meeting_id: meeting.id

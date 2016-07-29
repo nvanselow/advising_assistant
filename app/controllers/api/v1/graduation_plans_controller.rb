@@ -1,5 +1,8 @@
 class Api::V1::GraduationPlansController < ApiController
   before_filter :authenticate_user!
+  before_filter only: [:update] do
+    check_permissions(GraduationPlan.find(params[:id]).advisee)
+  end
 
   def update
     graduation_plan = GraduationPlan.find(params[:id])

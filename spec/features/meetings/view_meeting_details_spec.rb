@@ -11,7 +11,7 @@ feature 'User views meeting details', %{
   # NOTE: Other checks in js test
 
   let(:user) { FactoryGirl.create(:user) }
-  let(:meeting) { FactoryGirl.create(:meeting) }
+  let(:meeting) { FactoryGirl.create(:meeting, user: user) }
 
   before do
     sign_in user

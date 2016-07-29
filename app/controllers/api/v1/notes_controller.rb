@@ -2,6 +2,9 @@ class Api::V1::NotesController < ApiController
   include NoteParams
 
   before_filter :authenticate_user!
+  before_filter only: [:update, :destroy] do
+    check_permissions(Note.find(params[:id]).noteable)
+  end
 
   def update
     note = Note.find(params[:id])

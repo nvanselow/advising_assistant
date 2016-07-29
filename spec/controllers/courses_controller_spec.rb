@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe Api::V1::CoursesController, type: :controller do
-  let(:user) { FactoryGirl.create(:user) }
   let(:semester) { FactoryGirl.create(:semester) }
+  let(:user) { semester.graduation_plan.advisee.user }
 
   before do
     sign_in user
@@ -37,8 +37,9 @@ describe Api::V1::CoursesController, type: :controller do
 
   describe 'PUT /api/v1/courses/:course_id' do
     it 'moves a course to another semester' do
-      course = FactoryGirl.create(:course)
-      new_semester = FactoryGirl.create(:semester)
+      course = FactoryGirl.create(:course, semester: semester)
+      new_semester = FactoryGirl.create(:semester,
+                                        graduation_plan: semester.graduation_plan)
 
       put :update, id: course.id, new_semester_id: new_semester.id
 
@@ -49,7 +50,7 @@ describe Api::V1::CoursesController, type: :controller do
     end
 
     it 'returns an error message if there was no new semester' do
-      course = FactoryGirl.create(:course)
+      course = FactoryGirl.create(:course, semester: semester)
 
       put :update, id: course.id, new_semester_id: ''
 
@@ -60,7 +61,7 @@ describe Api::V1::CoursesController, type: :controller do
     end
 
     it 'returns an error if the new semster does not exist' do
-      course = FactoryGirl.create(:course)
+      course = FactoryGirl.create(:course, semester: semester)
 
       put :update, id: course.id, new_semester_id: 999
       json = parse_json(response, :bad_request)
@@ -72,7 +73,7 @@ describe Api::V1::CoursesController, type: :controller do
 
   describe 'DELETE /api/v1/courses/:course_id' do
     it 'deletes a course' do
-      course = FactoryGirl.create(:course)
+      course = FactoryGirl.create(:course, semester: semester)
 
       delete :destroy, id: course.id
 

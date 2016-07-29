@@ -2,6 +2,9 @@ class Api::V1::AdviseeNotesController < ApiController
   include NoteParams
 
   before_filter :authenticate_user!
+  before_filter only: [:index, :create] do
+    check_permissions(Advisee.find(params[:advisee_id]))
+  end
 
   def index
     advisee = Advisee.find(params[:advisee_id])

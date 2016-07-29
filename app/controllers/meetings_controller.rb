@@ -2,6 +2,9 @@ class MeetingsController < ApplicationController
   include MeetingParams
 
   before_filter :authenticate_user!
+  before_filter only: [:show, :edit, :update, :destroy] do
+    check_permissions(Meeting.find(params[:id]))
+  end
 
   def show
     @meeting = Meeting.find(params[:id])

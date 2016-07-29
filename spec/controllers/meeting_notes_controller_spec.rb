@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Api::V1::MeetingNotesController, type: :controller do
   let(:user) { FactoryGirl.create(:user) }
-  let(:meeting) { FactoryGirl.create(:meeting) }
+  let(:meeting) { FactoryGirl.create(:meeting, user: user) }
 
   before do
     sign_in user

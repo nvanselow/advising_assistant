@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe Api::V1::GraduationPlansController, type: :controller do
-  let(:user) { FactoryGirl.create(:user) }
   let(:graduation_plan) { FactoryGirl.create(:graduation_plan) }
+  let(:user) { graduation_plan.advisee.user }
 
   before do
     sign_in user

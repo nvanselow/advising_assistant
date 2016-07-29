@@ -1,5 +1,19 @@
 class Api::V1::CoursesController < ApiController
   before_filter :authenticate_user!
+  before_filter only: [:create] do
+    resource = Semester.find(params[:semester_id]).graduation_plan.advisee
+    check_permissions(resource)
+  end
+  before_filter only: [:update, :destroy] do
+    resource = Course.find(params[:id]).semester.graduation_plan.advisee
+    check_permissions(resource)
+  end
+  before_filter only: [:update] do
+    semester = Semester.where(id: params[:new_semester_id]).first
+    if(semester)
+      check_permissions(semester.graduation_plan.advisee)
+    end
+  end
 
   def create
     semester = Semester.find(params[:semester_id])
