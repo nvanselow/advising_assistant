@@ -14,6 +14,7 @@ class UpcomingMeetings extends Component {
     this.getUpcomingMeetings = this.getUpcomingMeetings.bind(this);
     this.getAllMeetings = this.getAllMeetings.bind(this);
     this.receivedMeetings = this.receivedMeetings.bind(this);
+    this.handleDeleteMeeting = this.handleDeleteMeeting.bind(this);
     this.renderMeetings = this.renderMeetings.bind(this);
   }
 
@@ -43,6 +44,14 @@ class UpcomingMeetings extends Component {
     this.setState({ meetings: data.meetings });
   }
 
+  handleDeleteMeeting(meeting) {
+    let meetings = this.state.meetings.filter((currentMeeting) => {
+      return meeting.id != currentMeeting.id;
+    });
+
+    this.setState({ meetings: meetings });
+  }
+
   renderMeetings() {
     let meetings = this.state.meetings;
 
@@ -53,7 +62,8 @@ class UpcomingMeetings extends Component {
         return <Meeting key={meeting.id}
                         meeting={meeting}
                         advisee={meeting.advisee}
-                        currentUrl="/advisees" />
+                        currentUrl="/advisees"
+                        onDelete={this.handleDeleteMeeting} />
       });
     }
   }
