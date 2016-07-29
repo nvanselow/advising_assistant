@@ -16,7 +16,8 @@ fork{
       stub_const('Rails::Uploader', foo)
       stub_const('Rails::Base', foo)
       allow(Rails).to receive_message_chain(:env, :test?).and_return(false)
+      expect(CarrierWave::Uploader::Base).to receive(:storage).with(:fog)
       require_relative '../../app/uploaders/advisee_photo_uploader'
     end
-  end  
+  end
 }
