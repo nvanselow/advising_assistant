@@ -8,8 +8,12 @@ describe 'AdviseePhotoUploader' do
   end
 
   it 'calls fog for storage in production' do
+    SimpleCov.start do
+      command_name 'fog-test'
+    end
     allow(Rails).to receive_message_chain(:env, :test?).and_return(false)
     expect(AdviseePhotoUploader).to receive(:storage).with(:fog)
+
     load File.expand_path('./app/uploaders/advisee_photo_uploader.rb')
   end
 
