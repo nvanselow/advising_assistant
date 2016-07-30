@@ -4,6 +4,7 @@ import Flash from '../lib/Flash';
 import Note from './Note';
 import EditNote from './EditNote';
 import Errors from './Errors';
+import Loader from './Loader';
 
 class Notes extends Component {
   constructor(props) {
@@ -20,7 +21,8 @@ class Notes extends Component {
       newNoteErrors: [],
       notes: [],
       editingNoteId: null,
-      currentVisibilty: false
+      currentVisibilty: false,
+      loading: false
     }
 
     this.getNotes = this.getNotes.bind(this);
@@ -39,6 +41,7 @@ class Notes extends Component {
   }
 
   componentDidMount() {
+    this.setState({ loading: true });
     this.getNotes();
   }
 
@@ -48,6 +51,9 @@ class Notes extends Component {
       method: 'GET'
     }).done((data) => {
       this.setState({ notes: data.notes });
+    })
+    .always(() => {
+      this.setState({ loading: false });
     });
   }
 
@@ -230,17 +236,19 @@ class Notes extends Component {
             {this.renderNoteForm()}
           </ReactCSSTransitionGroup>
         </div>
-        <div className="row">
-          <div className="col s12 notes">
-            <ReactCSSTransitionGroup transitionName="generic"
-                                     transitionEnterTimeout={500}
-                                     transitionLeaveTimeout={300}
-                                     transitionAppear={true}
-                                     transitionAppearTimeout={500}>
-              {this.renderNotes()}
-            </ReactCSSTransitionGroup>
+        <Loader active={this.state.loading}>
+          <div className="row">
+            <div className="col s12 notes">
+              <ReactCSSTransitionGroup transitionName="generic"
+                                       transitionEnterTimeout={500}
+                                       transitionLeaveTimeout={300}
+                                       transitionAppear={true}
+                                       transitionAppearTimeout={500}>
+                {this.renderNotes()}
+              </ReactCSSTransitionGroup>
+            </div>
           </div>
-        </div>
+        </Loader>
       </div>
     );
   }

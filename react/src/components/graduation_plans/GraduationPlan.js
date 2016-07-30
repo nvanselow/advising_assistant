@@ -4,6 +4,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import Semester from './Semester';
 import Course from './Course';
 import Flash from '../../lib/Flash';
+import Loader from '../Loader';
 
 class GraduationPlan extends Component {
   constructor(props) {
@@ -15,7 +16,8 @@ class GraduationPlan extends Component {
         name: '',
         credits: 3
       },
-      semesters: []
+      semesters: [],
+      loading: false
     }
 
     this.getSemesters = this.getSemesters.bind(this);
@@ -32,6 +34,7 @@ class GraduationPlan extends Component {
   }
 
   componentDidMount() {
+    this.setState({ loading: true });
     $('.graduation-plan').on('courseDropped', this.courseDropped);
     this.getSemesters();
   }
@@ -47,6 +50,9 @@ class GraduationPlan extends Component {
     })
     .done((data) => {
       this.setState({ semesters: data.semesters });
+    })
+    .always(() => {
+      this.setState({ loading: false });
     });
   }
 
@@ -299,23 +305,25 @@ class GraduationPlan extends Component {
             </div>
           </div>
 
-          {noSemestersMessage}
-
           {this.renderAddCourseForm()}
 
-          <div className="row">
-            <div className="col m3">
-              <div className="remaining-courses">
-                {this.renderRemainingCourseSemesters()}
-              </div>
-            </div>
+          <Loader active={this.state.loading}>
+            {noSemestersMessage}
 
-            <div className="col m9">
-              <div className="row semesters">
-                {this.renderSemesters()}
+            <div className="row">
+              <div className="col m3">
+                <div className="remaining-courses">
+                  {this.renderRemainingCourseSemesters()}
+                </div>
+              </div>
+
+              <div className="col m9">
+                <div className="row semesters">
+                  {this.renderSemesters()}
+                </div>
               </div>
             </div>
-          </div>
+          </Loader>
         </div>
         <div className="hide-on-med-and-up container">
           <p>

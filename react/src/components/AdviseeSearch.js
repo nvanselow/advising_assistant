@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Advisee from './Advisee';
+import Loader from './Loader';
 
 class AdviseeSearch extends Component {
   constructor(props) {
@@ -9,7 +10,8 @@ class AdviseeSearch extends Component {
     this.state = {
       originalAdvisees: [],
       advisees: [],
-      searchQuery: ''
+      searchQuery: '',
+      loading: false
     }
 
     this.searchAdvisees = this.searchAdvisees.bind(this);
@@ -18,6 +20,7 @@ class AdviseeSearch extends Component {
   }
 
   componentDidMount() {
+    this.setState({ loading: true });
     this.searchAdvisees();
   }
 
@@ -43,6 +46,9 @@ class AdviseeSearch extends Component {
         this.setState({ originalAdvisees: data.advisees});
       }
       this.setState({ advisees: data.advisees });
+    })
+    .always(() => {
+      this.setState({ loading: false });
     });
   }
 
@@ -81,29 +87,31 @@ class AdviseeSearch extends Component {
     let advisees = this.renderAdvisees();
 
     return (
-      <div id="advisee-search" className="search">
-        <div className="input-field">
-          <i className="material-icons prefix">search</i>
-          <input type="text"
-                 id="search"
-                 name="search"
-                 value={this.state.searchQuery}
-                 onChange={this.updateSearchQuery}
-                 autoComplete="off" />
-        </div>
+      <Loader active={this.state.loading}>
+        <div id="advisee-search" className="search">
+          <div className="input-field">
+            <i className="material-icons prefix">search</i>
+            <input type="text"
+                   id="search"
+                   name="search"
+                   value={this.state.searchQuery}
+                   onChange={this.updateSearchQuery}
+                   autoComplete="off" />
+          </div>
 
-        {this.noAdviseesMessage()}
+          {this.noAdviseesMessage()}
 
-        <div className="advisees row">
-          <ReactCSSTransitionGroup transitionName="advisee"
-                                   transitionEnterTimeout={500}
-                                   transitionLeaveTimeout={300}
-                                   transitionAppear={true}
-                                   transitionAppearTimeout={500}>
-            {advisees}
-          </ReactCSSTransitionGroup>
+          <div className="advisees row">
+            <ReactCSSTransitionGroup transitionName="advisee"
+                                     transitionEnterTimeout={500}
+                                     transitionLeaveTimeout={300}
+                                     transitionAppear={true}
+                                     transitionAppearTimeout={500}>
+              {advisees}
+            </ReactCSSTransitionGroup>
+          </div>
         </div>
-      </div>
+      </Loader>
     );
   }
 }
