@@ -4,6 +4,7 @@ import Flash from '../lib/Flash';
 import moment from 'moment-timezone/builds/moment-timezone-with-data';
 import Meeting from './Meeting';
 import NewMeeting from './NewMeeting';
+import Loader from './Loader';
 
 class Meetings extends Component {
   constructor(props) {
@@ -13,7 +14,8 @@ class Meetings extends Component {
       newMeeting: this.resetMeeting(),
       newMeetingErrors: [],
       meetings: [],
-      showNewMeetingForm: false
+      showNewMeetingForm: false,
+      loading: false
     }
 
     this.getMeetings = this.getMeetings.bind(this);
@@ -29,6 +31,7 @@ class Meetings extends Component {
   }
 
   componentDidMount() {
+    this.setState({ loading: true });
     this.getMeetings();
   }
 
@@ -39,6 +42,9 @@ class Meetings extends Component {
     })
     .done((data) => {
       this.setState({ meetings: data.meetings });
+    })
+    .always(() => {
+      this.setState({ loading: false });
     });
   }
 
@@ -171,15 +177,17 @@ class Meetings extends Component {
                                  transitionAppearTimeout={500}>
           {this.renderNewMeetingForm()}
         </ReactCSSTransitionGroup>
-        <div className="meetings">
-          <ReactCSSTransitionGroup transitionName="generic"
-                                   transitionEnterTimeout={500}
-                                   transitionLeaveTimeout={300}
-                                   transitionAppear={true}
-                                   transitionAppearTimeout={500}>
-            {this.renderMeetings()}
-          </ReactCSSTransitionGroup>
-        </div>
+        <Loader active={this.state.loading}>
+          <div className="meetings">
+            <ReactCSSTransitionGroup transitionName="generic"
+                                     transitionEnterTimeout={500}
+                                     transitionLeaveTimeout={300}
+                                     transitionAppear={true}
+                                     transitionAppearTimeout={500}>
+              {this.renderMeetings()}
+            </ReactCSSTransitionGroup>
+          </div>
+        </Loader>
       </div>
     );
   }
